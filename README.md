@@ -1,5 +1,7 @@
-#Maker Access System
-##Idea
+Maker Access System
+====================
+Idea
+----
 The idea of this project is to create a management system for makerspaces.
 So it should be possible to manage the members and their permissions.
 The members can learn the needed stuff in courses. After they did the course, they will be able to use the device.
