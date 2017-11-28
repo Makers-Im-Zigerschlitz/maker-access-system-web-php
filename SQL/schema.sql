@@ -1,7 +1,27 @@
+CREATE TABLE tblUsers (
+  uid INTEGER(11)  NOT NULL   AUTO_INCREMENT,
+  username VARCHAR(40)  NOT NULL  ,
+  password VARCHAR(50)  NOT NULL  ,
+  level INTEGER(1)  NOT NULL  ,
+  memberID INTEGER UNSIGNED  NULL    ,
+PRIMARY KEY(uid)  ,
+INDEX username(username));
+
+
+
 CREATE TABLE tblRoles (
   RoleID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   RoleName TEXT  NULL    ,
 PRIMARY KEY(RoleID));
+
+
+
+CREATE TABLE tblUploads (
+  upid INTEGER(11)  NOT NULL  ,
+  filename VARCHAR(150)  NOT NULL  ,
+  title VARCHAR(40)  NOT NULL  ,
+  uploader VARCHAR(40)  NOT NULL    ,
+PRIMARY KEY(upid));
 
 
 
@@ -10,6 +30,33 @@ CREATE TABLE tblDevices (
   deviceName TEXT  NULL  ,
   deviceDesc TEXT  NULL    ,
 PRIMARY KEY(deviceID));
+
+
+
+CREATE TABLE tblNews (
+  nid INTEGER(11)  NOT NULL  ,
+  title VARCHAR(40)  NOT NULL  ,
+  text LONGTEXT  NOT NULL  ,
+  author VARCHAR(40)  NULL    ,
+PRIMARY KEY(nid));
+
+
+
+CREATE TABLE tblMembers (
+  memberID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  uid INTEGER(11)  NOT NULL  ,
+  Firstname TEXT  NULL  ,
+  Lastname TEXT  NULL  ,
+  Birthday DATE  NULL  ,
+  Phone TEXT  NULL  ,
+  Street TEXT  NULL  ,
+  City TEXT  NULL  ,
+  Country TEXT  NULL    ,
+PRIMARY KEY(memberID, uid),
+  FOREIGN KEY(uid)
+    REFERENCES tblUsers(uid)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION);
 
 
 
@@ -29,27 +76,6 @@ INDEX tblPermissions_FKIndex2(tblDevices_deviceID),
       ON UPDATE NO ACTION,
   FOREIGN KEY(tblDevices_deviceID)
     REFERENCES tblDevices(deviceID)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION);
-
-
-
-CREATE TABLE tblMembers (
-  memberID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  tblPermissions_tblDevices_deviceID INTEGER UNSIGNED  NOT NULL  ,
-  tblPermissions_tblRoles_RoleID INTEGER UNSIGNED  NOT NULL  ,
-  tblPermissions_permissionID INTEGER UNSIGNED  NOT NULL  ,
-  Surname TEXT  NULL  ,
-  Lastname TEXT  NULL  ,
-  Birthday DATE  NULL  ,
-  Phone VARCHAR  NULL  ,
-  Street TEXT  NULL  ,
-  City TEXT  NULL  ,
-  Country TEXT  NULL    ,
-PRIMARY KEY(memberID, tblPermissions_tblDevices_deviceID, tblPermissions_tblRoles_RoleID, tblPermissions_permissionID)  ,
-INDEX tblMembers_FKIndex1(tblPermissions_permissionID, tblPermissions_tblRoles_RoleID, tblPermissions_tblDevices_deviceID),
-  FOREIGN KEY(tblPermissions_permissionID, tblPermissions_tblRoles_RoleID, tblPermissions_tblDevices_deviceID)
-    REFERENCES tblPermissions(permissionID, tblRoles_RoleID, tblDevices_deviceID)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION);
 

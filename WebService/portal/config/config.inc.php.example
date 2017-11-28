@@ -1,0 +1,28 @@
+<?php
+// Organization Name
+$orgname = "OrgName";
+$slogan = "Slogan";
+
+//MySQL-Server Settings
+$mysqlhost = "localhost";
+$mysqluser = "username";
+$mysqlpass = "password";
+$mysqldb = "dbname";
+
+// Chosen language will be used as standard
+$standardlanguage = "de";
+
+// DO NOT CHANGE THE LINES BELOW
+function getlang($standlang = "en", $fromlogin = false)
+{
+  if(isset($_COOKIE["language"]))
+  {
+    return $_COOKIE["language"];
+  }
+else {
+    $language = $standlang;
+    return $language;
+  }
+}
+$language = getlang($standardlanguage);
+?>

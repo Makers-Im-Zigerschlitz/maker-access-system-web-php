@@ -1,0 +1,71 @@
+body{
+  width: 100%;
+  font-family: Verdana;
+    }
+
+.settings
+{
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 4%;
+}
+
+.setframe{
+  /*display: inline-block;*/
+  width: auto;
+  display:inline-grid;
+  padding: 1%;
+  border-style: dashed;
+  border-color: black;
+  margin: 0.75%;
+}
+
+.setframe h3{
+  margin-top: 0;
+  text-decoration: underline;
+}
+
+.setframe td, .setframe th{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.setframe input, .setframe textarea{
+  margin: 0.5%;
+  margin-top: 2%;
+  font-family: Verdana;
+}
+
+button, .button, input[type="submit"], a {
+  cursor: pointer;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  line-height: normal;
+  /*margin: 0 0 1.25rem;*/
+  margin-top: 3%;
+  margin-bottom: 3%;
+  margin-left: 2%;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  /*padding-top: 1rem;*/
+  padding-right: 2rem;
+  /*padding-bottom: 1.0625rem;*/
+  padding-left: 2rem;
+  font-size: 1rem;
+  /*     @else                            { font-size: $padding - rem-calc(2); } */
+  background-color: #008cba;
+  border-color: #0079a1;
+  color: white;
+  -webkit-transition: background-color 300ms ease-out;
+  -moz-transition: background-color 300ms ease-out;
+  transition: background-color 300ms ease-out;
+  /*padding-top: 1.0625rem;
+  padding-bottom: 1rem;*/
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  -webkit-appearance: none;
+  border: none;
+  font-weight: normal !important; }

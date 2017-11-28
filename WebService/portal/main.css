@@ -1,0 +1,45 @@
+body{
+	font-family: Verdana;
+}
+.logout{
+	width: 10%;
+	position: fixed;
+	right: 1%;
+	border-color: black;
+	border-style: double;
+	text-align: center;
+	background: darkblue;
+}
+
+.logout a{
+	color: white;
+}
+
+.news p{
+	direction: ltr;
+	text-align: left;
+}
+
+footer{
+	width: 100%;
+}
+
+footer p{
+	width: 30%;
+	margin-left: 60%;
+	margin-right: 10%;
+}
+
+.usersettings{
+	/*padding-left: 5%;*/
+	padding-right: 5%;
+	padding-top: 4%;
+}
+
+.settingframe{
+	padding: 3%;
+	width: auto;
+	border-style: solid;
+	margin-right: 2%;
+	display: inline-grid;
+}
