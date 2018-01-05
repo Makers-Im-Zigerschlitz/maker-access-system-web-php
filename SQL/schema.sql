@@ -1,84 +1,103 @@
-CREATE TABLE tblUsers (
-  uid INTEGER(11)  NOT NULL   AUTO_INCREMENT,
-  username VARCHAR(40)  NOT NULL  ,
-  password VARCHAR(50)  NOT NULL  ,
-  level INTEGER(1)  NOT NULL  ,
-  memberID INTEGER UNSIGNED  NULL    ,
-PRIMARY KEY(uid)  ,
-INDEX username(username));
+CREATE DATABASE IF NOT EXISTS `mas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `mas`;
+
+CREATE TABLE `tblDevices` (
+  `deviceID` int(10) UNSIGNED NOT NULL,
+  `deviceName` text,
+  `deviceDesc` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `tblMembers` (
+  `memberID` int(10) UNSIGNED NOT NULL,
+  `uid` int(11) NOT NULL,
+  `Firstname` text,
+  `Lastname` text,
+  `Birthday` date DEFAULT NULL,
+  `Mail` text,
+  `Phone` text,
+  `Street` text,
+  `PLZ` int(11) DEFAULT NULL,
+  `City` text,
+  `Country` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `tblNews` (
+  `nid` int(11) NOT NULL,
+  `title` varchar(40) NOT NULL,
+  `text` longtext NOT NULL,
+  `author` varchar(40) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `tblPermissions` (
+  `permissionID` int(10) UNSIGNED NOT NULL,
+  `tblRoles_RoleID` int(10) UNSIGNED NOT NULL,
+  `tblDevices_deviceID` int(10) UNSIGNED NOT NULL,
+  `memberID` int(10) UNSIGNED DEFAULT NULL,
+  `deviceID` int(10) UNSIGNED DEFAULT NULL,
+  `Role` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `tblRoles` (
+  `RoleID` int(10) UNSIGNED NOT NULL,
+  `RoleName` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `tblUploads` (
+  `upid` int(11) NOT NULL,
+  `filename` varchar(150) NOT NULL,
+  `title` varchar(40) NOT NULL,
+  `uploader` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `tblUsers` (
+  `uid` int(11) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `level` int(1) NOT NULL,
+  `memberID` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+ALTER TABLE `tblDevices`
+  ADD PRIMARY KEY (`deviceID`);
 
-CREATE TABLE tblRoles (
-  RoleID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  RoleName TEXT  NULL    ,
-PRIMARY KEY(RoleID));
+ALTER TABLE `tblMembers`
+  ADD PRIMARY KEY (`memberID`,`uid`),
+  ADD KEY `uid` (`uid`);
 
+ALTER TABLE `tblNews`
+  ADD PRIMARY KEY (`nid`);
 
+ALTER TABLE `tblPermissions`
+  ADD PRIMARY KEY (`permissionID`,`tblRoles_RoleID`,`tblDevices_deviceID`),
+  ADD KEY `tblPermissions_FKIndex1` (`tblRoles_RoleID`),
+  ADD KEY `tblPermissions_FKIndex2` (`tblDevices_deviceID`);
 
-CREATE TABLE tblUploads (
-  upid INTEGER(11)  NOT NULL  ,
-  filename VARCHAR(150)  NOT NULL  ,
-  title VARCHAR(40)  NOT NULL  ,
-  uploader VARCHAR(40)  NOT NULL    ,
-PRIMARY KEY(upid));
+ALTER TABLE `tblRoles`
+  ADD PRIMARY KEY (`RoleID`);
 
+ALTER TABLE `tblUploads`
+  ADD PRIMARY KEY (`upid`);
 
-
-CREATE TABLE tblDevices (
-  deviceID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  deviceName TEXT  NULL  ,
-  deviceDesc TEXT  NULL    ,
-PRIMARY KEY(deviceID));
-
-
-
-CREATE TABLE tblNews (
-  nid INTEGER(11)  NOT NULL  ,
-  title VARCHAR(40)  NOT NULL  ,
-  text LONGTEXT  NOT NULL  ,
-  author VARCHAR(40)  NULL    ,
-PRIMARY KEY(nid));
+ALTER TABLE `tblUsers`
+  ADD PRIMARY KEY (`uid`),
+  ADD KEY `username` (`username`);
 
 
+ALTER TABLE `tblDevices`
+  MODIFY `deviceID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `tblMembers`
+  MODIFY `memberID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `tblPermissions`
+  MODIFY `permissionID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `tblRoles`
+  MODIFY `RoleID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `tblUsers`
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
-CREATE TABLE tblMembers (
-  memberID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  uid INTEGER(11)  NOT NULL  ,
-  Firstname TEXT  NULL  ,
-  Lastname TEXT  NULL  ,
-  Birthday DATE  NULL  ,
-  Phone TEXT  NULL  ,
-  Street TEXT  NULL  ,
-  City TEXT  NULL  ,
-  Country TEXT  NULL    ,
-PRIMARY KEY(memberID, uid),
-  FOREIGN KEY(uid)
-    REFERENCES tblUsers(uid)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION);
+ALTER TABLE `tblMembers`
+  ADD CONSTRAINT `tblMembers_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `tblUsers` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-
-
-CREATE TABLE tblPermissions (
-  permissionID INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  tblRoles_RoleID INTEGER UNSIGNED  NOT NULL  ,
-  tblDevices_deviceID INTEGER UNSIGNED  NOT NULL  ,
-  memberID INTEGER UNSIGNED  NULL  ,
-  deviceID INTEGER UNSIGNED  NULL  ,
-  Role INTEGER UNSIGNED  NULL    ,
-PRIMARY KEY(permissionID, tblRoles_RoleID, tblDevices_deviceID)  ,
-INDEX tblPermissions_FKIndex1(tblRoles_RoleID)  ,
-INDEX tblPermissions_FKIndex2(tblDevices_deviceID),
-  FOREIGN KEY(tblRoles_RoleID)
-    REFERENCES tblRoles(RoleID)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION,
-  FOREIGN KEY(tblDevices_deviceID)
-    REFERENCES tblDevices(deviceID)
-      ON DELETE NO ACTION
-      ON UPDATE NO ACTION);
-
-
-
-
+ALTER TABLE `tblPermissions`
+  ADD CONSTRAINT `tblPermissions_ibfk_1` FOREIGN KEY (`tblRoles_RoleID`) REFERENCES `tblRoles` (`RoleID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tblPermissions_ibfk_2` FOREIGN KEY (`tblDevices_deviceID`) REFERENCES `tblDevices` (`deviceID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
