@@ -37,25 +37,20 @@
 			$_GET["site"] = "news";
 		}
 
-$query = "SELECT * FROM `members` WHERE `username` like '".$_SESSION["username"]."'";
-$result = mysqli_query($sqlconn,$query);
-$result = mysqli_fetch_assoc($result);
-$_SESSION["surname"] = $result["surname"];
-$_SESSION["lastname"] = $result["lastname"];
-
 if($_GET["site"] == "news"):
 	?>
-      <div class="hero">
+  <div class="hero">
   <div class="row">
     <div class="large-12 columns centered">
       <h1><img src="img/logo.png" /><?php echo $orgname;?> <br><span><?php echo $slogan;?></span></h1>
-			<h3><?php echo $dict["30"]." ".$_SESSION["surname"]." ".$_SESSION["lastname"];?></h3>
+			<h3><?php echo $dict["30"]." ".$_SESSION["firstname"]." ".$_SESSION["lastname"];?></h3>
+			<h2><?php echo $motd;?></h2>
     </div>
   </div>
 </div>
 <div class="news">
 <?php
-$query = "SELECT * FROM news ORDER BY nid DESC";
+$query = "SELECT * FROM tblNews ORDER BY nid DESC";
 $result = mysqli_query($sqlconn,$query);
 while ($dataset = mysqli_fetch_assoc($result)) {
 	echo "<div class='row article'>\n<div class='large-12 columns'>\n<h2>";
@@ -81,14 +76,14 @@ if($_GET["site"]=="songs"):?>
 		}*/
 		echo "<table>";
 		echo "<tr><th>".$dict["16"]."</th><th>".$dict["15"]."</th></tr>";
-		$query = "SELECT * FROM `uploads` ORDER BY `title` DESC;";
+		$query = "SELECT * FROM `tblUploads` ORDER BY `title` DESC;";
 		$result = mysqli_query($sqlconn,$query);
 		while($data = mysqli_fetch_assoc($result))
 		{
 			echo "<tr><td>";
 			echo $data["title"];
 			echo "</td><td>";
-			echo "<a target='_blank' href='fileadmin/sheets/".$data["filename"]."'>".$dict["15"]."</a></td></tr>";
+			echo "<a target='_blank' href='fileadmin/documents/".$data["filename"]."'>".$dict["15"]."</a></td></tr>";
 		}
 		?>
 	</table>
@@ -109,23 +104,23 @@ if($_GET["site"]=="members"):?>
 				<th><?php echo $dict["41"];?></th>
 			</tr>
 		<?php
-		$query = "SELECT `surname`, `lastname`, `birthday`, `mail` FROM `members` ORDER BY `lastname` ASC";
+		$query = "SELECT `Firstname`, `Lastname`, `Birthday`, `Mail` FROM `tblMembers` ORDER BY `Lastname` ASC";
 		$result = mysqli_query($sqlconn,$query);
 		while ($dataset = mysqli_fetch_assoc($result))
 		{
 			echo "<tr><td>";
-			echo $dataset["lastname"];
+			echo $dataset["Lastname"];
 			echo "</td><td>";
-			echo $dataset["surname"];
+			echo $dataset["Firstname"];
 			echo "</td>";
 			if($_SESSION["level"]>2)
 			{
 				echo "<td>";
-				echo sqltodate($dataset["birthday"]);
+				echo sqltodate($dataset["Birthday"]);
 				echo "</td>";
 			}
 			echo "<td>";
-			echo "<a href='mailto:".$dataset["mail"]."'>".$dataset["mail"]."</a>";
+			echo "<a href='mailto:".$dataset["Mail"]."'>".$dataset["Mail"]."</a>";
 			echo "</td></tr>";
 		}
 		?>

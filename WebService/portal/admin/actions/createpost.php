@@ -14,7 +14,7 @@ $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
 $posttitle = sql_replace($_POST["posttitle"]);
 $posttext = sql_replace($_POST["text"]);
 
-$query = "INSERT INTO `tblNews` (`nid`, `title`, `text`, `author`) VALUES (NULL, '".$posttitle."', '".$posttext."', '".$_SESSION["username"]."');";
+$query = "INSERT INTO `tblNews` (`title`, `text`, `author`) VALUES ('".$posttitle."', '".$posttext."', '".$_SESSION["username"]."');";
 $result = mysqli_query($sqlconn,$query);
 if($result)
 {

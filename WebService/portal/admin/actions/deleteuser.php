@@ -10,7 +10,7 @@ include "../../includes/dictionary.inc.php";
 
 $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
 
-$query = "DELETE FROM `tblMembers` WHERE `members`.`username` = '".$_GET["user"]."';";
+$query = "DELETE FROM `tblMembers` WHERE `tblMembers`.`uid` = '".$_GET["user"]."';";
 $result = mysqli_query($sqlconn,$query);
 if(!$result)
 {
@@ -20,7 +20,7 @@ if(!$result)
 }
 else
 {
-  $query = "DELETE FROM `users` WHERE `users`.`username` = '".$_GET["user"]."';";
+  $query = "DELETE FROM `tblUsers` WHERE `tblUsers`.`uid` = '".$_GET["user"]."';";
   $result = mysqli_query($sqlconn,$query);
   if($result)
   {

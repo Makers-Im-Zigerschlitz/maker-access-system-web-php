@@ -32,8 +32,8 @@ echo $query;
 echo $upfile_ext;
 if($_FILES["file"]["size"]>0 && $upfile_ext =="pdf")
 {
-  copy($_FILES["file"]["tmp_name"],"../../fileadmin/sheets/".$newfilename);
-  $query = "INSERT INTO `tblUploads` (`upid`, `filename`, `title`, `uploader`) VALUES (NULL, '".$newfilename."', '".$_POST["filename"]."', '".$_SESSION["username"]."');";
+  copy($_FILES["file"]["tmp_name"],"../../fileadmin/documents/".$newfilename);
+  $query = "INSERT INTO `tblUploads` (`filename`, `title`, `uploader`) VALUES ('".$newfilename."', '".$_POST["filename"]."', '".$_SESSION["username"]."');";
   $result = mysqli_query($sqlconn,$query);
   if($result)
   {

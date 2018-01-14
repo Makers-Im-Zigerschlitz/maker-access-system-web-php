@@ -10,7 +10,7 @@ include "../../includes/dictionary.inc.php";
 
 $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
 
-$query = "DELETE FROM `tblUploads` WHERE `uploads`.`filename` LIKE '".$_GET["filename"]."';";
+$query = "DELETE FROM `tblUploads` WHERE `tblUploads`.`filename` LIKE '".$_GET["filename"]."';";
 // echo $query;
 $result = mysqli_query($sqlconn,$query);
 // TODO: Delete File

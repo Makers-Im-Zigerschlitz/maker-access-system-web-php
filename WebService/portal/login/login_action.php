@@ -4,6 +4,11 @@ include "../config/config.inc.php";
 $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
 $username = $_POST["username"];
 $password = md5($_POST["password"]);
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (mysqli_connect_errno())
 {
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -21,6 +26,14 @@ if ($sqlfetch["username"] == "") {
 }
 else
 {
+  $_SESSION["uid"] = $sqlfetch["uid"];
+
+  $query = "SELECT * FROM $mysqldb.tblMembers WHERE uid LIKE '" . $_SESSION["uid"] . "'";
+  $result = mysqli_query($sqlconn,$query);
+  $memberdata = mysqli_fetch_array($result);
+
+  $_SESSION["firstname"] = $memberdata["Firstname"];
+  $_SESSION["lastname"] = $memberdata["Lastname"];
 	$_SESSION["username"] = $username;
 	$_SESSION["level"] = $sqlfetch["level"];
 	header("Location: ../home.php");

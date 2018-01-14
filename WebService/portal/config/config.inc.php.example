@@ -8,6 +8,7 @@ $mysqlhost = "localhost";
 $mysqluser = "__USER__";
 $mysqlpass = "__PASS__";
 $mysqldb = "__DATABASE__";
+$motd = "Your Message of the day!";
 
 // Chosen language will be used as standard
 $standardlanguage = "de";

@@ -10,7 +10,7 @@ include "../../includes/dictionary.inc.php";
 
 $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
 
-$query = "DELETE FROM `tblNews` WHERE `news`.`nid` = ".$_GET["nid"];
+$query = "DELETE FROM `tblNews` WHERE `tblNews`.`nid` = ".$_GET["nid"];
 echo $query;
 $result = mysqli_query($sqlconn,$query);
 if($result)

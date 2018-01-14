@@ -69,14 +69,18 @@
       $query = "SELECT * FROM tblMembers ORDER BY lastname ASC";
       $result = mysqli_query($sqlconn,$query);
       while ($temp = mysqli_fetch_assoc($result)) {
+        $query = "SELECT * FROM $mysqldb.tblUsers WHERE uid LIKE '" . $temp["uid"] . "'";
+        $result = mysqli_query($sqlconn,$query);
+        $memberdata = mysqli_fetch_array($result);
+
         echo "<tr>";
-        echo "<td>".$temp["surname"]."</td>";
-        echo "<td>".$temp["lastname"]."</td>";
-        echo "<td>".sqltodate($temp["birthday"])."</td>";
-        echo "<td>".$temp["username"]."</td>";
-        echo "<td>".$temp["phone"]."</td>";
-        echo "<td>".$temp["mail"]."</td>";
-        echo "<td><a href='actions/deleteuser.php?user=".$temp["username"]."'>Delete</a>";
+        echo "<td>".$temp["Firstname"]."</td>";
+        echo "<td>".$temp["Lastname"]."</td>";
+        echo "<td>".sqltodate($temp["Birthday"])."</td>";
+        echo "<td>".$memberdata["username"]."</td>";
+        echo "<td>".$temp["Phone"]."</td>";
+        echo "<td>".$temp["Mail"]."</td>";
+        echo "<td><a href='actions/deleteuser.php?user=".$temp["uid"]."'>Delete</a>";
       }
      ?>
     </table>
