@@ -44,4 +44,5 @@ $dict["40"] = "Telefon";
 $dict["41"] = "E-Mail";
 $dict["42"] = "Es wurde ein ungültiges Dateiformat hochgeladen";
 $dict["43"] = "Diese Datei existiert bereits!";
+$dict["44"] = "Accessystem";
 ?>

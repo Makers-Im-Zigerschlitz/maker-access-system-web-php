@@ -61,7 +61,7 @@ while ($dataset = mysqli_fetch_assoc($result)) {
 }
 echo "</div>";
 endif;
-if($_GET["site"]=="songs"):?>
+if($_GET["site"]=="docs"):?>
 <div class='row'>
 	<div class="large-12 columns">
 		<h2><?php echo $dict["17"];?></h2>
@@ -173,6 +173,50 @@ if($_GET["site"]=="settings"):?>
 					</form>
 			</div>
 		</div>
+</div>
+</div>
+<?php endif;
+if($_GET["site"]=="access"):?>
+<div class='row'>
+	<div class="large-12 columns">
+		<h1>MAS</h1>
+		<form action="admin/actions/updateperm.php" method="post">
+			<table>
+			<?php
+			$query = "SELECT * FROM tblDevices ORDER BY deviceName";
+			$deviceresult = mysqli_query($sqlconn,$query);
+			echo "<th>Name</th>";
+			while ($device = mysqli_fetch_assoc($deviceresult)) {
+			  echo "<th>";
+			  echo $device["deviceName"];
+			  echo "</th>";
+			}
+			$query = "SELECT * FROM tblUsers ORDER BY username";
+			$userresult = mysqli_query($sqlconn,$query);
+			while ($user = mysqli_fetch_assoc($userresult)) {
+				echo "<tr>";
+				echo "<td>".$user["username"]."</td>";
+
+				$query = "SELECT * FROM tblDevices ORDER BY deviceName";
+				$deviceresult = mysqli_query($sqlconn,$query);
+				while ($device = mysqli_fetch_assoc($deviceresult)) {
+					$query = "SELECT * FROM tblPermissions WHERE uid=" . $user["uid"] . " AND deviceID=" . $device["deviceID"] . ";";
+					$permresult = mysqli_query($sqlconn,$query);
+					if (mysqli_num_rows($permresult)>0) {
+					echo "<td><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' checked></td>";
+					}
+					else{
+					echo "<td><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' ></td>";
+				}
+				}
+			echo "</tr>";
+			}
+			echo "</table>";
+			if ($_SESSION["level"]>2) {
+				echo "<input class='button' type='submit' value='Update'>";
+			}
+			?>
+	</form>
 </div>
 </div>
 <?php endif;?>

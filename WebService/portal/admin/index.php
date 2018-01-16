@@ -66,12 +66,13 @@
         <th><?php echo $dict["11"];?></th>
       </tr>
     <?php
-      $query = "SELECT * FROM tblMembers ORDER BY lastname ASC";
+      $query = "SELECT * FROM $mysqldb.tblMembers ORDER BY Lastname ASC";
       $result = mysqli_query($sqlconn,$query);
+      //echo mysqli_num_rows($result);
       while ($temp = mysqli_fetch_assoc($result)) {
         $query = "SELECT * FROM $mysqldb.tblUsers WHERE uid LIKE '" . $temp["uid"] . "'";
-        $result = mysqli_query($sqlconn,$query);
-        $memberdata = mysqli_fetch_array($result);
+        $result2 = mysqli_query($sqlconn,$query);
+        $memberdata = mysqli_fetch_array($result2);
 
         echo "<tr>";
         echo "<td>".$temp["Firstname"]."</td>";
