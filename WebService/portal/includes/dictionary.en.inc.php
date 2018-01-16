@@ -44,4 +44,13 @@ $dict["40"] = "Phone";
 $dict["41"] = "Mail Adress";
 $dict["42"] = "The file with the uploaded extension is not allowed";
 $dict["43"] = "This file already exists!";
+$dict["44"] = "Accessystem";
+$dict["45"] = "Devicename";
+$dict["46"] = "Device description";
+$dict["47"] = "Delete device";
+$dict["48"] = "Devices";
+$dict["49"] = "Device ID";
+$dict["50"] = "Create device";
+$dict["51"] = "Your password was successfully changed!";
+$dict["52"] = "Password change";
 ?>

@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link href="css/normalize.css" rel="stylesheet" type="text/css" />
 	<link href="css/all.css" rel="stylesheet" type="text/css" />
+	<link href="css/popups.css" rel="stylesheet" type="text/css" />
 
 	<script src="js/all.js" type="text/javascript"></script>
 	<script src="js/modernizr.js" type="text/javascript"></script>
@@ -61,7 +62,7 @@ while ($dataset = mysqli_fetch_assoc($result)) {
 }
 echo "</div>";
 endif;
-if($_GET["site"]=="songs"):?>
+if($_GET["site"]=="docs"):?>
 <div class='row'>
 	<div class="large-12 columns">
 		<h2><?php echo $dict["17"];?></h2>
@@ -146,16 +147,17 @@ if($_GET["site"]=="settings"):?>
 		<div class="usersettings">
 			<div class="settingframe">
 				<h3><?php echo $dict["34"];?></h3>
-				<?php
-				if(isset($_GET["message"]))
-				{
-					if($_GET["message"] == "pwchanged")
-					{
-						echo "<script type='text/javascript'>alert('Das Passwort wurde erfolgreich geändert!');</script>";
-						header("Location: home.php?site=settings");
-					}
-				}
-				 ?>
+
+					<div id="pwchanged" class="overlay">
+						<div class="popup">
+							<h2><?php echo $dict["52"];?></h2>
+							<a class="close" href="#">&times;</a>
+							<div class="content">
+								<?php echo $dict["51"];?>
+							</div>
+						</div>
+						</div>
+
 					<form name="changepw" action="useractions/changepw.php" method="post" onsubmit="return changePW();">
 							<input required type="password" name="pw1" placeholder="<?php echo $dict["32"];?>">
 							<input required type="password" name="pw2" placeholder="<?php echo $dict["33"];?>">
@@ -173,6 +175,50 @@ if($_GET["site"]=="settings"):?>
 					</form>
 			</div>
 		</div>
+</div>
+</div>
+<?php endif;
+if($_GET["site"]=="access"):?>
+<div class='row'>
+	<div class="large-12 columns">
+		<h1>MAS</h1>
+		<form action="admin/actions/updateperm.php" method="post">
+			<table>
+			<?php
+			$query = "SELECT * FROM tblDevices ORDER BY deviceName";
+			$deviceresult = mysqli_query($sqlconn,$query);
+			echo "<th>Name</th>";
+			while ($device = mysqli_fetch_assoc($deviceresult)) {
+			  echo "<th>";
+			  echo $device["deviceName"];
+			  echo "</th>";
+			}
+			$query = "SELECT * FROM tblMembers ORDER BY Lastname";
+			$userresult = mysqli_query($sqlconn,$query);
+			while ($user = mysqli_fetch_assoc($userresult)) {
+				echo "<tr>";
+				echo "<td>".$user["Firstname"]." ".$user["Lastname"]."</td>";
+
+				$query = "SELECT * FROM tblDevices ORDER BY deviceName";
+				$deviceresult = mysqli_query($sqlconn,$query);
+				while ($device = mysqli_fetch_assoc($deviceresult)) {
+					$query = "SELECT * FROM tblPermissions WHERE uid=" . $user["uid"] . " AND deviceID=" . $device["deviceID"] . ";";
+					$permresult = mysqli_query($sqlconn,$query);
+					if (mysqli_num_rows($permresult)>0) {
+					echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' checked></td>";
+					}
+					else{
+					echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' ></td>";
+				}
+				}
+			echo "</tr>";
+			}
+			echo "</table>";
+			if ($_SESSION["level"]>2) {
+				echo "<input class='button' type='submit' value='Update'>";
+			}
+			?>
+	</form>
 </div>
 </div>
 <?php endif;?>

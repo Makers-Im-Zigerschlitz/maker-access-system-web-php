@@ -1,0 +1,280 @@
+
+$base-light: #f9ef6b
+$base-regular: #e2d307
+$base-dark: #7f8818
+
+
+
+body
+  background: linear-gradient(white,rgba(249, 239, 107, 0.5))
+
+  font-smoothing: antialiased
+  background-repeat: repeat
+  background-size: cover
+
+
+  &::after
+    display: none
+    content: ''
+    position: absolute
+    width: 100vw
+    height: 100vh
+    background: black
+    opacity: 0.15
+
+.body-wrapper
+  width: 1000px
+  height: 600px
+  margin: 25px auto
+
+
+  .panel
+    width: 1000px
+    height: 600px
+    background: white
+    border-radius: 10px
+    box-shadow: 0px 10px 50px 5px rgba(0, 0, 0, 0.1)
+    z-index: 8
+    overflow: hidden
+
+    .aside
+      width: 83px
+      height: 600px
+      //background: pink
+      float: left
+      margin-left: 5px
+      position: relative
+      border-right: 1px solid rgba(0, 0, 0, 0.1)
+      box-sizing: border-box
+
+      .avatar
+        width: 55px
+        height: 55px
+        border-radius: 50%
+        background-color: rgb(255, 255, 255)
+        margin: auto
+        margin-top: 20px
+        overflow: hidden
+        transition: all 0.3s cubic-bezier(0.38,-0.9, 0.5, 2.5)
+
+        &:hover
+          transform: scale(1.1)
+
+        img
+          position: relative
+          width: 55px
+          height: 55px
+
+      .seperator
+        width: 50px
+        height: 1px
+        background: $base-dark
+        opacity: 0.25
+        margin: 18px auto 36px auto
+
+      .list
+        width: 100%
+        height: auto
+        //background: red
+        text-align: right
+        padding-right: 14px
+        box-sizing: border-box
+        font-size: 11px
+        font-family: "Lato"
+        color: $base-dark
+
+        .item
+          height: 23px
+          line-height: 23px
+          width: 100%
+          margin-bottom: 17px
+          //background: pink
+          position: relative
+          cursor: pointer
+          transition: all 0.1s ease-in-out
+          &:hover
+            color: lighten($base-dark, 10%)
+          &.selected
+            font-weight: bold
+
+            &::after
+              content: ''
+              display: block
+              position: absolute
+              top: 0
+              right: -14px
+              width: 3px
+              height: 23px
+              background: $base-regular
+
+            &:hover
+              color: $base-dark
+
+
+
+      .log-out
+        position: relative
+        margin-top: 163px
+        font-size: 11px
+        color: #e53935
+        font-weight: bold
+        text-align: center
+        cursor: pointer
+        &:hover
+          color: lighten(#e53935, 10%)
+          text-decoration: underline
+
+      &::before
+        content: ''
+        display: block
+        width: 5px
+        height: 600px
+        background: $base-regular
+        border-radius: 10px 0px 0px 10px
+        position: absolute
+        top: 0
+        left: -5px
+
+    .view
+      width: 912px
+      height: 600px
+      background: white
+      float: left
+      padding: 65px 77px
+      box-sizing: border-box
+      position: relative
+
+      .sub-title
+        position: absolute
+        font-size: 9px
+        letter-spacing: 5px
+        opacity: 0.4
+        color: $base-dark
+        font-weight: bold
+        top: 22px
+        right: 32px
+
+
+      .main-title
+        font-size: 32px
+        letter-spacing: 10px
+        color: $base-regular
+        font-weight: light
+
+      .seperator,
+      .min-seperator
+        width: 600px
+        height: 1px
+        background: $base-dark
+        opacity: 0.25
+        margin-top: 10px
+        margin-bottom: 45px
+      .min-seperator
+        width: 380px
+        margin-left: 78px
+        margin-top: 80px
+        margin-bottom: 45px
+
+
+      .health-charts
+        max-width: 600px
+        height: auto
+        //background: pink
+
+        .chart
+          position: relative
+          width: 33.33%
+          height: auto
+          float: left
+          //background: red
+          text-align: center
+
+          .title
+            font-size: 14px
+            line-height: 10px
+            color: $base-dark
+            //background: red
+          .info
+            position: relative
+            width: 100%
+            //background: yellow
+
+            .percentage
+              line-height: 96px
+              color: $base-dark
+              background-size: contain
+              background-repeat: no-repeat
+              background-position: center
+              margin-top: 33px
+          &.system
+            .info .percentage
+              background-image: url(https://raw.githubusercontent.com/mhmoodlan/Designs-to-Code/master/Admin-Panel/assets/img/chart-1.png)
+          &.network
+            .info .percentage
+              background-image: url(https://raw.githubusercontent.com/mhmoodlan/Designs-to-Code/master/Admin-Panel/assets/img/chart-2.png)
+          &.storage
+            .info .percentage
+              background-image: url(https://raw.githubusercontent.com/mhmoodlan/Designs-to-Code/master/Admin-Panel/assets/img/chart-3.png)
+
+    .general-settings
+      .set
+        margin-bottom: 25px
+        .title
+          font-size: 13px
+          color: $base-dark
+          float: left
+          line-height: 20px
+
+        .value
+          font-size: 13px
+          color: $base-dark
+          line-height: 20px
+          margin-left: 40px
+          float: left
+
+          .current
+            float: left
+            .numbers,
+            .extra
+              float: left
+            .extra
+              font-size: 8px
+              line-height: 20px
+              margin-left: 5px
+          .change
+            float: left
+            font-size: 8px
+            color: lighten($base-dark, 10%)
+            text-decoration: underline
+            line-height: 20px
+            margin-left: 12px
+            cursor: pointer
+            &:hover
+              color: $base-dark
+
+          select
+            border: none
+            color: $base-dark
+            border-bottom: 1px solid $base-dark
+            font-size: 12px
+
+            &:focus
+              outline: none
+
+.clear-fix
+  clear: both
+  
+::selection
+  background: #FFF498
+
+::-moz-selection
+  background: #FFF498
+
+img::selection
+  background: transparent
+
+img::-moz-selection
+  background: transparent
+
+body
+  -webkit-tap-highlight-color: #FFF498

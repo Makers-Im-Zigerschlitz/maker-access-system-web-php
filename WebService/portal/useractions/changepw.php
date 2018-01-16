@@ -14,7 +14,7 @@ $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
 $query = "UPDATE `tblUsers` SET `password` = '$pw1' WHERE `tblUsers`.`username` = '".$_SESSION["username"]."';";
 $result = mysqli_query($sqlconn,$query);
 if ($result) {
-  header("Location: ../home.php?site=settings&message=pwchanged");
+  header("Location: ../home.php?site=settings#pwchanged");
 }
 else {
   echo mysqli_error($sqlconn);

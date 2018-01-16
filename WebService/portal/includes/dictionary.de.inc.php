@@ -44,4 +44,13 @@ $dict["40"] = "Telefon";
 $dict["41"] = "E-Mail";
 $dict["42"] = "Es wurde ein ungültiges Dateiformat hochgeladen";
 $dict["43"] = "Diese Datei existiert bereits!";
+$dict["44"] = "Accessystem";
+$dict["45"] = "Gerätename";
+$dict["46"] = "Gerätebeschreibung";
+$dict["47"] = "Gerät löschen";
+$dict["48"] = "Geräte";
+$dict["49"] = "Geräte ID";
+$dict["50"] = "Gerät erstellen";
+$dict["51"] = "Das Passwort wurde erfolgreich geändert!";
+$dict["52"] = "Passwort ändern";
 ?>
