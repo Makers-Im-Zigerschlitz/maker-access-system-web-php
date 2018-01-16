@@ -14,6 +14,10 @@ $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
 $query = "TRUNCATE tblPermissions;";
 mysqli_query($sqlconn,$query);
 
+if ($_POST == NULL) {
+  header("Location: ../../home.php?site=access");
+  die();
+}
 foreach ($_POST as $key => $value) {
   //echo "$key $value<br>";
   //echo "$key $value<br>";
