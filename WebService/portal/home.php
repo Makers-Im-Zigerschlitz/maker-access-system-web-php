@@ -193,11 +193,19 @@ if($_GET["site"]=="access"):?>
 			  echo $device["deviceName"];
 			  echo "</th>";
 			}
+<<<<<<< HEAD
 			$query = "SELECT * FROM tblMembers ORDER BY Lastname";
 			$userresult = mysqli_query($sqlconn,$query);
 			while ($user = mysqli_fetch_assoc($userresult)) {
 				echo "<tr>";
 				echo "<td>".$user["Firstname"]." ".$user["Lastname"]."</td>";
+=======
+			$query = "SELECT * FROM tblUsers ORDER BY username";
+			$userresult = mysqli_query($sqlconn,$query);
+			while ($user = mysqli_fetch_assoc($userresult)) {
+				echo "<tr>";
+				echo "<td>".$user["username"]."</td>";
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 
 				$query = "SELECT * FROM tblDevices ORDER BY deviceName";
 				$deviceresult = mysqli_query($sqlconn,$query);
@@ -205,10 +213,17 @@ if($_GET["site"]=="access"):?>
 					$query = "SELECT * FROM tblPermissions WHERE uid=" . $user["uid"] . " AND deviceID=" . $device["deviceID"] . ";";
 					$permresult = mysqli_query($sqlconn,$query);
 					if (mysqli_num_rows($permresult)>0) {
+<<<<<<< HEAD
 					echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' checked></td>";
 					}
 					else{
 					echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' ></td>";
+=======
+					echo "<td><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' checked></td>";
+					}
+					else{
+					echo "<td><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' ></td>";
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 				}
 				}
 			echo "</tr>";

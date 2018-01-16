@@ -3,7 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
+<<<<<<< HEAD
 -- Erstellungszeit: 16. Jan 2018 um 17:53
+=======
+-- Erstellungszeit: 16. Jan 2018 um 12:55
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 -- Server Version: 5.5.58-0+deb8u1
 -- PHP-Version: 5.6.30-0+deb8u1
 
@@ -17,7 +21,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
+<<<<<<< HEAD
 -- Datenbank: `mas_schema`
+=======
+-- Datenbank: `access_Schema`
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 --
 
 -- --------------------------------------------------------
@@ -30,7 +38,13 @@ CREATE TABLE IF NOT EXISTS `tblDevices` (
 `deviceID` int(10) unsigned NOT NULL,
   `deviceName` text,
   `deviceDesc` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `tblMembers`
+--
 
 -- --------------------------------------------------------
 
@@ -49,7 +63,13 @@ CREATE TABLE IF NOT EXISTS `tblMembers` (
   `Street` text,
   `City` text,
   `Country` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `tblNews`
+--
 
 -- --------------------------------------------------------
 
@@ -75,7 +95,17 @@ CREATE TABLE IF NOT EXISTS `tblPermissions` (
 `permID` int(10) NOT NULL,
   `deviceID` int(11) NOT NULL,
   `uid` text NOT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `tblRoles`
+--
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 
 -- --------------------------------------------------------
 
@@ -123,7 +153,11 @@ CREATE TABLE IF NOT EXISTS `tblUsers` (
   `username` varchar(40) NOT NULL,
   `password` varchar(50) NOT NULL,
   `level` int(1) NOT NULL
+<<<<<<< HEAD
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 
 --
 -- Daten für Tabelle `tblUsers`
@@ -186,22 +220,34 @@ ALTER TABLE `tblUsers`
 -- AUTO_INCREMENT für Tabelle `tblDevices`
 --
 ALTER TABLE `tblDevices`
+<<<<<<< HEAD
 MODIFY `deviceID` int(10) unsigned NOT NULL AUTO_INCREMENT;
+=======
+MODIFY `deviceID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 --
 -- AUTO_INCREMENT für Tabelle `tblMembers`
 --
 ALTER TABLE `tblMembers`
+<<<<<<< HEAD
 MODIFY `memberID` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `tblNews`
 --
 ALTER TABLE `tblNews`
 MODIFY `nid` int(11) NOT NULL AUTO_INCREMENT;
+=======
+MODIFY `memberID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 --
 -- AUTO_INCREMENT für Tabelle `tblPermissions`
 --
 ALTER TABLE `tblPermissions`
+<<<<<<< HEAD
 MODIFY `permID` int(10) NOT NULL AUTO_INCREMENT;
+=======
+MODIFY `permID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 --
 -- AUTO_INCREMENT für Tabelle `tblRoles`
 --
@@ -216,7 +262,11 @@ MODIFY `upid` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT für Tabelle `tblUsers`
 --
 ALTER TABLE `tblUsers`
+<<<<<<< HEAD
 MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+=======
+MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+>>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
