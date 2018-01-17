@@ -8,8 +8,9 @@
 	<link href="css/all.css" rel="stylesheet" type="text/css" />
 	<link href="css/popups.css" rel="stylesheet" type="text/css" />
 
-	<script src="js/all.js" type="text/javascript"></script>
 	<script src="js/modernizr.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+	<script src="js/all.js" type="text/javascript"></script>
 	<?php
 	include "includes/logincheck.inc.php";
 	session_regenerate_id();
@@ -159,10 +160,39 @@ if($_GET["site"]=="settings"):?>
 						</div>
 
 					<form name="changepw" action="useractions/changepw.php" method="post" onsubmit="return changePW();">
-							<input required type="password" name="pw1" placeholder="<?php echo $dict["32"];?>">
+							<input required type="password" id="password" name="pw1" placeholder="<?php echo $dict["32"];?>">
 							<input required type="password" name="pw2" placeholder="<?php echo $dict["33"];?>">
+							<meter id="password-strength-meter" max="4"></meter>
+							<p id="password-strength-text"></p>
 							<button type="submit" name="submit"><?php echo $dict["34"];?></button>
 					</form>
+					<script type="text/javascript">
+					var strength = {
+					  0: "Worst",
+					  1: "Bad",
+					  2: "Weak",
+					  3: "Good",
+					  4: "Strong"
+					}
+					var password = document.getElementById('password');
+					var meter = document.getElementById('password-strength-meter');
+					var text = document.getElementById('password-strength-text');
+
+					password.addEventListener('input', function() {
+					  var val = password.value;
+					  var result = zxcvbn(val);
+
+					  // Update the password strength meter
+					  meter.value = result.score;
+
+					  // Update the text indicator
+					  if (val !== "") {
+					    text.innerHTML = "Strength: " + strength[result.score];
+					  } else {
+					    text.innerHTML = "";
+					  }
+					});
+ 					</script>
 			</div>
 			<div class="settingframe">
 					<h3><?php echo $dict["38"] ?></h3>
