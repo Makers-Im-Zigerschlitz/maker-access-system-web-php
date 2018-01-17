@@ -1,11 +1,6 @@
 body{
 	font-family: Verdana;
 }
-
-#chkbxc {
-    text-align: center; /* center checkbox horizontally */
-    vertical-align: middle; /* center checkbox vertically */
-}
 .logout{
 	width: 10%;
 	position: fixed;

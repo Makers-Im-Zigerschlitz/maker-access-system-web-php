@@ -44,6 +44,7 @@ $dict["40"] = "Telefon";
 $dict["41"] = "E-Mail";
 $dict["42"] = "Es wurde ein ungültiges Dateiformat hochgeladen";
 $dict["43"] = "Diese Datei existiert bereits!";
+<<<<<<< HEAD
 $dict["44"] = "Accessystem";
 <<<<<<< HEAD
 $dict["45"] = "Gerätename";
@@ -56,4 +57,6 @@ $dict["51"] = "Das Passwort wurde erfolgreich geändert!";
 $dict["52"] = "Passwort ändern";
 =======
 >>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
+=======
+>>>>>>> parent of ffaefd7... Another Update
 ?>

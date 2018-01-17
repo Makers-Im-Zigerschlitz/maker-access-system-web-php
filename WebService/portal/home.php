@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link href="css/normalize.css" rel="stylesheet" type="text/css" />
 	<link href="css/all.css" rel="stylesheet" type="text/css" />
-	<link href="css/popups.css" rel="stylesheet" type="text/css" />
 
 	<script src="js/all.js" type="text/javascript"></script>
 	<script src="js/modernizr.js" type="text/javascript"></script>
@@ -62,7 +61,7 @@ while ($dataset = mysqli_fetch_assoc($result)) {
 }
 echo "</div>";
 endif;
-if($_GET["site"]=="docs"):?>
+if($_GET["site"]=="songs"):?>
 <div class='row'>
 	<div class="large-12 columns">
 		<h2><?php echo $dict["17"];?></h2>
@@ -147,17 +146,16 @@ if($_GET["site"]=="settings"):?>
 		<div class="usersettings">
 			<div class="settingframe">
 				<h3><?php echo $dict["34"];?></h3>
-
-					<div id="pwchanged" class="overlay">
-						<div class="popup">
-							<h2><?php echo $dict["52"];?></h2>
-							<a class="close" href="#">&times;</a>
-							<div class="content">
-								<?php echo $dict["51"];?>
-							</div>
-						</div>
-						</div>
-
+				<?php
+				if(isset($_GET["message"]))
+				{
+					if($_GET["message"] == "pwchanged")
+					{
+						echo "<script type='text/javascript'>alert('Das Passwort wurde erfolgreich geändert!');</script>";
+						header("Location: home.php?site=settings");
+					}
+				}
+				 ?>
 					<form name="changepw" action="useractions/changepw.php" method="post" onsubmit="return changePW();">
 							<input required type="password" name="pw1" placeholder="<?php echo $dict["32"];?>">
 							<input required type="password" name="pw2" placeholder="<?php echo $dict["33"];?>">
@@ -177,6 +175,7 @@ if($_GET["site"]=="settings"):?>
 		</div>
 </div>
 </div>
+<<<<<<< HEAD
 <?php endif;
 if($_GET["site"]=="access"):?>
 <div class='row'>
@@ -236,6 +235,8 @@ if($_GET["site"]=="access"):?>
 	</form>
 </div>
 </div>
+=======
+>>>>>>> parent of ffaefd7... Another Update
 <?php endif;?>
 </div>
 	<footer>

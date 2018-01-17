@@ -17,8 +17,7 @@
       <ul class="right">
         <li class=""><a href="home.php?site=news"><?php echo $dict["20"]; ?></a></li>
           <li class=""><a href="home.php?site=members"><?php echo $dict["19"]; ?></a></li>
-          <li class=""><a href="home.php?site=docs"><?php echo $dict["21"]; ?></a></li>
-          <li class=""><a href="home.php?site=access"><?php echo $dict["44"]; ?></a></li>
+          <li class=""><a href="home.php?site=songs"><?php echo $dict["21"]; ?></a></li>
           <?php
             if($_SESSION["level"]>3)
             {
