@@ -10,7 +10,7 @@ $mysqlpass = "__PASS__";
 $mysqldb = "__DATABASE__";
 
 $motd = "Happy to see ya!";
-$forcessl = true; //Force SSL
+$fhttps = false; //Force SSL
 
 // Chosen language will be used as standard
 $standardlanguage = "de";
@@ -28,12 +28,4 @@ else {
   }
 }
 $language = getlang($standardlanguage);
-if($forcessl == true)
-{
-  if($_SERVER["HTTPS"] != "on")
-  {
-      header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-      exit();
-  }
-}
 ?>
