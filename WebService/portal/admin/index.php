@@ -66,12 +66,13 @@
         <th><?php echo $dict["11"];?></th>
       </tr>
     <?php
-      $query = "SELECT * FROM tblMembers ORDER BY lastname ASC";
+      $query = "SELECT * FROM $mysqldb.tblMembers ORDER BY Lastname ASC";
       $result = mysqli_query($sqlconn,$query);
+      //echo mysqli_num_rows($result);
       while ($temp = mysqli_fetch_assoc($result)) {
         $query = "SELECT * FROM $mysqldb.tblUsers WHERE uid LIKE '" . $temp["uid"] . "'";
-        $result = mysqli_query($sqlconn,$query);
-        $memberdata = mysqli_fetch_array($result);
+        $result2 = mysqli_query($sqlconn,$query);
+        $memberdata = mysqli_fetch_array($result2);
 
         echo "<tr>";
         echo "<td>".$temp["Firstname"]."</td>";
@@ -161,6 +162,38 @@
       echo "<td>".$temp["text"]."</td>";
     }
     echo "<td><a href='actions/deletepost.php?nid=".$temp["nid"]."'>Delete</a>";
+  }
+ ?>
+</table>
+</div>
+<div class="setframe">
+  <h3><?php echo $dict["50"];?></h3>
+<form action="actions/createdevice.php" method="post">
+<input required type="text" name="deviceName" placeholder="<?php echo $dict["45"];?>">
+<br>
+<textarea required name="deviceDesc" rows="4" cols="30" placeholder="<?php echo $dict["46"];?>"></textarea>
+<input type="submit" name="submit" value="<?php echo $dict["50"];?>">
+</form>
+</div>
+<div class="setframe">
+<h3><?php echo $dict["48"];?></h3>
+<table border>
+  <tr>
+    <th><?php echo $dict["49"];?></th>
+    <th><?php echo $dict["45"];?></th>
+    <th><?php echo $dict["46"];?></th>
+    <th><?php echo $dict["47"];?></th>
+  </tr>
+<?php
+  $query = "SELECT * FROM tblDevices ORDER BY deviceID";
+  $result = mysqli_query($sqlconn,$query);
+  while ($temp = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . $temp["deviceID"] . "</td>";
+    echo "<td>" . $temp["deviceName"] . "</td>";
+    echo "<td>" . $temp["deviceDesc"] . "</td>";
+    echo "<td><a href='actions/deletedevice.php?deviceID=".$temp["deviceID"]."'>Delete</a>";
+    echo "</tr>";
   }
  ?>
 </table>

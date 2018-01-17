@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link href="css/normalize.css" rel="stylesheet" type="text/css" />
 	<link href="css/all.css" rel="stylesheet" type="text/css" />
+	<link href="css/popups.css" rel="stylesheet" type="text/css" />
 
 	<script src="js/all.js" type="text/javascript"></script>
 	<script src="js/modernizr.js" type="text/javascript"></script>
@@ -61,7 +62,7 @@ while ($dataset = mysqli_fetch_assoc($result)) {
 }
 echo "</div>";
 endif;
-if($_GET["site"]=="songs"):?>
+if($_GET["site"]=="docs"):?>
 <div class='row'>
 	<div class="large-12 columns">
 		<h2><?php echo $dict["17"];?></h2>
@@ -146,16 +147,17 @@ if($_GET["site"]=="settings"):?>
 		<div class="usersettings">
 			<div class="settingframe">
 				<h3><?php echo $dict["34"];?></h3>
-				<?php
-				if(isset($_GET["message"]))
-				{
-					if($_GET["message"] == "pwchanged")
-					{
-						echo "<script type='text/javascript'>alert('Das Passwort wurde erfolgreich geändert!');</script>";
-						header("Location: home.php?site=settings");
-					}
-				}
-				 ?>
+
+					<div id="pwchanged" class="overlay">
+						<div class="popup">
+							<h2><?php echo $dict["52"];?></h2>
+							<a class="close" href="#">&times;</a>
+							<div class="content">
+								<?php echo $dict["51"];?>
+							</div>
+						</div>
+						</div>
+
 					<form name="changepw" action="useractions/changepw.php" method="post" onsubmit="return changePW();">
 							<input required type="password" name="pw1" placeholder="<?php echo $dict["32"];?>">
 							<input required type="password" name="pw2" placeholder="<?php echo $dict["33"];?>">
@@ -175,7 +177,6 @@ if($_GET["site"]=="settings"):?>
 		</div>
 </div>
 </div>
-<<<<<<< HEAD
 <?php endif;
 if($_GET["site"]=="access"):?>
 <div class='row'>
@@ -192,19 +193,11 @@ if($_GET["site"]=="access"):?>
 			  echo $device["deviceName"];
 			  echo "</th>";
 			}
-<<<<<<< HEAD
 			$query = "SELECT * FROM tblMembers ORDER BY Lastname";
 			$userresult = mysqli_query($sqlconn,$query);
 			while ($user = mysqli_fetch_assoc($userresult)) {
 				echo "<tr>";
 				echo "<td>".$user["Firstname"]." ".$user["Lastname"]."</td>";
-=======
-			$query = "SELECT * FROM tblUsers ORDER BY username";
-			$userresult = mysqli_query($sqlconn,$query);
-			while ($user = mysqli_fetch_assoc($userresult)) {
-				echo "<tr>";
-				echo "<td>".$user["username"]."</td>";
->>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 
 				$query = "SELECT * FROM tblDevices ORDER BY deviceName";
 				$deviceresult = mysqli_query($sqlconn,$query);
@@ -212,17 +205,10 @@ if($_GET["site"]=="access"):?>
 					$query = "SELECT * FROM tblPermissions WHERE uid=" . $user["uid"] . " AND deviceID=" . $device["deviceID"] . ";";
 					$permresult = mysqli_query($sqlconn,$query);
 					if (mysqli_num_rows($permresult)>0) {
-<<<<<<< HEAD
 					echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' checked></td>";
 					}
 					else{
 					echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' ></td>";
-=======
-					echo "<td><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' checked></td>";
-					}
-					else{
-					echo "<td><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' ></td>";
->>>>>>> 64b4e169643060b871332e2ea4e9cd15eef2faf1
 				}
 				}
 			echo "</tr>";
@@ -235,8 +221,6 @@ if($_GET["site"]=="access"):?>
 	</form>
 </div>
 </div>
-=======
->>>>>>> parent of ffaefd7... Another Update
 <?php endif;?>
 </div>
 	<footer>
