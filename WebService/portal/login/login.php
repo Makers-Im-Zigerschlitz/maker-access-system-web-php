@@ -2,7 +2,7 @@
 <head>
 <?php
 include "../config/config.inc.php";
-if(fhttps == true)
+if($fhttps == true)
 {
   if (!(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' ||
     $_SERVER['HTTPS'] == 1) ||
