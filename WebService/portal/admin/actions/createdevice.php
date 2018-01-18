@@ -6,7 +6,7 @@ if($_SESSION["level"] <3)
   die();
 }
 include "../../config/config.inc.php";
-include "../../includes/dictionary.inc.php";
+include "../../includes/dictionary.$language.inc.php";
 include "../../includes/functions.inc.php";
 $db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
 $stmt = $db->prepare("INSERT INTO tblDevices(deviceName,deviceDesc) VALUES (:deviceName,:deviceDesc)");
