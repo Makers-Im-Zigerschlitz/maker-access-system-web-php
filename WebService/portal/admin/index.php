@@ -43,6 +43,14 @@
       {
         echo "<script type='text/javascript'>alert('".$dict["43"]."'); document.location='index.php';</script>";
       }
+      elseif($_GET["message"] == "devicecreated")
+      {
+        echo "<script type='text/javascript'>alert('Device created'); document.location='index.php';</script>";
+      }
+      elseif($_GET["message"] == "postcreated")
+      {
+        echo "<script type='text/javascript'>alert('Post created'); document.location='index.php';</script>";
+      }	  
     }
     ?>
     <script type="text/javascript">

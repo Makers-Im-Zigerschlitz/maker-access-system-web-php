@@ -8,9 +8,7 @@ if($_SESSION["level"] <3)
 include "../../config/config.inc.php";
 include "../../includes/dictionary.inc.php";
 include "../../includes/functions.inc.php";
-echo "Creating DB";
 $db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
-echo "Database created";
 $stmt = $db->prepare("INSERT INTO tblDevices(deviceName,deviceDesc) VALUES (:deviceName,:deviceDesc)");
 $stmt->bindValue(':deviceName', $_POST["deviceName"], PDO::PARAM_STR);
 $stmt->bindValue(':deviceDesc', $_POST["deviceDesc"], PDO::PARAM_STR);

@@ -8,18 +8,14 @@ if($_SESSION["level"] <3)
 include "../../config/config.inc.php";
 include "../../includes/dictionary.inc.php";
 include "../../includes/functions.inc.php";
+$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$stmt = $db->prepare("INSERT INTO tblNews(title,text,author) VALUES (:title,:text,:author)");
+$stmt->bindValue(':title', $_POST["posttitle"], PDO::PARAM_STR);
+$stmt->bindValue(':deviceDesc', $_POST["text"], PDO::PARAM_STR);
+$stmt->bindValue(':author', $_SESSION["username"], PDO::PARAM_STR);
+$stmt->execute();
 
-$sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
-
-$posttitle = sql_replace($_POST["posttitle"]);
-$posttext = sql_replace($_POST["text"]);
-
-$query = "INSERT INTO `tblNews` (`title`, `text`, `author`) VALUES ('".$posttitle."', '".$posttext."', '".$_SESSION["username"]."');";
-$result = mysqli_query($sqlconn,$query);
-if($result)
-{
-  header("Location: ../index.php?message=postcreated");
+if ($stmt->rowCount()>0) {
+	header("Location: ../index.php?message=postcreated");
 }
-echo mysqli_error($sqlconn);
-echo "<br>".$query;
 ?>
