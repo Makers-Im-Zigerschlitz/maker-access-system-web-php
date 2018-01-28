@@ -3,6 +3,7 @@ $dict = array();
 
 //General
 $dict["Gen_Welcome"] = "Welcome";
+$dict["Gen_Administration"] = "Administration";
 
 //Login
 $dict["Login_Prompt"] = "Please log in";
@@ -56,7 +57,10 @@ $dict["News_Title"] = "News title";
 $dict["News_Text"] = "News text";
 $dict["Post_Text"] = "Post text";
 $dict["Post_Posts"] = "Posts";
+$dict["Post_Send"] = "Post";
 $dict["Post_Delete_Post"] = "Delete Post";
+$dict["Post_Create_Success"] = "Post created!";
+$dict["Post_Delete_Success"] = "Post deleted!";
 
 //Devices 
 $dict["Dev_Name"] = "Devicename";
@@ -65,4 +69,6 @@ $dict["Dev_Delete"] = "Delete device";
 $dict["Dev_Devices"] = "Devices";
 $dict["Dev_ID"] = "Device ID";
 $dict["Dev_Create"] = "Create device";
+$dict["Dev_Create_Success"] = "Device created!";
+$dict["Dev_Delete_Success"] = "Device deleted!";
 ?>

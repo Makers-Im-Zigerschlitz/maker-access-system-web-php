@@ -3,6 +3,7 @@ $dict = array();
 
 //General
 $dict["Gen_Welcome"] = "Willkommen";
+$dict["Gen_Administration"] = "Administration";
 
 //Login
 $dict["Login_Prompt"] = "Bitte loggen Sie sich ein";
@@ -53,16 +54,21 @@ $dict["Doc_File_Exists"] = "Die Datei besteht bereits!";
 //News
 $dict["News_Create_Entry"] = "Newseintrag erstellen";
 $dict["News_Title"] = "Titel";
-$dict["News_Text"] = "Text";
-$dict["Post_Text"] = "Text";
+$dict["News_Text"] = "Inhalt";
+$dict["Post_Text"] = "Inhalt";
 $dict["Post_Posts"] = "Beiträge";
+$dict["Post_Send"] = "Absenden";
 $dict["Post_Delete_Post"] = "Beitrag löschen";
+$dict["Post_Create_Success"] = "Beitrag erstellt!";
+$dict["Post_Delete_Success"] = "Beitrag gelöscht!";
 
 //Devices 
-$dict["Dev_Name"] = "Gerätenamen";
+$dict["Dev_Name"] = "Gerätename";
 $dict["Dev_Description"] = "Gerätebeschreibung";
 $dict["Dev_Delete"] = "Gerät löschen";
 $dict["Dev_Devices"] = "Geräte";
 $dict["Dev_ID"] = "Geräte ID";
 $dict["Dev_Create"] = "Gerät erstellen";
+$dict["Dev_Create_Success"] = "Gerät erstellt!";
+$dict["Dev_Delete_Success"] = "Gerät gelöscht!";
 ?>
