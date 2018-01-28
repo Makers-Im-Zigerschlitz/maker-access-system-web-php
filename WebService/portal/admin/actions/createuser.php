@@ -16,7 +16,7 @@ $result = mysqli_query($sqlconn,$query);
 if(!$result)
 {
   echo "Es ist ein Fehler aufgetreten: ".mysqli_error($sqlconn);
-  echo "<p><a href='../'>".$dict["5"]."</a></p>";
+  echo "<p><a href='../'>".$dict["Nav_Return_Home"]."</a></p>";
   die();
 }
 else

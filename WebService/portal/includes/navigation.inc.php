@@ -15,18 +15,18 @@
     <section class="top-bar-section">
       <!-- Right Nav Section -->
       <ul class="right">
-        <li class=""><a href="home.php?site=news"><?php echo $dict["20"]; ?></a></li>
-          <li class=""><a href="home.php?site=members"><?php echo $dict["19"]; ?></a></li>
-          <li class=""><a href="home.php?site=docs"><?php echo $dict["21"]; ?></a></li>
-          <li class=""><a href="home.php?site=access"><?php echo $dict["44"]; ?></a></li>
+        <li class=""><a href="home.php?site=news"><?php echo $dict["Nav_News"]; ?></a></li>
+          <li class=""><a href="home.php?site=members"><?php echo $dict["Nav_Members"]; ?></a></li>
+          <li class=""><a href="home.php?site=docs"><?php echo $dict["Nav_Documents"]; ?></a></li>
+          <li class=""><a href="home.php?site=access"><?php echo $dict["Nav_Access_System"]; ?></a></li>
           <?php
             if($_SESSION["level"]>3)
             {
-              echo "<li><a target='_blank' href='admin/'>".$dict["22"]."</a></li>";
+              echo "<li><a target='_blank' href='admin/'>".$dict["Nav_Admin_Panel"]."</a></li>";
             }
            ?>
-          <li class=""><a href="login/logout.php"><?php echo $dict["23"]; ?></a></li>
-          <li class=""><a href="home.php?site=settings"><?php echo $dict["31"]; ?></a></li>
+          <li class=""><a href="login/logout.php"><?php echo $dict["Login_Logout"]; ?></a></li>
+          <li class=""><a href="home.php?site=settings"><?php echo $dict["Nav_Settings"]; ?></a></li>
       </ul>
     </section>
   </nav>

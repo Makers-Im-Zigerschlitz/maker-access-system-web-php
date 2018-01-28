@@ -30,11 +30,11 @@ include "../includes/dictionary.$language.inc.php";
 <div class="wrapper">
 	<div class="container">
 		<h1><?php echo $orgname; ?></h1>
-		<h2><?php echo $dict["0"]; ?>:</h2>
+		<h2><?php echo $dict["Login_Prompt"]; ?>:</h2>
 		<form class="form" action="login_action.php" method="post">
-			<input type="text" name="username" placeholder="Username">
-			<input type="password" name="password" placeholder="Password">
-			<button type="submit" id="login-button">Login</button>
+			<input type="text" name="username" placeholder="<?php echo $dict["Login_Username"]; ?>">
+			<input type="password" name="password" placeholder="<?php echo $dict["Login_Passwort"]; ?>">
+			<button type="submit" id="login-button"><?php echo $dict["Login_Passwort"]; ?></button>
 		</form>
 	</div>
 
