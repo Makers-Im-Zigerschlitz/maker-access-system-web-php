@@ -8,9 +8,10 @@
 	<link href="css/all.css" rel="stylesheet" type="text/css" />
 	<link href="css/popups.css" rel="stylesheet" type="text/css" />
 
+	<!--<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>-->
 	<script src="js/modernizr.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
-	<script src="js/all.js" type="text/javascript"></script>
+	<!--<script src="js/all.js" type="text/javascript"></script>-->
 	<?php
 	include "includes/logincheck.inc.php";
 	session_regenerate_id();
