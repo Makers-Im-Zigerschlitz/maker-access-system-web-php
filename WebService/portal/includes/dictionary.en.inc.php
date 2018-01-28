@@ -1,56 +1,68 @@
 <?php
 $dict = array();
-$dict["0"] = "Please log in";
-$dict["1"] = "Username";
-$dict["2"] = "Password";
-$dict["3"] = "Authentication rejected";
-$dict["4"] = "Your Authentication was rejected! Maybe you are not logged in or you Username / Password was wrong";
-$dict["5"] = "Go back to Home";
-$dict["6"] = "User successfully created";
-$dict["7"] = "Surname";
-$dict["8"] = "Lastname";
-$dict["9"] = "Birthday";
-$dict["10"] = "Create User";
-$dict["11"] = "Delete User";
-$dict["12"] = "Upload Document";
-$dict["13"] = "Filename";
-$dict["14"] = "Upload";
-$dict["15"] = "Open File";
-$dict["16"] = "Title";
-$dict["17"] = "Document overview";
-$dict["18"] = "Delete files";
-$dict["19"] = "Members";
-$dict["20"] = "News";
-$dict["21"] = "Documents";
-$dict["22"] = "Admin";
-$dict["23"] = "Logout";
-$dict["24"] = "Create Newsentry";
-$dict["25"] = "News title";
-$dict["26"] = "News text";
-$dict["27"] = "Post text";
-$dict["28"] = "Posts";
-$dict["29"] = "Delete Post";
-$dict["30"] = "Welcome";
-$dict["31"] = "Settings";
-$dict["32"] = "New Password";
-$dict["33"] = "Repeat Password";
-$dict["34"] = "Change Password";
-$dict["35"] = "File successfully uploaded";
-$dict["36"] = "User has been created";
-$dict["37"] = "User has been deletedw";
-$dict["38"] = "Change Language";
-$dict["39"] = "Log on";
-$dict["40"] = "Phone";
-$dict["41"] = "Mail Adress";
-$dict["42"] = "The file with the uploaded extension is not allowed";
-$dict["43"] = "This file already exists!";
-$dict["44"] = "Accessystem";
-$dict["45"] = "Devicename";
-$dict["46"] = "Device description";
-$dict["47"] = "Delete device";
-$dict["48"] = "Devices";
-$dict["49"] = "Device ID";
-$dict["50"] = "Create device";
-$dict["51"] = "Your password was successfully changed!";
-$dict["52"] = "Password change";
+
+//General
+$dict["Gen_Welcome"] = "Welcome";
+
+//Login
+$dict["Login_Prompt"] = "Please log in";
+$dict["Login_Logon"] = "Log on";
+$dict["Login_Logout"] = "Logout";
+$dict["Login_Username"] = "Username";
+$dict["Login_Passwort"] = "Password";
+$dict["Login_Auth_Rejected_Short"] = "Authentication rejected";
+$dict["Login_Auth_Rejected_Long"] = "Your Authentication was rejected! Maybe you are not logged in or you Username / Password was wrong";
+$dict["Login_New_Password"] = "New Password";
+$dict["Login_Repeat_Password"] = "Repeat Password";
+$dict["Login_Change_Password"] = "Change Password";
+$dict["Login_Password_Change_Success"] = "Your password was successfully changed!";
+
+//Navigation
+$dict["Nav_Return_Home"] = "Go back to Home";
+$dict["Nav_Members"] = "Members";
+$dict["Nav_News"] = "News";
+$dict["Nav_Documents"] = "Documents";
+$dict["Nav_Admin_Panel"] = "Admin";
+$dict["Nav_Access_System"] = "Accessystem";
+$dict["Nav_Settings"] = "Settings";
+$dict["Nav_Change_Lang"] = "Change Language";
+
+//Users
+$dict["User_Create_Success"] = "User successfully created";
+$dict["User_Delete_Success"] = "User has been deleted";
+$dict["User_Surname"] = "Surname";
+$dict["User_Lastname"] = "Lastname";
+$dict["User_Birthday"] = "Birthday";
+$dict["User_Phone"] = "Phone";
+$dict["User_Mail"] = "Mail Adress";
+$dict["User_Create"] = "Create User";
+$dict["User_Delete"] = "Delete User";
+
+//Documents and Files
+$dict["Doc_Upload_Document"] = "Upload Document";
+$dict["Doc_Filename"] = "Filename";
+$dict["Doc_Upload"] = "Upload";
+$dict["Doc_Open_File"] = "Open File";
+$dict["Doc_Title"] = "Title";
+$dict["Doc_Overview"] = "Document overview";
+$dict["Doc_Delete_Files"] = "Delete files";
+$dict["Doc_Upload_Success"] = "File successfully uploaded";
+$dict["Doc_Upload_Filetype_Denied"] = "The file with the uploaded extension is not allowed";
+$dict["Doc_File_Exists"] = "This file already exists!";
+
+//News
+$dict["News_Create_Entry"] = "Create Newsentry";
+$dict["News_Title"] = "News title";
+$dict["News_Text"] = "News text";
+$dict["Post_Text"] = "Post text";
+$dict["Post_Posts"] = "Posts";
+$dict["Post_Delete_Post"] = "Delete Post";
+
+//Devices 
+$dict["Dev_Name"] = "Devicename";
+$dict["Dev_Description"] = "Device description";
+$dict["Dev_Delete"] = "Delete device";
+$dict["Dev_Devices"] = "Devices";
+$dict["Dev_ID"] = "Device ID";
+$dict["Dev_Create"] = "Create device";
 ?>

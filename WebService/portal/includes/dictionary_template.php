@@ -16,7 +16,6 @@ $dict["Login_New_Password"] = "New Password";
 $dict["Login_Repeat_Password"] = "Repeat Password";
 $dict["Login_Change_Password"] = "Change Password";
 $dict["Login_Password_Change_Success"] = "Your password was successfully changed!";
-$dict["Login_Change_Lang"] = "Change Language";
 
 //Navigation
 $dict["Nav_Return_Home"] = "Go back to Home";
@@ -26,6 +25,7 @@ $dict["Nav_Documents"] = "Documents";
 $dict["Nav_Admin_Panel"] = "Admin";
 $dict["Nav_Access_System"] = "Accessystem";
 $dict["Nav_Settings"] = "Settings";
+$dict["Nav_Change_Lang"] = "Change Language";
 
 //Users
 $dict["User_Create_Success"] = "User successfully created";
