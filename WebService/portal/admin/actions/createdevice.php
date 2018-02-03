@@ -6,20 +6,14 @@ if($_SESSION["level"] <3)
   die();
 }
 include "../../config/config.inc.php";
-include "../../includes/dictionary.inc.php";
+include "../../includes/dictionary.$language.inc.php";
 include "../../includes/functions.inc.php";
-
-$sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
-
-$deviceName = sql_replace($_POST["deviceName"]);
-$deviceDesc = sql_replace($_POST["deviceDesc"]);
-
-$query = "INSERT INTO `tblDevices` (`deviceName`, `deviceDesc`) VALUES ('".$deviceName."', '".$deviceDesc."');";
-$result = mysqli_query($sqlconn,$query);
-if($result)
-{
-  header("Location: ../index.php");
+$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$stmt = $db->prepare("INSERT INTO tblDevices(deviceName,deviceDesc) VALUES (:deviceName,:deviceDesc)");
+$stmt->bindValue(':deviceName', filter_input(INPUT_POST, 'deviceName'), PDO::PARAM_STR);
+$stmt->bindValue(':deviceDesc', filter_input(INPUT_POST, 'deviceDesc'), PDO::PARAM_STR);
+$stmt->execute();
+if ($stmt->rowCount()>0) {
+	header("Location: ../index.php?message=devicecreated");
 }
-echo mysqli_error($sqlconn);
-echo "<br>".$query;
 ?>
