@@ -15,7 +15,7 @@
       include "../includes/functions.inc.php";
       $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
      ?>
-    <title><?php echo $orgname; ?> - Administration</title>
+    <title><?php echo $orgname; ?> - <?php echo $dict["Gen_Administration"];?></title>
     <link rel="stylesheet" type="text/css" href="../css/adminpanel.css">
     <link rel="stylesheet" type="text/css" href="../css/normalize.css">
 
@@ -25,31 +25,31 @@
     {
       if($_GET["message"] == "ucreated")
       {
-        echo "<script type='text/javascript'>alert('".$dict["36"].": ".$_GET["username"]."'); document.location='index.php';</script>";
+        echo "<script type='text/javascript'>alert('".$dict["User_Create_Success"].": ".$_GET["username"]."'); document.location='index.php';</script>";
       }
       elseif($_GET["message"] == "udeleted")
       {
-        echo "<script type='text/javascript'>alert('".$dict["37"].": ".$_GET["username"]."'); document.location='index.php';</script>";
+        echo "<script type='text/javascript'>alert('".$dict["User_Delete_Success"].": ".$_GET["username"]."'); document.location='index.php';</script>";
       }
       elseif($_GET["message"] == "uploadok")
       {
-        echo "<script type='text/javascript'>alert('".$dict["35"]."'); document.location='index.php';</script>";
+        echo "<script type='text/javascript'>alert('".$dict["Doc_Upload_Success"]."'); document.location='index.php';</script>";
       }
       elseif($_GET["message"] == "wrongext")
       {
-        echo "<script type='text/javascript'>alert('".$dict["42"].": ".$_GET["filext"]."'); document.location='index.php';</script>";
+        echo "<script type='text/javascript'>alert('".$dict["Doc_Upload_Filetype_Denied"].": ".$_GET["filext"]."'); document.location='index.php';</script>";
       }
       elseif($_GET["message"] == "file_exists")
       {
-        echo "<script type='text/javascript'>alert('".$dict["43"]."'); document.location='index.php';</script>";
+        echo "<script type='text/javascript'>alert('".$dict["Doc_File_Exists"]."'); document.location='index.php';</script>";
       }
       elseif($_GET["message"] == "devicecreated")
       {
-        echo "<script type='text/javascript'>alert('Device created'); document.location='index.php';</script>";
+        echo "<script type='text/javascript'>alert('".$dict["Dev_Create_Success"]."'); document.location='index.php';</script>";
       }
       elseif($_GET["message"] == "postcreated")
       {
-        echo "<script type='text/javascript'>alert('Post created'); document.location='index.php';</script>";
+        echo "<script type='text/javascript'>alert('".$dict["Post_Create_Success"]."'); document.location='index.php';</script>";
       }	  
     }
     ?>
@@ -62,16 +62,16 @@
   <body>
 <div class="settings">
   <div class="setframe">
-    <h3><?php echo $dict["11"];?></h3>
+    <h3><?php echo $dict["User_Delete"];?></h3>
     <table border>
       <tr>
-        <th><?php echo $dict["7"];?></th>
-        <th><?php echo $dict["8"];?></th>
-        <th><?php echo $dict["9"];?></th>
-        <th><?php echo $dict["1"];?></th>
-        <th><?php echo $dict["40"];?></th>
-        <th><?php echo $dict["41"];?></th>
-        <th><?php echo $dict["11"];?></th>
+        <th><?php echo $dict["User_Surname"];?></th>
+        <th><?php echo $dict["User_Lastname"];?></th>
+        <th><?php echo $dict["User_Birthday"];?></th>
+        <th><?php echo $dict["Login_Username"];?></th>
+        <th><?php echo $dict["User_Phone"];?></th>
+        <th><?php echo $dict["User_Mail"];?></th>
+        <th><?php echo $dict["User_Delete"];?></th>
       </tr>
     <?php
       $query = "SELECT * FROM $mysqldb.tblMembers ORDER BY Lastname ASC";
@@ -98,38 +98,38 @@
     </table>
 </div>
   <div class="setframe">
-      <h3><?php echo $dict["10"];?></h3>
+      <h3><?php echo $dict["User_Create"];?></h3>
       <form name="createuser" action="actions/createuser.php" method="post">
       <table>
-        <tr><td><input required type="text" name="surname" onchange="copyuname();" placeholder="<?php echo $dict["7"];?>"></td></tr>
-        <tr><td><input required type="text" name="lastname" placeholder="<?php echo $dict["8"];?>"></td></tr>
-        <tr><td><input required type="date" name="birthday" placeholder="<?php echo $dict["9"];?> DD.MM.YYYY"></td></tr>
-        <tr><td><input required type="text" name="phone" placeholder="<?php echo $dict["40"];?>"></td></tr>
-        <tr><td><input required type="text" name="mail" placeholder="<?php echo $dict["41"];?>"></td></tr>
-        <tr><td><input required type="text" name="street" placeholder="street"></td></tr>
-        <tr><td><input required type="text" name="city" placeholder="city"></td></tr>
-        <tr><td><input required type="text" name="country" placeholder="country"></td></tr>
-        <tr><td><input required type="text" name="username" placeholder="<?php echo $dict["1"];?>"></td></tr>
-        <tr><td><input required type="password" name="password" placeholder="<?php echo $dict["2"];?>"></td></tr>
-        <tr><td><input required type="submit" name="submit" value="<?php echo $dict["10"];?>"></td></tr>
+        <tr><td><input required type="text" name="surname" onchange="copyuname();" placeholder="<?php echo $dict["User_Surname"];?>"></td></tr>
+        <tr><td><input required type="text" name="lastname" placeholder="<?php echo $dict["User_Lastname"];?>"></td></tr>
+        <tr><td><input required type="date" name="birthday" placeholder="<?php echo $dict["User_Birthday"];?> DD.MM.YYYY"></td></tr>
+        <tr><td><input required type="text" name="phone" placeholder="<?php echo $dict["User_Phone"];?>"></td></tr>
+        <tr><td><input required type="text" name="mail" placeholder="<?php echo $dict["User_Mail"];?>"></td></tr>
+        <tr><td><input required type="text" name="street" placeholder="<?php echo $dict["User_Street"];?>"></td></tr>
+        <tr><td><input required type="text" name="city" placeholder="<?php echo $dict["User_City"];?>"></td></tr>
+        <tr><td><input required type="text" name="country" placeholder="<?php echo $dict["User_Country"];?>"></td></tr>        
+        <tr><td><input required type="text" name="username" placeholder="<?php echo $dict["Login_Username"];?>"></td></tr>
+        <tr><td><input required type="password" name="password" placeholder="<?php echo $dict["Login_Passwort"];?>"></td></tr>
+        <tr><td><input required type="submit" name="submit" value="<?php echo $dict["User_Create"];?>"></td></tr>
       </table>
       </form>
   </div>
 <div class="setframe">
-<h3><?php echo $dict["12"];?></h3>
+<h3><?php echo $dict["Doc_Upload_Document"];?></h3>
 <form enctype="multipart/form-data" action="actions/upload.php" method="post">
-  <input required type="text" name="filename" Placeholder="<?php echo $dict["13"];?>">
+  <input required type="text" name="filename" Placeholder="<?php echo $dict["Doc_Filename"];?>">
   <input required type="file" name="file" dropzone="copy">
-  <br><input type="submit" name="upload" value="<?php echo $dict["14"];?>">
+  <br><input type="submit" name="upload" value="<?php echo $dict["Doc_Upload"];?>">
 </form>
 </div>
 <div class="setframe">
-<h3><?php echo $dict["18"];?></h3>
+<h3><?php echo $dict["Doc_Delete_Files"];?></h3>
 <table border>
   <tr>
-    <th><?php echo $dict["16"];?></th>
-    <th><?php echo $dict["13"];?></th>
-    <th><?php echo $dict["18"];?></th>
+    <th><?php echo $dict["Doc_Title"];?></th>
+    <th><?php echo $dict["Doc_Filename"];?></th>
+    <th><?php echo $dict["Doc_Delete_Files"];?></th>
   </tr>
 <?php
   $query = "select * from tblUploads";
@@ -144,22 +144,22 @@
 </table>
 </div>
 <div class="setframe">
-  <h3><?php echo $dict["24"];?></h3>
+  <h3><?php echo $dict["News_Create_Entry"];?></h3>
 <form action="actions/createpost.php" method="post">
-<input required type="text" name="posttitle" placeholder="<?php echo $dict["25"];?>">
+<input required type="text" name="posttitle" placeholder="<?php echo $dict["News_Title"];?>">
 <br>
-<!-- <input required type='textarea' name="text" placeholder="<?php echo $dict["26"];?>"> -->
-<textarea required name="text" rows="8" cols="50" placeholder="<?php echo $dict["26"];?>"></textarea>
-<input type="submit" name="submit" value="<?php echo $dict["27"];?>">
+<!-- <input required type='textarea' name="text" placeholder="<?php echo $dict["News_Text"];?>"> -->
+<textarea required name="text" rows="8" cols="50" placeholder="<?php echo $dict["News_Text"];?>"></textarea>
+<input type="submit" name="submit" value="<?php echo $dict["Post_Send"];?>">
 </form>
 </div>
 <div class="setframe">
-<h3><?php echo $dict["28"];?></h3>
+<h3><?php echo $dict["Post_Posts"];?></h3>
 <table border>
   <tr>
-    <th><?php echo $dict["25"];?></th>
-    <th><?php echo $dict["26"];?></th>
-    <th><?php echo $dict["29"];?></th>
+    <th><?php echo $dict["News_Title"];?></th>
+    <th><?php echo $dict["News_Text"];?></th>
+    <th><?php echo $dict["Post_Delete_Post"];?></th>
   </tr>
 <?php
   $query = "SELECT * FROM tblNews ORDER BY nid DESC";
@@ -181,22 +181,22 @@
 </table>
 </div>
 <div class="setframe">
-  <h3><?php echo $dict["50"];?></h3>
+  <h3><?php echo $dict["Dev_Create"];?></h3>
 <form action="actions/createdevice.php" method="post">
-<input required type="text" name="deviceName" placeholder="<?php echo $dict["45"];?>">
+<input required type="text" name="deviceName" placeholder="<?php echo $dict["Dev_Name"];?>">
 <br>
-<textarea required name="deviceDesc" rows="4" cols="30" placeholder="<?php echo $dict["46"];?>"></textarea>
-<input type="submit" name="submit" value="<?php echo $dict["50"];?>">
+<textarea required name="deviceDesc" rows="4" cols="30" placeholder="<?php echo $dict["Dev_Description"];?>"></textarea>
+<input type="submit" name="submit" value="<?php echo $dict["Dev_Create"];?>">
 </form>
 </div>
 <div class="setframe">
-<h3><?php echo $dict["48"];?></h3>
+<h3><?php echo $dict["Dev_Devices"];?></h3>
 <table border>
   <tr>
-    <th><?php echo $dict["49"];?></th>
-    <th><?php echo $dict["45"];?></th>
-    <th><?php echo $dict["46"];?></th>
-    <th><?php echo $dict["47"];?></th>
+    <th><?php echo $dict["Dev_ID"];?></th>
+    <th><?php echo $dict["Dev_Name"];?></th>
+    <th><?php echo $dict["Dev_Description"];?></th>
+    <th><?php echo $dict["Dev_Delete"];?></th>
   </tr>
 <?php
   $query = "SELECT * FROM tblDevices ORDER BY deviceID";

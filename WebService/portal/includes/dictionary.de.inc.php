@@ -1,56 +1,74 @@
 <?php
 $dict = array();
-$dict["0"] = "Bitte melden Sie sich an";
-$dict["1"] = "Benutzername";
-$dict["2"] = "Passwort";
-$dict["3"] = "Authentifizierung fehlgeschlagen";
-$dict["4"] = "Sie konnten nicht authentifiziert werden! Möglicherweise sind Sie nicht angemeldet oder der Benutzername / das Passwort sind falsch";
-$dict["5"] = "Zurück zur Startseite";
-$dict["6"] = "Benutzer erfolgreich erstellt";
-$dict["7"] = "Vorname";
-$dict["8"] = "Nachname";
-$dict["9"] = "Geburtstag";
-$dict["10"] = "Benutzer erstellen";
-$dict["11"] = "Benutzer löschen";
-$dict["12"] = "Dokument hochladen";
-$dict["13"] = "Dateiname";
-$dict["14"] = "Hochladen";
-$dict["15"] = "Datei öffnen";
-$dict["16"] = "Titel";
-$dict["17"] = "Dokumentenübersicht";
-$dict["18"] = "Dateien löschen";
-$dict["19"] = "Mitglieder";
-$dict["20"] = "Neuigkeiten";
-$dict["21"] = "Dokumente";
-$dict["22"] = "Admin";
-$dict["23"] = "Abmelden";
-$dict["24"] = "Post erstellen";
-$dict["25"] = "Titel des Posts";
-$dict["26"] = "Inhalt";
-$dict["27"] = "Text posten";
-$dict["28"] = "Posts";
-$dict["29"] = "Post löschen";
-$dict["30"] = "Willkommen";
-$dict["31"] = "Einstellungen";
-$dict["32"] = "Neues Passwort";
-$dict["33"] = "Passwort wiederholen";
-$dict["34"] = "Passwort ändern";
-$dict["35"] = "Hochladen erfolgreich!";
-$dict["36"] = "User wurde erstellt";
-$dict["37"] = "User wurde gelöscht";
-$dict["38"] = "Sprache ändern";
-$dict["39"] = "Anmelden";
-$dict["40"] = "Telefon";
-$dict["41"] = "E-Mail";
-$dict["42"] = "Es wurde ein ungültiges Dateiformat hochgeladen";
-$dict["43"] = "Diese Datei existiert bereits!";
-$dict["44"] = "Accessystem";
-$dict["45"] = "Gerätename";
-$dict["46"] = "Gerätebeschreibung";
-$dict["47"] = "Gerät löschen";
-$dict["48"] = "Geräte";
-$dict["49"] = "Geräte ID";
-$dict["50"] = "Gerät erstellen";
-$dict["51"] = "Das Passwort wurde erfolgreich geändert!";
-$dict["52"] = "Passwort ändern";
+
+//General
+$dict["Gen_Welcome"] = "Willkommen";
+$dict["Gen_Administration"] = "Administration";
+
+//Login
+$dict["Login_Prompt"] = "Bitte loggen Sie sich ein";
+$dict["Login_Logon"] = "Einloggen";
+$dict["Login_Logout"] = "Ausloggen";
+$dict["Login_Username"] = "Benutzername";
+$dict["Login_Passwort"] = "Passwort";
+$dict["Login_Auth_Rejected_Short"] = "Authentifizierung fehlgeschlagen";
+$dict["Login_Auth_Rejected_Long"] = "Ihre Authentifizierung ist fehlgeschlagen! Bitte überprüfen Sie ob sie eingeloggt sind und ob Benutzernamen und Passwort korrekt sind.";
+$dict["Login_New_Password"] = "Neues Passwort";
+$dict["Login_Repeat_Password"] = "Passwort wiederholen";
+$dict["Login_Change_Password"] = "Passwort ändern";
+$dict["Login_Password_Change_Success"] = "Ihr Passwort wurde erfolgreich geändert!";
+
+//Navigation
+$dict["Nav_Return_Home"] = "Zurück zur Startseite";
+$dict["Nav_Members"] = "Mitglieder";
+$dict["Nav_News"] = "Neuigkeiten";
+$dict["Nav_Documents"] = "Dokumente";
+$dict["Nav_Admin_Panel"] = "Verwaltung";
+$dict["Nav_Access_System"] = "Geräteverwaltung";
+$dict["Nav_Settings"] = "Einstellungen";
+$dict["Nav_Change_Lang"] = "Sprache wechseln";
+
+//Users
+$dict["User_Create_Success"] = "Benutzer erfolgreich erstellt";
+$dict["User_Delete_Success"] = "Benutzer gelöscht";
+$dict["User_Surname"] = "Vorname";
+$dict["User_Lastname"] = "Nachname";
+$dict["User_Birthday"] = "Geburtsdatum";
+$dict["User_Phone"] = "Telefon";
+$dict["User_Mail"] = "Email";
+$dict["User_Create"] = "Benutzer erstellen";
+$dict["User_Delete"] = "Benutzer löschen";
+
+//Documents and Files
+$dict["Doc_Upload_Document"] = "Dokument hochladen";
+$dict["Doc_Filename"] = "Dateiname";
+$dict["Doc_Upload"] = "Hochladen";
+$dict["Doc_Open_File"] = "Datei öffnen";
+$dict["Doc_Title"] = "Titel";
+$dict["Doc_Overview"] = "Dokumentenübersicht";
+$dict["Doc_Delete_Files"] = "Dateien löschen";
+$dict["Doc_Upload_Success"] = "Datei erfolgreich hochgeladen";
+$dict["Doc_Upload_Filetype_Denied"] = "Der Filetyp der hochgeladenen Datei wurde blockiert!";
+$dict["Doc_File_Exists"] = "Die Datei besteht bereits!";
+
+//News
+$dict["News_Create_Entry"] = "Newseintrag erstellen";
+$dict["News_Title"] = "Titel";
+$dict["News_Text"] = "Inhalt";
+$dict["Post_Text"] = "Inhalt";
+$dict["Post_Posts"] = "Beiträge";
+$dict["Post_Send"] = "Absenden";
+$dict["Post_Delete_Post"] = "Beitrag löschen";
+$dict["Post_Create_Success"] = "Beitrag erstellt!";
+$dict["Post_Delete_Success"] = "Beitrag gelöscht!";
+
+//Devices 
+$dict["Dev_Name"] = "Gerätename";
+$dict["Dev_Description"] = "Gerätebeschreibung";
+$dict["Dev_Delete"] = "Gerät löschen";
+$dict["Dev_Devices"] = "Geräte";
+$dict["Dev_ID"] = "Geräte ID";
+$dict["Dev_Create"] = "Gerät erstellen";
+$dict["Dev_Create_Success"] = "Gerät erstellt!";
+$dict["Dev_Delete_Success"] = "Gerät gelöscht!";
 ?>

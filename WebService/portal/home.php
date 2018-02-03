@@ -8,9 +8,10 @@
 	<link href="css/all.css" rel="stylesheet" type="text/css" />
 	<link href="css/popups.css" rel="stylesheet" type="text/css" />
 
+	<!--<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>-->
 	<script src="js/modernizr.js" type="text/javascript"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
-	<script src="js/all.js" type="text/javascript"></script>
+	<!--<script src="js/all.js" type="text/javascript"></script>-->
 	<?php
 	include "includes/logincheck.inc.php";
 	session_regenerate_id();
@@ -45,7 +46,7 @@ if($_GET["site"] == "news"):
   <div class="row">
     <div class="large-12 columns centered">
       <h1><img src="img/logo.png" /><?php echo $orgname;?> <br><span><?php echo $slogan;?></span></h1>
-			<h3><?php echo $dict["30"]." ".$_SESSION["firstname"]." ".$_SESSION["lastname"];?></h3>
+			<h3><?php echo $dict["Gen_Welcome"]." ".$_SESSION["firstname"]." ".$_SESSION["lastname"];?></h3>
 			<h2><?php echo $motd;?></h2>
     </div>
   </div>
@@ -66,7 +67,7 @@ endif;
 if($_GET["site"]=="docs"):?>
 <div class='row'>
 	<div class="large-12 columns">
-		<h2><?php echo $dict["17"];?></h2>
+		<h2><?php echo $dict["Nav_Documents"];?></h2>
 		<?php
 		/*$handle = opendir("fileadmin/sheets");
 		while($name = readdir($handle))
@@ -77,7 +78,7 @@ if($_GET["site"]=="docs"):?>
 			}
 		}*/
 		echo "<table>";
-		echo "<tr><th>".$dict["16"]."</th><th>".$dict["15"]."</th></tr>";
+		echo "<tr><th>".$dict["Doc_Title"]."</th><th>".$dict["Doc_Open_File"]."</th></tr>";
 		$query = "SELECT * FROM `tblUploads` ORDER BY `title` DESC;";
 		$result = mysqli_query($sqlconn,$query);
 		while($data = mysqli_fetch_assoc($result))
@@ -85,7 +86,7 @@ if($_GET["site"]=="docs"):?>
 			echo "<tr><td>";
 			echo $data["title"];
 			echo "</td><td>";
-			echo "<a target='_blank' href='fileadmin/documents/".$data["filename"]."'>".$dict["15"]."</a></td></tr>";
+			echo "<a target='_blank' href='fileadmin/documents/".$data["filename"]."'>".$dict["Doc_Open_File"]."</a></td></tr>";
 		}
 		?>
 	</table>
@@ -95,15 +96,15 @@ if($_GET["site"]=="docs"):?>
 if($_GET["site"]=="members"):?>
 <div class='row'>
 	<div class="large-12 columns">
-		<h2><?php echo $dict["19"];?></h2>
+		<h2><?php echo $dict["Nav_Members"];?></h2>
 		<table>
 			<tr>
-				<th><?php echo $dict["8"];?></th>
-				<th><?php echo $dict["7"];?></th>
+				<th><?php echo $dict["User_Lastname"];?></th>
+				<th><?php echo $dict["User_Surname"];?></th>
 				<?php if ($_SESSION["level"]>2) {
-					echo "<th>".$dict["9"]."</th>";
+					echo "<th>".$dict["User_Birthday"]."</th>";
 				} ?>
-				<th><?php echo $dict["41"];?></th>
+				<th><?php echo $dict["User_Mail"];?></th>
 			</tr>
 		<?php
 		$query = "SELECT `Firstname`, `Lastname`, `Birthday`, `Mail` FROM `tblMembers` ORDER BY `Lastname` ASC";
@@ -144,27 +145,27 @@ if($_GET["site"]=="settings"):?>
 </script>
 <div class='row'>
 	<div class="large-12 columns">
-		<h2><?php echo $dict["31"];?></h2>
+		<h2><?php echo $dict["Nav_Settings"];?></h2>
 		<div class="usersettings">
 			<div class="settingframe">
-				<h3><?php echo $dict["34"];?></h3>
+				<h3><?php echo $dict["Login_Change_Password"];?></h3>
 
 					<div id="pwchanged" class="overlay">
 						<div class="popup">
-							<h2><?php echo $dict["52"];?></h2>
+							<h2><?php echo $dict["Login_Change_Password"];?></h2>
 							<a class="close" href="#">&times;</a>
 							<div class="content">
-								<?php echo $dict["51"];?>
+								<?php echo $dict["Login_Password_Change_Success"];?>
 							</div>
 						</div>
 						</div>
 
 					<form name="changepw" action="useractions/changepw.php" method="post" onsubmit="return changePW();">
-							<input required type="password" id="password" name="pw1" placeholder="<?php echo $dict["32"];?>">
-							<input required type="password" name="pw2" placeholder="<?php echo $dict["33"];?>">
+							<input required type="password" id="password" name="pw1" placeholder="<?php echo $dict["Login_New_Password"];?>">
+							<input required type="password" name="pw2" placeholder="<?php echo $dict["Login_Repeat_Password"];?>">
 							<meter id="password-strength-meter" max="4"></meter>
 							<p id="password-strength-text"></p>
-							<button type="submit" name="submit"><?php echo $dict["34"];?></button>
+							<button type="submit" name="submit"><?php echo $dict["Login_Change_Password"];?></button>
 					</form>
 					<script type="text/javascript">
 					var strength = {
@@ -195,13 +196,13 @@ if($_GET["site"]=="settings"):?>
  					</script>
 			</div>
 			<div class="settingframe">
-					<h3><?php echo $dict["38"] ?></h3>
+					<h3><?php echo $dict["Nav_Change_Lang"] ?></h3>
 					<form action="home.php" method="post">
 							<select name="chlang" required>
 								<option value="de">Deutsch</option>
 								<option value="en">Englisch</option>
 							</select>
-							<input type="submit" class="button" name="submit" value="<?php echo $dict["38"] ?>">
+							<input type="submit" class="button" name="submit" value="<?php echo $dict["Nav_Change_Lang"] ?>">
 					</form>
 			</div>
 		</div>
@@ -211,7 +212,7 @@ if($_GET["site"]=="settings"):?>
 if($_GET["site"]=="access"):?>
 <div class='row'>
 	<div class="large-12 columns">
-		<h1>MAS</h1>
+		<h2><?php echo $dict["Nav_Access_System"];?></h2>
 		<form action="admin/actions/updateperm.php" method="post">
 			<table>
 			<?php

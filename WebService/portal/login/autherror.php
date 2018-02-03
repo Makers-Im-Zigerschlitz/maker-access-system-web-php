@@ -4,7 +4,7 @@
 	<?php
 	include "../config/config.inc.php";
 	include "../includes/dictionary.$language.inc.php"; ?>
-	<title><?php echo $dict["3"];?></title>
+	<title><?php echo $dict["Login_Auth_Rejected_Short"];?></title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,900">
 	<link rel="stylesheet" href="autherror.css">
@@ -17,8 +17,8 @@
           <svg class="icon icon-left icon-x"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-x"></use></svg>
         </div>
         <div class="display-table-cell">
-          <h1><?php echo $dict["4"] ?></h1>
-          <h2><a href="../index.php"><?php echo $dict["5"] ?></h2>
+          <h1><?php echo $dict["Login_Auth_Rejected_Long"] ?></h1>
+          <h2><a href="../index.php"><?php echo $dict["Nav_Return_Home"] ?></h2>
         </div>
       </div>
     </div>
