@@ -6,35 +6,30 @@ if($_SESSION["level"] <3)
   die();
 }
 include "../../config/config.inc.php";
-include "../../includes/dictionary.inc.php";
+include "../../includes/dictionary.$language.inc.php";
 include "../../includes/functions.inc.php";
-
-$sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
-
-$query = "INSERT INTO `tblUsers` (`username`, `password`, `level`) VALUES ('".$_POST["username"]."', '".md5($_POST["password"])."', '1');";
-$result = mysqli_query($sqlconn,$query);
-if(!$result)
-{
-  echo "Es ist ein Fehler aufgetreten: ".mysqli_error($sqlconn);
-  echo "<p><a href='../'>".$dict["5"]."</a></p>";
-  die();
-}
-else
-{
-  $query = "SELECT * FROM $mysqldb.tblUsers WHERE username LIKE '". $_POST["username"] ."';";
-  $result = mysqli_query($sqlconn,$query);
-  $sqlfetch = mysqli_fetch_array($result);
-  $uid = $sqlfetch["uid"];
-
-  // $query = "INSERT INTO `tblMembers` (`mid`, `surname`, `lastname`, `birthday`, `username`) VALUES (NULL,'".$_POST["surname"]."','".$_POST["lastname"]."','".datetosql($_POST["birthday"])."','".$_POST["username"]."')";
-  $query = "INSERT INTO `tblMembers` (`uid`, `Firstname`, `Lastname`, `Birthday`, `Phone`, `Mail`)";
-  //$query .="VALUES ('$uid','".$_POST["surname"]."','".$_POST["lastname"]."','".datetosql($_POST["birthday"])."','".$_POST["phone"]."','".$_POST["mail"]."')"; //No conversion of date needed
-  $query .="VALUES ('$uid','".$_POST["surname"]."','".$_POST["lastname"]."','".$_POST["birthday"]."','".$_POST["phone"]."','".$_POST["mail"]."')";
-  $result = mysqli_query($sqlconn,$query);
-  echo mysqli_error($sqlconn);
-  if($result)
-  {
-    header("Location: ../index.php?message=ucreated&username=".$_POST["username"]);
-  }
+$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$stmt = $db->prepare("INSERT INTO tblUsers (username,password,level) VALUES (?,?,1)");
+$stmt->bindValue(1, filter_input(INPUT_POST, 'username'), PDO::PARAM_STR);
+$stmt->bindValue(2, md5(filter_input(INPUT_POST, 'password')), PDO::PARAM_STR);
+$stmt->execute();
+if ($stmt->rowCount()>0) {
+    foreach($db->query('SELECT * FROM tblUsers WHERE username LIKE "'.filter_input(INPUT_POST, 'username').'";') as $row) {
+        $uid=$row['uid'];
+        $stmt = $db->prepare("INSERT INTO tblMembers (uid,Firstname,Lastname,Birthday,Phone,Mail,Street,City,Country) VALUES (?,?,?,?,?,?,?,?,?)");
+        $stmt->bindValue(1, $uid, PDO::PARAM_STR);
+        $stmt->bindValue(2, filter_input(INPUT_POST, 'surname'), PDO::PARAM_STR);
+        $stmt->bindValue(3, filter_input(INPUT_POST, 'lastname'), PDO::PARAM_STR);
+        $stmt->bindValue(4, filter_input(INPUT_POST, 'birthday'), PDO::PARAM_STR);
+        $stmt->bindValue(5, filter_input(INPUT_POST, 'phone'), PDO::PARAM_STR);
+        $stmt->bindValue(6, filter_input(INPUT_POST, 'mail'), PDO::PARAM_STR);
+        $stmt->bindValue(7, filter_input(INPUT_POST, 'street'), PDO::PARAM_STR);
+        $stmt->bindValue(8, filter_input(INPUT_POST, 'city'), PDO::PARAM_STR);
+        $stmt->bindValue(9, filter_input(INPUT_POST, 'country'), PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->rowCount()>0) {
+            header("Location: ../index.php?message=ucreated&username=".filter_input(INPUT_POST, 'username'));
+        }
+    }
 }
  ?>

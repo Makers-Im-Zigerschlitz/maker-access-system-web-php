@@ -89,6 +89,9 @@
         echo "<td>".$memberdata["username"]."</td>";
         echo "<td>".$temp["Phone"]."</td>";
         echo "<td>".$temp["Mail"]."</td>";
+        echo "<td>".$temp["Street"]."</td>";
+        echo "<td>".$temp["City"]."</td>";
+        echo "<td>".$temp["Country"]."</td>";
         echo "<td><a href='actions/deleteuser.php?user=".$temp["uid"]."'>Delete</a>";
       }
      ?>
@@ -103,6 +106,9 @@
         <tr><td><input required type="date" name="birthday" placeholder="<?php echo $dict["9"];?> DD.MM.YYYY"></td></tr>
         <tr><td><input required type="text" name="phone" placeholder="<?php echo $dict["40"];?>"></td></tr>
         <tr><td><input required type="text" name="mail" placeholder="<?php echo $dict["41"];?>"></td></tr>
+        <tr><td><input required type="text" name="street" placeholder="street"></td></tr>
+        <tr><td><input required type="text" name="city" placeholder="city"></td></tr>
+        <tr><td><input required type="text" name="country" placeholder="country"></td></tr>
         <tr><td><input required type="text" name="username" placeholder="<?php echo $dict["1"];?>"></td></tr>
         <tr><td><input required type="password" name="password" placeholder="<?php echo $dict["2"];?>"></td></tr>
         <tr><td><input required type="submit" name="submit" value="<?php echo $dict["10"];?>"></td></tr>
