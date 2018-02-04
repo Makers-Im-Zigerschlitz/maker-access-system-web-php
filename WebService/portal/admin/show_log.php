@@ -13,7 +13,7 @@
       include "../config/config.inc.php";
       include "../includes/dictionary.$language.inc.php";
       include "../includes/functions.inc.php";
-      $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
+        $db = new PDO('mysql:host=localhost;dbname=' . $mysqldb, $mysqluser, $mysqlpass);
      ?>
     <title><?php echo $orgname; ?> - Logs</title>
     <link rel="stylesheet" type="text/css" href="../css/log_viewer.css">
@@ -32,16 +32,15 @@
         </tr>
       </thead>
     <?php
-      $query = "SELECT `uid`, `username` FROM `tblUsers`;";
-      $result = mysqli_query($sqlconn, $query);
-      while ($temp = mysqli_fetch_assoc($result)) {
+    $stmt = $db->query('SELECT uid,username FROM tblUsers');
+    while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) { 
           $members[$temp["uid"]] = $temp["username"];
       }
-      $query = "SELECT * FROM `tblLogs` ORDER BY `logID` ASC ;";
-      $result = mysqli_query($sqlconn, $query);
+      $stmt = $db->query('SELECT * FROM tblLogs ORDER BY logID ASC');
+
 
       echo "<tbody class='table-hover'>";
-      while ($logentry = mysqli_fetch_assoc($result)) {
+        while ($logentry = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<tr>";
         if (strpos($logentry["action"], "Error") !== false) {
             echo "<td><img class='status' src='../img/error.png' alt=''></td>";

@@ -29,7 +29,7 @@ if ($stmt->rowCount()>0) {
         $stmt->bindValue(9, filter_input(INPUT_POST, 'country'), PDO::PARAM_STR);
         $stmt->execute();
         if ($stmt->rowCount()>0) {
-            header("Location: ../index.php?message=ucreated&username=".filter_input(INPUT_POST, 'username'));
+            header("Location: ../index.php?message=usercreated&username=".filter_input(INPUT_POST, 'username'));
         }
     }
 }

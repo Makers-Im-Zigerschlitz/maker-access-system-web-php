@@ -8977,7 +8977,7 @@ th.hide-for-touch {
         display: none !important; }
       /* line 723, /home/bitrock/projects/apachefriends-web/source-xampp-windows/stylesheets/asciidoctor.css */
       .asciidoctor .show-for-print {
-        display: inherit !important; } }
+        display: inherit !important; }
   /* line 702, /home/bitrock/projects/apachefriends-web/source-xampp-windows/stylesheets/all.scss */
   .asciidoctor .imageblock > .content, .asciidoctor ul#downloads > li .imageblock > .notes, ul#downloads > li .asciidoctor .imageblock > .notes, .asciidoctor ul#downloads > li table .imageblock > ul[id$="-download"], ul#downloads > li table .asciidoctor .imageblock > ul[id$="-download"], .asciidoctor #download > div .imageblock > ul[id$="-download"], #download > div .asciidoctor .imageblock > ul[id$="-download"] {
     text-align: center; }

@@ -36,6 +36,10 @@ $dict["User_Lastname"] = "Lastname";
 $dict["User_Birthday"] = "Birthday";
 $dict["User_Phone"] = "Phone";
 $dict["User_Mail"] = "Mail Adress";
+$dict["User_Street"] = "Street";
+$dict["User_ZIP"] = "ZIP Code";
+$dict["User_City"] = "City";
+$dict["User_Country"] = "Country";
 $dict["User_Create"] = "Create User";
 $dict["User_Delete"] = "Delete User";
 
@@ -47,6 +51,7 @@ $dict["Doc_Open_File"] = "Open File";
 $dict["Doc_Title"] = "Title";
 $dict["Doc_Overview"] = "Document overview";
 $dict["Doc_Delete_Files"] = "Delete files";
+$dict["Doc_File_Deleted"] = "File deleted";
 $dict["Doc_Upload_Success"] = "File successfully uploaded";
 $dict["Doc_Upload_Filetype_Denied"] = "The file with the uploaded extension is not allowed";
 $dict["Doc_File_Exists"] = "This file already exists!";
@@ -71,4 +76,5 @@ $dict["Dev_ID"] = "Device ID";
 $dict["Dev_Create"] = "Create device";
 $dict["Dev_Create_Success"] = "Device created!";
 $dict["Dev_Delete_Success"] = "Device deleted!";
+$dict["Dev_Delete_Perm_Success"] = "Permissions revoked!";
 ?>

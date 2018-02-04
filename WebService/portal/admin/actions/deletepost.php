@@ -6,18 +6,19 @@ if($_SESSION["level"] <3)
   die();
 }
 include "../../config/config.inc.php";
-include "../../includes/dictionary.inc.php";
+include "../../includes/dictionary.$language.inc.php";
 
-$sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
+$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$stmt = $db->prepare("DELETE FROM tblNews WHERE nid=:nid");
+$stmt->bindValue(':nid', filter_input(INPUT_GET, 'nid'), PDO::PARAM_STR);
+$stmt->execute();
 
-$query = "DELETE FROM `tblNews` WHERE `tblNews`.`nid` = ".$_GET["nid"];
-echo $query;
-$result = mysqli_query($sqlconn,$query);
-if($result)
-{
-  header("Location: ../");
-}
-else {
-  echo mysqli_error($sqlconn);
+if ($stmt->rowCount()>0) {
+    header("Location: ../index.php?message=postdeleted");
+    
+} else {
+    echo "Es ist ein Fehler aufgetreten: ".mysqli_error($sqlconn);
+    echo "<p><a href='../'>".$dict["Nav_Return_Home"]."</a></p>";
+    die();    
 }
  ?>
