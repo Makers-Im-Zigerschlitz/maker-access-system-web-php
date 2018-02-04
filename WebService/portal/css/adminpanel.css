@@ -12,9 +12,7 @@ body{
 }
 
 .setframe{
-  /*display: inline-block;*/
   width: auto;
-  display:inline-grid;
   padding: 1%;
   border-style: dashed;
   border-color: black;

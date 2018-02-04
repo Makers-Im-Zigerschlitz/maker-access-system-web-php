@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include "../includes/logincheck.inc.php";
 if($_SESSION["level"] <3)
 {
@@ -10,22 +7,21 @@ if($_SESSION["level"] <3)
 }
 include "../../config/config.inc.php";
 
-$sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
-$query = "TRUNCATE tblPermissions;";
-mysqli_query($sqlconn,$query);
+$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$stmt = $db->prepare("TRUNCATE tblPermissions");
+$stmt->execute();
 
-if ($_POST == NULL) {
-  header("Location: ../../home.php?site=access");
-  die();
-}
-foreach ($_POST as $key => $value) {
-  //echo "$key $value<br>";
-  //echo "$key $value<br>";
-  $identifier = explode("_",$key);
-  //echo "UID = $identifier[0], DevID = $identifier[1]";
-  $query = "INSERT INTO `tblPermissions` (`deviceID`, `uid`) VALUES ('". $identifier[1] ."', '". $identifier[0] ."');";
-  mysqli_query($sqlconn,$query);
-  //echo $query;
-  header("Location: ../../home.php?site=access");
+if (filter_input_array(INPUT_POST)==NULL) {
+    header("Location: ../../home.php?site=access");
+    die();
+} else {
+    foreach (filter_input_array(INPUT_POST) as $key => $value) {
+        $identifier = explode("_",$key);
+        $stmt = $db->prepare("INSERT INTO tblPermissions (deviceID,uid) VALUES (:deviceID,:uid)");
+        $stmt->bindValue(':deviceID', $identifier[1], PDO::PARAM_STR);
+        $stmt->bindValue(':uid', $identifier[0], PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    header("Location: ../../home.php?site=access");      
 }
 ?>

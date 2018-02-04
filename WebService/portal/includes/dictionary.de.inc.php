@@ -36,6 +36,10 @@ $dict["User_Lastname"] = "Nachname";
 $dict["User_Birthday"] = "Geburtsdatum";
 $dict["User_Phone"] = "Telefon";
 $dict["User_Mail"] = "Email";
+$dict["User_Street"] = "Strasse";
+$dict["User_ZIP"] = "PLZ";
+$dict["User_City"] = "Stadt";
+$dict["User_Country"] = "Land";
 $dict["User_Create"] = "Benutzer erstellen";
 $dict["User_Delete"] = "Benutzer löschen";
 
@@ -47,6 +51,7 @@ $dict["Doc_Open_File"] = "Datei öffnen";
 $dict["Doc_Title"] = "Titel";
 $dict["Doc_Overview"] = "Dokumentenübersicht";
 $dict["Doc_Delete_Files"] = "Dateien löschen";
+$dict["Doc_File_Deleted"] = "Datei gelöscht";
 $dict["Doc_Upload_Success"] = "Datei erfolgreich hochgeladen";
 $dict["Doc_Upload_Filetype_Denied"] = "Der Filetyp der hochgeladenen Datei wurde blockiert!";
 $dict["Doc_File_Exists"] = "Die Datei besteht bereits!";
@@ -71,4 +76,5 @@ $dict["Dev_ID"] = "Geräte ID";
 $dict["Dev_Create"] = "Gerät erstellen";
 $dict["Dev_Create_Success"] = "Gerät erstellt!";
 $dict["Dev_Delete_Success"] = "Gerät gelöscht!";
+$dict["Dev_Delete_Perm_Success"] = "Berechtigungen zurückgezogen!";
 ?>
