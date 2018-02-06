@@ -42,6 +42,8 @@ $dict["User_City"] = "Stadt";
 $dict["User_Country"] = "Land";
 $dict["User_Create"] = "Benutzer erstellen";
 $dict["User_Delete"] = "Benutzer löschen";
+$dict["User_Membership_Begin"] = "Mitglied seit";
+$dict["User_Membership_End"] = "Mitglied bis";
 
 //Documents and Files
 $dict["Doc_Upload_Document"] = "Dokument hochladen";

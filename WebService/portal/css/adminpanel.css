@@ -18,6 +18,15 @@ body{
   border-color: black;
   margin: 0.75%;
 }
+.notification{
+  width: auto;
+  padding-left: 1%;
+  border-style: solid;
+background-color: #008cba;
+    border-color: #0079a1;
+  color: #ffffff;
+  margin: 0.75%;
+}
 
 .setframe h3{
   margin-top: 0;

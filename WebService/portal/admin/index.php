@@ -12,46 +12,47 @@
         include "../config/config.inc.php";
         include "../includes/dictionary.$language.inc.php";
         include "../includes/functions.inc.php";
-$db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
+        $db = new PDO('mysql:host=' . $mysqlhost . ';dbname=' . $mysqldb, $mysqluser, $mysqlpass);
         ?>
         <title><?php echo $orgname; ?> - <?php echo $dict["Gen_Administration"]; ?></title>
         <link rel="stylesheet" type="text/css" href="../css/adminpanel.css">
         <link rel="stylesheet" type="text/css" href="../css/normalize.css">
 
-        <!-- javascript messages -->
-        <?php
-        if (isset($_GET["message"])) {
-            if ($_GET["message"] == "usercreated") {
-                echo "<script type='text/javascript'>alert('" . $dict["User_Create_Success"] . ": " . $_GET["username"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "userdeleted") {
-                echo "<script type='text/javascript'>alert('" . $dict["User_Delete_Success"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "uploadok") {
-                echo "<script type='text/javascript'>alert('" . $dict["Doc_Upload_Success"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "wrongext") {
-                echo "<script type='text/javascript'>alert('" . $dict["Doc_Upload_Filetype_Denied"] . ": " . $_GET["filext"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "file_exists") {
-                echo "<script type='text/javascript'>alert('" . $dict["Doc_File_Exists"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "filedeleted") {
-                echo "<script type='text/javascript'>alert('" . $dict["Doc_File_Deleted"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "devicecreated") {
-                echo "<script type='text/javascript'>alert('" . $dict["Dev_Create_Success"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "devicedeleted") {
-                echo "<script type='text/javascript'>alert('" . $dict["Dev_Delete_Success"] . " " . $_GET["permdeleted"] . " " . $dict["Dev_Delete_Perm_Success"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "postcreated") {
-                echo "<script type='text/javascript'>alert('" . $dict["Post_Create_Success"] . "'); document.location='index.php';</script>";
-            } elseif ($_GET["message"] == "postdeleted") {
-                echo "<script type='text/javascript'>alert('" . $dict["Post_Delete_Success"] . "'); document.location='index.php';</script>";
-            }
-        }
-        ?>
         <script type="text/javascript">
             function copyuname() {
-                document.createuser.username.value = document.createuser.surname.value.toLowerCase();
+                document.createuser.username.value = document.createuser.surname.value.toLowerCase() + "." + document.createuser.lastname.value.toLowerCase();
             }
         </script>
     </head>
     <body>
         <div class="settings">
+            <?php
+            if (isset($_GET["message"])) {
+                echo "<div class='notification'>";
+                if ($_GET["message"] == "usercreated") {
+                    echo "<p>" . $dict["User_Create_Success"] . ": " . $_GET["username"] . "</p>";
+                } elseif ($_GET["message"] == "userdeleted") {
+                    echo "<p>" . $dict["User_Delete_Success"] . "</p>";
+                } elseif ($_GET["message"] == "uploadok") {
+                    echo "<p>" . $dict["Doc_Upload_Success"] . "</p>";
+                } elseif ($_GET["message"] == "wrongext") {
+                    echo "<p>" . $dict["Doc_Upload_Filetype_Denied"] . ": " . $_GET["filext"] . "</p>";
+                } elseif ($_GET["message"] == "file_exists") {
+                    echo "<p>" . $dict["Doc_File_Exists"] . "</p>";
+                } elseif ($_GET["message"] == "filedeleted") {
+                    echo "<p>" . $dict["Doc_File_Deleted"] . "</p>";
+                } elseif ($_GET["message"] == "devicecreated") {
+                    echo "<p>" . $dict["Dev_Create_Success"] . "</p>";
+                } elseif ($_GET["message"] == "devicedeleted") {
+                    echo "<p>" . $dict["Dev_Delete_Success"] . " " . $_GET["permdeleted"] . " " . $dict["Dev_Delete_Perm_Success"] . "</p>";
+                } elseif ($_GET["message"] == "postcreated") {
+                    echo "<p>" . $dict["Post_Create_Success"] . "</p>";
+                } elseif ($_GET["message"] == "postdeleted") {
+                    echo "<p>" . $dict["Post_Delete_Success"] . "</p>";
+                }
+                echo "</div>";
+            }
+            ?>            
             <div class="setframe">
                 <h3><?php echo $dict["User_Delete"]; ?></h3>
                 <table border>
@@ -60,30 +61,30 @@ $db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpa
                         <th><?php echo $dict["User_Lastname"]; ?></th>
                         <th><?php echo $dict["User_Birthday"]; ?></th>
                         <th><?php echo $dict["Login_Username"]; ?></th>
-                        <th><?php echo $dict["User_Phone"]; ?></th>
                         <th><?php echo $dict["User_Mail"]; ?></th>
-                        <th><?php echo $dict["User_Street"]; ?></th>
                         <th><?php echo $dict["User_City"]; ?></th>
                         <th><?php echo $dict["User_Country"]; ?></th>
+                        <th><?php echo $dict["User_Membership_Begin"]; ?></th>
+                        <th><?php echo $dict["User_Membership_End"]; ?></th>
                         <th><?php echo $dict["User_Delete"]; ?></th>
                     </tr>
                     <?php
                     $stmt = $db->query('SELECT * FROM tblMembers ORDER BY Lastname ASC');
                     while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        $stmt = $db->prepare('SELECT * FROM tblUsers WHERE uid LIKE :uid');
-                        $stmt->bindValue(':uid', $temp['uid'], PDO::PARAM_STR);
-                        $stmt->execute();
-                        while ($memberdata = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $stmttwo = $db->prepare('SELECT * FROM tblUsers WHERE uid LIKE :uid');
+                        $stmttwo->bindValue(':uid', $temp['uid'], PDO::PARAM_STR);
+                        $stmttwo->execute();
+                        while ($memberdata = $stmttwo->fetch(PDO::FETCH_ASSOC)) {
                             echo "<tr>";
                             echo "<td>" . $temp["Firstname"] . "</td>";
                             echo "<td>" . $temp["Lastname"] . "</td>";
                             echo "<td>" . sqltodate($temp["Birthday"]) . "</td>";
                             echo "<td>" . $memberdata["username"] . "</td>";
-                            echo "<td>" . $temp["Phone"] . "</td>";
                             echo "<td>" . $temp["Mail"] . "</td>";
-                            echo "<td>" . $temp["Street"] . "</td>";
                             echo "<td>" . $temp["City"] . "</td>";
                             echo "<td>" . $temp["Country"] . "</td>";
+                            echo "<td>" . sqltodate($temp["Membership_Start"]) . "</td>";
+                            echo "<td>" . sqltodate($temp["Membership_End"]) . "</td>";
                             echo "<td><a href='actions/deleteuser.php?user=" . $temp["uid"] . "'>Delete</a>";
                         }
                     }
@@ -95,13 +96,16 @@ $db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpa
                 <form name="createuser" action="actions/createuser.php" method="post">
                     <table>
                         <tr><td><input required type="text" name="surname" onchange="copyuname();" placeholder="<?php echo $dict["User_Surname"]; ?>"></td></tr>
-                        <tr><td><input required type="text" name="lastname" placeholder="<?php echo $dict["User_Lastname"]; ?>"></td></tr>
+                        <tr><td><input required type="text" name="lastname" onchange="copyuname();" placeholder="<?php echo $dict["User_Lastname"]; ?>"></td></tr>
                         <tr><td><input required type="date" name="birthday" placeholder="<?php echo $dict["User_Birthday"]; ?> DD.MM.YYYY"></td></tr>
                         <tr><td><input required type="text" name="phone" placeholder="<?php echo $dict["User_Phone"]; ?>"></td></tr>
                         <tr><td><input required type="text" name="mail" placeholder="<?php echo $dict["User_Mail"]; ?>"></td></tr>
                         <tr><td><input required type="text" name="street" placeholder="<?php echo $dict["User_Street"]; ?>"></td></tr>
+                        <tr><td><input required type="text" name="zip" placeholder="<?php echo $dict["User_ZIP"]; ?>"></td></tr>
                         <tr><td><input required type="text" name="city" placeholder="<?php echo $dict["User_City"]; ?>"></td></tr>
-                        <tr><td><input required type="text" name="country" placeholder="<?php echo $dict["User_Country"]; ?>"></td></tr>        
+                        <tr><td><input required type="text" name="country" placeholder="<?php echo $dict["User_Country"]; ?>"></td></tr>
+                        <tr><td><input required type="date" name="mem_start" placeholder="<?php echo $dict["Membership_Start"]; ?>"></td></tr>
+                        <tr><td><input type="date" name="mem_end" placeholder="<?php echo $dict["Membership_End"]; ?>"></td></tr>
                         <tr><td><input required type="text" name="username" placeholder="<?php echo $dict["Login_Username"]; ?>"></td></tr>
                         <tr><td><input required type="password" name="password" placeholder="<?php echo $dict["Login_Passwort"]; ?>"></td></tr>
                         <tr><td><input required type="submit" name="submit" value="<?php echo $dict["User_Create"]; ?>"></td></tr>
@@ -126,7 +130,7 @@ $db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpa
                     </tr>
                     <?php
                     $stmt = $db->query('SELECT * FROM tblUploads');
-                    while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {                    
+                    while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                         echo "<td>" . $temp["title"] . "</td>";
                         echo "<td>" . $temp["filename"] . "</td>";
@@ -155,7 +159,7 @@ $db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpa
                     </tr>
                     <?php
                     $stmt = $db->query('SELECT * FROM tblNews ORDER BY nid DESC');
-                    while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {                     
+                    while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                         echo "<td>" . $temp["title"] . "</td>";
                         if (strlen($temp["text"]) > 20) {
@@ -188,7 +192,7 @@ $db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpa
                     </tr>
                     <?php
                     $stmt = $db->query('SELECT * FROM tblDevices ORDER BY deviceID');
-                    while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {                           
+                    while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<tr>";
                         echo "<td>" . $temp["deviceID"] . "</td>";
                         echo "<td>" . $temp["deviceName"] . "</td>";

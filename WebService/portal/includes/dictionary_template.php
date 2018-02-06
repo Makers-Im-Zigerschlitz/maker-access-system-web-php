@@ -42,6 +42,8 @@ $dict["User_City"] = "City";
 $dict["User_Country"] = "Country";
 $dict["User_Create"] = "Create User";
 $dict["User_Delete"] = "Delete User";
+$dict["User_Membership_Begin"] = "Member since";
+$dict["User_Membership_End"] = "Membership ends";
 
 //Documents and Files
 $dict["Doc_Upload_Document"] = "Upload Document";
