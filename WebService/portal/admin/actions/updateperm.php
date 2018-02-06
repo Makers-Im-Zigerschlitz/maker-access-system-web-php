@@ -7,7 +7,7 @@ if($_SESSION["level"] <3)
 }
 include "../../config/config.inc.php";
 
-$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
 $stmt = $db->prepare("TRUNCATE tblPermissions");
 $stmt->execute();
 

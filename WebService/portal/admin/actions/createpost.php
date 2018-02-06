@@ -8,7 +8,7 @@ if($_SESSION["level"] <3)
 include "../../config/config.inc.php";
 include "../../includes/dictionary.$language.inc.php";
 include "../../includes/functions.inc.php";
-$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
 $stmt = $db->prepare("INSERT INTO tblNews (title,text,author) VALUES (?,?,?)");
 $stmt->bindValue(1, filter_input(INPUT_POST, 'posttitle'), PDO::PARAM_STR);
 $stmt->bindValue(2, filter_input(INPUT_POST, 'text'), PDO::PARAM_STR);

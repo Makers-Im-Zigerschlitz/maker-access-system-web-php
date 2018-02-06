@@ -13,7 +13,7 @@
       include "../config/config.inc.php";
       include "../includes/dictionary.$language.inc.php";
       include "../includes/functions.inc.php";
-        $db = new PDO('mysql:host=localhost;dbname=' . $mysqldb, $mysqluser, $mysqlpass);
+$db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
      ?>
     <title><?php echo $orgname; ?> - Logs</title>
     <link rel="stylesheet" type="text/css" href="../css/log_viewer.css">

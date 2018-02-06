@@ -8,7 +8,7 @@ if($_SESSION["level"] <3)
 include "../../config/config.inc.php";
 include "../../includes/dictionary.$language.inc.php";
 
-$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
 $stmt = $db->prepare("DELETE FROM tblNews WHERE nid=:nid");
 $stmt->bindValue(':nid', filter_input(INPUT_GET, 'nid'), PDO::PARAM_STR);
 $stmt->execute();

@@ -21,7 +21,7 @@ $upfile_ext = $dname[$dnamesize - 1];
 $newfilename = str_replace(" ", "", htmlspecialchars($_FILES["file"]["name"]));
 
 //Check for duplicates
-$db = new PDO('mysql:host=localhost;dbname=' . $mysqldb, $mysqluser, $mysqlpass);
+$db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
 $stmt = $db->prepare('SELECT * FROM tblUploads WHERE filename=:fn');
 $stmt->bindValue(':fn', $newfilename, PDO::PARAM_STR);
 $stmt->execute();

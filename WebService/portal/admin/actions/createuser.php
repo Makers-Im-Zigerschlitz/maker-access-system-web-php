@@ -9,7 +9,7 @@ include "../../config/config.inc.php";
 include "../../includes/dictionary.$language.inc.php";
 include "../../includes/functions.inc.php";
 
-$db = new PDO('mysql:host=localhost;dbname='.$mysqldb, $mysqluser, $mysqlpass);
+$db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
 $stmt = $db->prepare("INSERT INTO tblUsers (username,password,level) VALUES (?,?,1)");
 $stmt->bindValue(1, filter_input(INPUT_POST, 'username'), PDO::PARAM_STR);
 $stmt->bindValue(2, md5(filter_input(INPUT_POST, 'password')), PDO::PARAM_STR);
