@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 16. Jan 2018 um 17:53
+-- Erstellungszeit: 25. Mrz 2018 um 12:12
 -- Server Version: 5.5.58-0+deb8u1
 -- PHP-Version: 5.6.30-0+deb8u1
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Datenbank: `mas_schema`
+-- Datenbank: `n15c_makers_auth`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +30,23 @@ CREATE TABLE IF NOT EXISTS `tblDevices` (
 `deviceID` int(10) unsigned NOT NULL,
   `deviceName` text,
   `deviceDesc` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `tblLogs`
+--
+
+CREATE TABLE IF NOT EXISTS `tblLogs` (
+`logID` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `action` text COLLATE utf8_unicode_ci NOT NULL,
+  `uid` text COLLATE utf8_unicode_ci NOT NULL,
+  `deviceID` text COLLATE utf8_unicode_ci,
+  `r_host` text COLLATE utf8_unicode_ci,
+  `logCategory` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=241 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -41,15 +57,19 @@ CREATE TABLE IF NOT EXISTS `tblDevices` (
 CREATE TABLE IF NOT EXISTS `tblMembers` (
 `memberID` int(10) NOT NULL,
   `uid` int(11) NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT '1',
   `Firstname` text,
   `Lastname` text,
   `Birthday` date DEFAULT NULL,
   `Phone` text,
   `Mail` text NOT NULL,
   `Street` text,
+  `ZIP` text,
   `City` text,
-  `Country` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Country` text,
+  `Membership_Start` date DEFAULT NULL,
+  `Membership_End` date DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -63,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `tblNews` (
   `text` longtext NOT NULL,
   `author` varchar(40) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -75,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `tblPermissions` (
 `permID` int(10) NOT NULL,
   `deviceID` int(11) NOT NULL,
   `uid` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -95,9 +115,9 @@ CREATE TABLE IF NOT EXISTS `tblRoles` (
 --
 
 CREATE TABLE IF NOT EXISTS `tblTags` (
-  `tagID` int(11) NOT NULL,
+  `tagID` text COLLATE utf8_unicode_ci NOT NULL,
   `uid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -110,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `tblUploads` (
   `filename` varchar(150) NOT NULL,
   `title` varchar(40) NOT NULL,
   `uploader` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -123,14 +143,7 @@ CREATE TABLE IF NOT EXISTS `tblUsers` (
   `username` varchar(40) NOT NULL,
   `password` varchar(50) NOT NULL,
   `level` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Daten für Tabelle `tblUsers`
---
-
-INSERT INTO `tblUsers` (`uid`, `username`, `password`, `level`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 4);
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Indizes der exportierten Tabellen
@@ -141,6 +154,12 @@ INSERT INTO `tblUsers` (`uid`, `username`, `password`, `level`) VALUES
 --
 ALTER TABLE `tblDevices`
  ADD PRIMARY KEY (`deviceID`);
+
+--
+-- Indizes für die Tabelle `tblLogs`
+--
+ALTER TABLE `tblLogs`
+ ADD PRIMARY KEY (`logID`);
 
 --
 -- Indizes für die Tabelle `tblMembers`
@@ -186,22 +205,27 @@ ALTER TABLE `tblUsers`
 -- AUTO_INCREMENT für Tabelle `tblDevices`
 --
 ALTER TABLE `tblDevices`
-MODIFY `deviceID` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `deviceID` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT für Tabelle `tblLogs`
+--
+ALTER TABLE `tblLogs`
+MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=241;
 --
 -- AUTO_INCREMENT für Tabelle `tblMembers`
 --
 ALTER TABLE `tblMembers`
-MODIFY `memberID` int(10) NOT NULL AUTO_INCREMENT;
+MODIFY `memberID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT für Tabelle `tblNews`
 --
 ALTER TABLE `tblNews`
-MODIFY `nid` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `nid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT für Tabelle `tblPermissions`
 --
 ALTER TABLE `tblPermissions`
-MODIFY `permID` int(10) NOT NULL AUTO_INCREMENT;
+MODIFY `permID` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT für Tabelle `tblRoles`
 --
@@ -211,12 +235,12 @@ MODIFY `RoleID` int(10) unsigned NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT für Tabelle `tblUploads`
 --
 ALTER TABLE `tblUploads`
-MODIFY `upid` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `upid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT für Tabelle `tblUsers`
 --
 ALTER TABLE `tblUsers`
-MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

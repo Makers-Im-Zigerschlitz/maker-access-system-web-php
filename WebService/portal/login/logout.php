@@ -7,7 +7,7 @@ if(isset($_SESSION["username"]))
   $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
   $rhost = whatsMyIP();
   $uid = $_SESSION["uid"];
-  $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `uid`, `deviceID`, `r_host`) VALUES (CURRENT_TIMESTAMP, 'Logout', '$uid', 'WebUI', '$rhost');";
+  $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `uid`, `deviceID`, `r_host`, `logCategory`) VALUES (CURRENT_TIMESTAMP, 'Logout', '$uid', 'WebUI', '$rhost', 1);";
   mysqli_query($sqlconn, $query);
 }
 
