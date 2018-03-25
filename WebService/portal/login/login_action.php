@@ -23,7 +23,7 @@ $result = mysqli_query($sqlconn,$query);
 $sqlfetch = mysqli_fetch_array($result);
 
 if ($sqlfetch["username"] == "") {
-  $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `deviceID`, `r_host`) VALUES (CURRENT_TIMESTAMP, 'Login Error', 'WebUI', '$rhost');";
+  $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `deviceID`, `r_host`, `logCategory`) VALUES (CURRENT_TIMESTAMP, 'Login Error', 'WebUI', '$rhost', 1);";
   mysqli_query($sqlconn, $query);
 	header("Location: autherror.php");
 	die();
@@ -42,7 +42,7 @@ else
 	$_SESSION["level"] = $sqlfetch["level"];
 
   $uid = $_SESSION["uid"];
-  $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `uid`, `deviceID`, `r_host`) VALUES (CURRENT_TIMESTAMP, 'Login', '$uid', 'WebUI', '$rhost');";
+  $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `uid`, `deviceID`, `r_host`, `logCategory`) VALUES (CURRENT_TIMESTAMP, 'Login', '$uid', 'WebUI', '$rhost', 1);";
   mysqli_query($sqlconn, $query);
 	header("Location: ../home.php");
 }

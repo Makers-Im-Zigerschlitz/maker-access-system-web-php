@@ -20,7 +20,7 @@ else {
 
 $rhost = whatsMyIP();
 
-$query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `uid`, `deviceID`, `r_host`) VALUES (CURRENT_TIMESTAMP, '$action', '$uid', '$devid', '$rhost');";
+$query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `uid`, `deviceID`, `r_host`, `logCategory`) VALUES (CURRENT_TIMESTAMP, '$action', '$uid', '$devid', '$rhost', 2);";
 mysqli_query($sqlconn, $query);
 $myJSON = json_encode($response);
 echo $myJSON;
