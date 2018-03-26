@@ -11,9 +11,11 @@
 
         <script src="js/modernizr.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
-        <script src='js/moment.min.js'></script>
+        <script src="js/moment.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/jquery.min.js" type="text/javascript"></script>
-        <script src="js/fullcalendar.min.js" type="text/javascript"></script>
+        <script src="js/fullcalendar.js" type="text/javascript"></script>
+
+        </script>
 
         <?php
         include "includes/logincheck.inc.php";
@@ -266,9 +268,24 @@
 <?php endif;
 if ($_GET["site"] == "bookings"):
     ?>
-    <div class='row'>
+    <div class="row">
         <div class="large-12 columns">
             <h2><?php echo $dict["Bookings"]; ?></h2>
+            <?php if (isset($_GET["entrycreated"])): ?>
+              <div class="alert-box success">
+                <p>The entry has been created!</p>
+              </div>
+            <?php endif; ?>
+            <?php if (isset($_GET["error"])): ?>
+              <div class="alert-box alert">
+                <p>An error occured while performing the action!</p>
+              </div>
+            <?php endif; ?>
+            <?php if (isset($_GET["deleted"])): ?>
+              <div class="alert-box warning">
+                <p>The entry has been deleted!</p>
+              </div>
+            <?php endif; ?>
             <script>
 
               $(document).ready(function() {
@@ -277,36 +294,72 @@ if ($_GET["site"] == "bookings"):
                   header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay,listWeek'
+                    right: 'agendaWeek,agendaDay'
                   },
-                  events: '/API/get_bookings.php',
+                  events: {
+                    url: '/API/get_bookings.php',
+                    cache: true
+                  },
+                  resources: '/API/get_resources.php',
                   navLinks: true, // can click day/week names to navigate views
                   eventLimit: true, // allow "more" link when too many events
+                  defaultView: 'agendaWeek',
+                  timeFormat: 'H:mm' // uppercase H for 24-hour clock
                 });
-
               });
               </script>
             <div id='calendar'></div>
-            <form class="" action="create_booking.php" method="post">
-              <label for="bookingUser">Benutzername</label>
-              <select name="bookingUser">
-                <option><?php echo $_SESSION["username"];?></option>
-              </select>
-              <label for="BookingDevice">Zu buchendes Gerät</label>
-              <select name="BookingDevice">
-                <?php
-                  $query = "SELECT * FROM `tblDevices`";
-                  $result = mysqli_query($sqlconn,$query);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<option value='".$row["deviceID"]."'>".$row["deviceName"]."</option>";
-                  }
-                 ?>
-              </select>
-                <input type="datetime-local" name="startTime">
-                <input type="datetime-local" name="endTime">
-                <input type="submit" name="sbm">
-            </form>
-        </div>
+            <div class="settingframe">
+                <form action="useractions/create_booking.php" method="post">
+                  <label for="bookingUser">Benutzername</label>
+                  <select name="bookingUser" id="bookingUser">
+                    <option value="<?php echo $_SESSION["uid"] ?>"><?php echo $_SESSION["username"];?></option>
+                  </select>
+                  <label for="BookingDevice">Zu buchendes Gerät</label>
+                  <select name="BookingDevice" id="BookingDevice">
+                    <?php
+                      $query = "SELECT * FROM `tblDevices`";
+                      $result = mysqli_query($sqlconn,$query);
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<option value='".$row["deviceID"]."'>".$row["deviceName"]."</option>";
+                      }
+                     ?>
+                  </select>
+                  <label for="startTime">Startzeit der Reservation</label>
+                    <input type="datetime-local" placeholder="YYYY-MM-DD HH:MM:SS" name="startTime" id="startTime">
+                    <label for="startTime">Endzeit der Reservation</label>
+                    <input type="datetime-local" placeholder="YYYY-MM-DD HH:MM:SS" name="endTime" id="endTime">
+                    <input type="submit" name="sbm">
+                </form>
+              </div>
+              <div class="settingframe">
+                <h2>Meine Reservationen</h2>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Start</th>
+                      <th>Endzeit</th>
+                      <th>Titel</th>
+                      <th>Loeschen</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      $query = "SELECT * FROM `tblBookings` WHERE `uid` = '". $_SESSION["uid"] ."'";
+                      $result = mysqli_query($sqlconn, $query);
+                      while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>".$row["start"]."</td>";
+                        echo "<td>".$row["end"]."</td>";
+                        echo "<td>".$row["title"]."</td>";
+                        echo "<td><a href='useractions/delete_booking.php?evtid=".$row["evtID"]."'>Loeschen</a></td>";
+                      }
+                     ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+      </div>
     </div>
 <?php
 endif;
