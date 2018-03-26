@@ -35,7 +35,7 @@ if ($stmt->rowCount()>0) {
             $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass,$mysqldb);
             $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `uid`, `deviceID`, `r_host`, `logCategory`) VALUES (CURRENT_TIMESTAMP, 'User Creation', '$uid', 'WebUI', '$rhost', 3);";
             mysqli_query($sqlconn, $query);
-            header("Location: ../index.php?message=usercreated&username=".filter_input(INPUT_POST, 'username'));
+            header("Location: ../index.php?site=users&message=usercreated&username=".filter_input(INPUT_POST, 'username'));
         }
     }
 }

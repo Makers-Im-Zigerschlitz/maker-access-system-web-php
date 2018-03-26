@@ -14,6 +14,6 @@ $stmt->bindValue(':deviceName', filter_input(INPUT_POST, 'deviceName'), PDO::PAR
 $stmt->bindValue(':deviceDesc', filter_input(INPUT_POST, 'deviceDesc'), PDO::PARAM_STR);
 $stmt->execute();
 if ($stmt->rowCount()>0) {
-	header("Location: ../index.php?message=devicecreated");
+	header("Location: ../index.php?site=devices&message=devicecreated");
 }
 ?>

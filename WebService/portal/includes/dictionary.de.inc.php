@@ -69,7 +69,7 @@ $dict["Post_Delete_Post"] = "Beitrag löschen";
 $dict["Post_Create_Success"] = "Beitrag erstellt!";
 $dict["Post_Delete_Success"] = "Beitrag gelöscht!";
 
-//Devices 
+//Devices
 $dict["Dev_Name"] = "Gerätename";
 $dict["Dev_Description"] = "Gerätebeschreibung";
 $dict["Dev_Delete"] = "Gerät löschen";
@@ -79,4 +79,11 @@ $dict["Dev_Create"] = "Gerät erstellen";
 $dict["Dev_Create_Success"] = "Gerät erstellt!";
 $dict["Dev_Delete_Success"] = "Gerät gelöscht!";
 $dict["Dev_Delete_Perm_Success"] = "Berechtigungen zurückgezogen!";
+
+//Tags
+$dict["Tag_ID"] = "Tag ID";
+$dict["Tag_Create"] = "Tag erstellen";
+$dict["Tag_Enter_ID"] = "Bitte Tag ID eingeben";
+$dict["Tag_Assoc_User"] = "Bitte zugehörigen User auswählen";
+$dict["Tag_Created"] = "Der Tag wurde erstellt!";
 ?>
