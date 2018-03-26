@@ -27,6 +27,7 @@ $dict["Nav_Admin_Panel"] = "Admin";
 $dict["Nav_Access_System"] = "Accessystem";
 $dict["Nav_Settings"] = "Settings";
 $dict["Nav_Change_Lang"] = "Change Language";
+$dict["Bookings"] = "Bookings";
 
 //Users
 $dict["User_Create_Success"] = "User successfully created";
@@ -69,7 +70,7 @@ $dict["Post_Delete_Post"] = "Delete Post";
 $dict["Post_Create_Success"] = "Post created!";
 $dict["Post_Delete_Success"] = "Post deleted!";
 
-//Devices 
+//Devices
 $dict["Dev_Name"] = "Devicename";
 $dict["Dev_Description"] = "Device description";
 $dict["Dev_Delete"] = "Delete device";

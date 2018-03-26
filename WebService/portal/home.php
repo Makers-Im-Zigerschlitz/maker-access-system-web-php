@@ -7,11 +7,14 @@
         <link href="css/normalize.css" rel="stylesheet" type="text/css" />
         <link href="css/all.css" rel="stylesheet" type="text/css" />
         <link href="css/popups.css" rel="stylesheet" type="text/css" />
+        <link href="css/fullcalendar.min.css" rel="stylesheet" type="text/css">
 
-        <!--<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>-->
         <script src="js/modernizr.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
-        <!--<script src="js/all.js" type="text/javascript"></script>-->
+        <script src='js/moment.min.js'></script>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script src="js/fullcalendar.min.js" type="text/javascript"></script>
+
         <?php
         include "includes/logincheck.inc.php";
         session_regenerate_id();
@@ -215,7 +218,7 @@
                     ?>
                     <div class='row'>
                         <div class="large-12 columns">
-                            
+
                             <h2><?php echo $dict["Nav_Access_System"]; ?></h2>
                             <?php
                             if ($_SESSION["level"] > 2) {
@@ -260,14 +263,61 @@
                             </form>
                         </div>
                     </div>
-<?php endif; ?>
+<?php endif;
+if ($_GET["site"] == "bookings"):
+    ?>
+    <div class='row'>
+        <div class="large-12 columns">
+            <h2><?php echo $dict["Bookings"]; ?></h2>
+            <script>
+
+              $(document).ready(function() {
+
+                $('#calendar').fullCalendar({
+                  header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay,listWeek'
+                  },
+                  events: '/API/get_bookings.php',
+                  navLinks: true, // can click day/week names to navigate views
+                  eventLimit: true, // allow "more" link when too many events
+                });
+
+              });
+              </script>
+            <div id='calendar'></div>
+            <form class="" action="create_booking.php" method="post">
+              <label for="bookingUser">Benutzername</label>
+              <select name="bookingUser">
+                <option><?php echo $_SESSION["username"];?></option>
+              </select>
+              <label for="BookingDevice">Zu buchendes Gerät</label>
+              <select name="BookingDevice">
+                <?php
+                  $query = "SELECT * FROM `tblDevices`";
+                  $result = mysqli_query($sqlconn,$query);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='".$row["deviceID"]."'>".$row["deviceName"]."</option>";
+                  }
+                 ?>
+              </select>
+                <input type="datetime-local" name="startTime">
+                <input type="datetime-local" name="endTime">
+                <input type="submit" name="sbm">
+            </form>
+        </div>
+    </div>
+<?php
+endif;
+?>
             </div>
             <footer>
                 <!-- <div class="row">
                   <div class="large-12 columns">
                     <div class="row">
                       <div class="large-4 columns"> -->
-                <p class="text-right">Copyright (c) 2017 Niels Scheunemann<br>All Rights Reserved.</p>
+                <p class="text-right">Copyright (c) 2018 Niels Scheunemann<br>All Rights Reserved.</p>
                 <!-- </div>
               </div>
             </div>

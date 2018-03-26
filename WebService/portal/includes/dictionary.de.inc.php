@@ -27,6 +27,7 @@ $dict["Nav_Admin_Panel"] = "Verwaltung";
 $dict["Nav_Access_System"] = "Geräteverwaltung";
 $dict["Nav_Settings"] = "Einstellungen";
 $dict["Nav_Change_Lang"] = "Sprache wechseln";
+$dict["Bookings"] = "Buchungen";
 
 //Users
 $dict["User_Create_Success"] = "Benutzer erfolgreich erstellt";
@@ -69,7 +70,7 @@ $dict["Post_Delete_Post"] = "Beitrag löschen";
 $dict["Post_Create_Success"] = "Beitrag erstellt!";
 $dict["Post_Delete_Success"] = "Beitrag gelöscht!";
 
-//Devices 
+//Devices
 $dict["Dev_Name"] = "Gerätename";
 $dict["Dev_Description"] = "Gerätebeschreibung";
 $dict["Dev_Delete"] = "Gerät löschen";
