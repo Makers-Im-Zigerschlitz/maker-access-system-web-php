@@ -45,7 +45,7 @@
 
 <nav role="navigation">
   <ul class="main">
-    <li class="dashboard"><a href="#">Dashboard</a></li>
+    <li class="dashboard"><a href="?site=dashboard">Dashboard</a></li>
     <li class="users"><a href="?site=users">Manage Users</a></li>
     <li class=""><a href="?site=documents">Edit Documents</a></li>
     <li class=""><a href="?site=posts">Manage Posts</a></li>
@@ -83,6 +83,11 @@
       echo "</div>";
   }
   ?>
+  <?php if ($_GET["site"] == "dashboard"): ?>
+    <section class="panel important">
+      <iframe src="show_log.php" width="100%" height="500px"></iframe>
+    </section>
+<?php endif; ?>
 <?php if ($_GET["site"] == "users"): ?>
 <section class="panel important">
   <h2><?php echo $dict["User_Delete"]; ?></h2>
