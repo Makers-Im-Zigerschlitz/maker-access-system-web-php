@@ -294,7 +294,7 @@ if ($_GET["site"] == "bookings"):
                   header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'agendaWeek,agendaDay'
+                    right: 'agendaWeek,agendaDay,listWeek'
                   },
                   events: {
                     url: '/API/get_bookings.php',
