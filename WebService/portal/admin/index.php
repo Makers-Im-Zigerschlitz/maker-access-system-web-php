@@ -15,12 +15,11 @@
   $db = new PDO('mysql:host=' . $mysqlhost . ';dbname=' . $mysqldb, $mysqluser, $mysqlpass);
   ?>
   <title><?php echo $orgname; ?> - <?php echo $dict["Gen_Administration"]; ?></title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="../css/normalize.css" type="text/css">
+  <link rel='stylesheet prefetch' href='css/font-awesome.min.css'>
   <link rel="stylesheet" href="css/style.css" type="text/css">
 
-  <script  src="js/index.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <script src="js/prefixfree.min.js"></script>
     <?php
     if (!isset($_GET["site"])) {
       header("Location: index.php?site=dashboard");
@@ -38,7 +37,7 @@
   <header role="banner">
   <h1>Admin Panel</h1>
   <ul class="utilities">
-    <li class="users"><a href="../">Back to MAS</a></li>
+    <li class="users"><a href="javascript:window.close();">Back to MAS</a></li>
     <li class="logout warn"><a href="../login/logout.php">Log Out</a></li>
   </ul>
 </header>
@@ -47,10 +46,10 @@
   <ul class="main">
     <li class="dashboard"><a href="?site=dashboard">Dashboard</a></li>
     <li class="users"><a href="?site=users">Manage Users</a></li>
-    <li class=""><a href="?site=documents">Edit Documents</a></li>
-    <li class=""><a href="?site=posts">Manage Posts</a></li>
-    <li class=""><a href="?site=devices">Manage Devices</a></li>
-    <li class=""><a href="?site=tags">Manage Tags</a></li>
+    <li class="documents"><a href="?site=documents">Edit Documents</a></li>
+    <li class="posts"><a href="?site=posts">Manage Posts</a></li>
+    <li class="devices"><a href="?site=devices">Manage Devices</a></li>
+    <li class="tags"><a href="?site=tags">Manage Tags</a></li>
   </ul>
 </nav>
 <main role="main">

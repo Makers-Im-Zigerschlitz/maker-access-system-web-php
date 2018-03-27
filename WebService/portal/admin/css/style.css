@@ -39,7 +39,7 @@ header[role=banner] h1 {
   padding: 1rem;
 }
 header[role=banner] h1:before {
-  content: "\f248";
+  content: "\f1b3";
   font-family: FontAwesome;
   padding-right: .6em;
   color: turquoise;
@@ -59,17 +59,19 @@ header[role=banner] .utilities li a {
 
 /* header */
 .utilities a:before {
-  content: "\f248";
+  content: "\f1b3";
   font-family: FontAwesome;
   padding-right: .6em;
 }
 
 .logout a:before {
-  content: "";
+  content: "\f023";
+  font-family: FontAwesome;
 }
 
 .users a:before {
-  content: "";
+  content: "\f410";
+  font-family: FontAwesome;
 }
 
 nav[role=navigation] {
@@ -97,17 +99,20 @@ nav[role=navigation] li a:before {
 nav[role=navigation] .dashboard a:before {
   content: "";
 }
-nav[role=navigation] .write a:before {
-  content: "";
-}
-nav[role=navigation] .edit a:before {
-  content: "";
-}
-nav[role=navigation] .comments a:before {
-  content: "";
-}
 nav[role=navigation] .users a:before {
-  content: "";
+  content: "\f0c0";
+}
+nav[role=navigation] .documents a:before {
+  content: "\f1d8";
+}
+nav[role=navigation] .posts a:before {
+  content: "\f1ea";
+}
+nav[role=navigation] .devices a:before {
+  content: "\f0ad";
+}
+nav[role=navigation] .tags a:before {
+  content: "\f02c";
 }
 
 /* current nav item */
