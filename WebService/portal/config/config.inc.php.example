@@ -1,6 +1,6 @@
 <?php
 // Organization Name
-$orgname = "Organization Name";
+$orgname = "OrganizationName";
 $slogan = "Slogan";
 
 //MySQL-Server Settings
@@ -10,10 +10,10 @@ $mysqlpass = "__PASS__";
 $mysqldb = "__DATABASE__";
 
 $motd = "Happy to see ya!";
-$fhttps = false; //Force SSL
+$fhttps = _FSSLSet__; //Force SSL; true or false
 
 // Chosen language will be used as standard
-$standardlanguage = "de";
+$standardlanguage = "__Language__"; //de or en
 
 // DO NOT CHANGE THE LINES BELOW
 function getlang($standlang = "en", $fromlogin = false)
