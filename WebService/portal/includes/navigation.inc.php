@@ -19,6 +19,7 @@
           <li class=""><a href="home.php?site=members"><?php echo $dict["Nav_Members"]; ?></a></li>
           <li class=""><a href="home.php?site=docs"><?php echo $dict["Nav_Documents"]; ?></a></li>
           <li class=""><a href="home.php?site=access"><?php echo $dict["Nav_Access_System"]; ?></a></li>
+          <li class=""><a href="home.php?site=bookings"><?php echo $dict["Bookings"]; ?></a></li>
           <?php
             if($_SESSION["level"]>3)
             {

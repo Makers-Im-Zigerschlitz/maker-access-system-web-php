@@ -27,6 +27,7 @@ $dict["Nav_Admin_Panel"] = "Admin";
 $dict["Nav_Access_System"] = "Accessystem";
 $dict["Nav_Settings"] = "Settings";
 $dict["Nav_Change_Lang"] = "Change Language";
+$dict["Bookings"] = "Bookings";
 
 //Users
 $dict["User_Create_Success"] = "User successfully created";
