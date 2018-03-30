@@ -12,7 +12,7 @@ $stmt = $db->prepare("TRUNCATE tblPermissions");
 $stmt->execute();
 
 if (filter_input_array(INPUT_POST)==NULL) {
-    header("Location: ../../home.php?site=access");
+    header("Location: ../index.php?site=permissions&message=permmodified");
     die();
 } else {
     foreach (filter_input_array(INPUT_POST) as $key => $value) {
@@ -22,6 +22,6 @@ if (filter_input_array(INPUT_POST)==NULL) {
         $stmt->bindValue(':uid', $identifier[0], PDO::PARAM_STR);
         $stmt->execute();
     }
-    header("Location: ../../home.php?site=access");      
+    header("Location: ../index.php?site=permissions&message=permmodified");      
 }
 ?>

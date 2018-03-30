@@ -259,7 +259,6 @@ label.error {
 .feedback {
   background: #fcfae6;
   color: #857a11;
-  margin: 1em;
   padding: .5em .5em .5em 2em;
   border: solid 1px khaki;
 }
@@ -276,7 +275,6 @@ label.error {
 .feedback.error {
   background: #ffe9e0;
   color: #942a00;
-  margin: 1em;
   padding: .5em .5em .5em 2em;
   border: solid 1px lightsalmon;
 }
@@ -293,7 +291,6 @@ label.error {
 .feedback.success {
   background: #98eee6;
   color: #08322e;
-  margin: 1em;
   padding: .5em .5em .5em 2em;
   border: solid 1px turquoise;
 }
@@ -365,13 +362,13 @@ td {
 
   nav[role=navigation] {
     position: fixed;
-    width: 200px;
+    width: 250px;
     top: 75px;
     bottom: 0px;
   }
 
   main[role=main] {
-    margin: 75px 0 40px 200px;
+    margin: 75px 0 40px 250px;
   }
   main[role=main]:after {
     content: "";
