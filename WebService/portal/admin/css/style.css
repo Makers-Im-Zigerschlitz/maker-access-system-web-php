@@ -311,7 +311,10 @@ table {
   width: 96%;
   margin: 2%;
 }
-
+#logbook .status{
+  height: 14px;
+  width: 14px;
+}
 th {
   text-align: left;
   font-weight: 400;
