@@ -77,7 +77,9 @@
       } elseif ($_GET["message"] == "postdeleted") {
           echo "<p>" . $dict["Post_Delete_Success"] . "</p>";
       } elseif ($_GET["message"] == "tagcreated") {
-            echo "<p>" . $dict["Tag_Created"] . "</p>";
+          echo "<p>" . $dict["Tag_Created"] . "</p>";
+      } elseif ($_GET["message"] == "tagdeleted") {
+            echo "<p>" . $dict["Tag_Deleted"] . "</p>";
       }
       echo "</div>";
   }
