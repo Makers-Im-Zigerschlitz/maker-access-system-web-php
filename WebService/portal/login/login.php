@@ -2,10 +2,7 @@
 <head>
 <?php
 $filename = "../installer";
-if (file_exists($filename)) {
-    echo("Please delete the installation folder before you continue!");
-	die();
-}
+
 include "../config/config.inc.php";
 if($fhttps == true)
 {
@@ -34,6 +31,11 @@ include "../includes/dictionary.$language.inc.php";
 <div class="login">
 <div class="wrapper">
 	<div class="container">
+	<?php
+	if (file_exists($filename)) {
+    echo("<p>Please delete the installation folder before you continue!</p></br>");
+	//die();
+} ?>
 		<h1><?php echo $orgname; ?></h1>
 		<h2><?php echo $dict["Login_Prompt"]; ?>:</h2>
 		<form class="form" action="login_action.php" method="post">
