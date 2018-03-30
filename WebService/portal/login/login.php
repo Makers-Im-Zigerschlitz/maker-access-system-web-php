@@ -1,6 +1,11 @@
 <html>
 <head>
 <?php
+$filename = "../installer";
+if (file_exists($filename)) {
+    echo("Please delete the installation folder before you continue!");
+	die();
+}
 include "../config/config.inc.php";
 if($fhttps == true)
 {
@@ -34,7 +39,7 @@ include "../includes/dictionary.$language.inc.php";
 		<form class="form" action="login_action.php" method="post">
 			<input type="text" name="username" placeholder="<?php echo $dict["Login_Username"]; ?>">
 			<input type="password" name="password" placeholder="<?php echo $dict["Login_Passwort"]; ?>">
-			<button type="submit" id="login-button"><?php echo $dict["Login_Passwort"]; ?></button>
+			<button type="submit" id="login-button"><?php echo $dict["Login_Logon"]; ?></button>
 		</form>
 	</div>
 

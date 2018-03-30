@@ -23,7 +23,14 @@ $result = mysqli_query($sqlconn,$query);
 $sqlfetch = mysqli_fetch_array($result);
 
 if ($sqlfetch["username"] == "") {
-  $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `deviceID`, `r_host`, `logCategory`) VALUES (CURRENT_TIMESTAMP, 'Login Error', 'WebUI', '$rhost', 1);";
+  $query = "SELECT * FROM `tblUsers` WHERE `username` like '$username';";
+  $result = mysqli_query($sqlconn, $query);
+  $uid = "";
+  while($temp = mysqli_fetch_assoc($result))
+  {
+	  $uid = $temp["uid"];
+  }
+  $query = "INSERT INTO `tblLogs` (`timestamp`, `action`, `deviceID`, `r_host`, `logCategory`, `uid`) VALUES (CURRENT_TIMESTAMP, 'Login Error', 'WebUI', '$rhost', 1, '$uid');";
   mysqli_query($sqlconn, $query);
 	header("Location: autherror.php");
 	die();

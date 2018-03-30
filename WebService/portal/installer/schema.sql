@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.2.12deb2+deb8u2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Erstellungszeit: 27. Mrz 2018 um 09:41
--- Server Version: 5.5.58-0+deb8u1
--- PHP-Version: 5.6.30-0+deb8u1
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 

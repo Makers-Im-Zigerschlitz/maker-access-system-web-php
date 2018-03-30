@@ -1,6 +1,8 @@
 <?php
 include "../config/config.inc.php";
 include "../includes/functions.inc.php";
+header("Content-Type: application/json; charset=UTF-8");
+
 $tag = $_GET["tag"];
 $devid = $_GET["device"];
 $sqlconn = mysqli_connect($mysqlhost,$mysqluser,$mysqlpass, $mysqldb);

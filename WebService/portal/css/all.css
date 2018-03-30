@@ -2923,11 +2923,9 @@ button, .button, .sendgrid-subscription-widget input[type="submit"] {
   -webkit-transition: background-color 300ms ease-out;
   -moz-transition: background-color 300ms ease-out;
   transition: background-color 300ms ease-out;
-  padding-top: 1.0625rem;
-  padding-bottom: 1rem;
   -webkit-appearance: none;
   border: none;
-  font-weight: normal !important; }
+  }
   /* line 142, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_buttons.scss */
   button:hover, button:focus, .button:hover, .sendgrid-subscription-widget input[type="submit"]:hover, .button:focus, .sendgrid-subscription-widget input[type="submit"]:focus {
     background-color: #0079a1; }
@@ -3818,7 +3816,10 @@ form .row .row, form #stack-list .row, form #theme-list li .row, #theme-list for
       -moz-border-radius-bottomright: 0;
       -moz-border-radius-topright: 0;
       -webkit-border-bottom-right-radius: 0;
-      -webkit-border-top-right-radius: 0; }
+      -webkit-border-top-right-radius: 0;
+	  border-bottom-right-radius: auto;
+	  border-top-right-radius: auto;
+}
 /* line 97, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_forms.scss */
 form .row input.column, form #stack-list input.column, form #theme-list li input.column, #theme-list form li input.column, form ul#docs-list input.column,
 form .row input.columns,
@@ -4498,29 +4499,36 @@ kbd {
 @-webkit-keyframes rotate {
   /* line 45, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_orbit.scss */
   from {
-    -webkit-transform: rotate(0deg); }
+    -webkit-transform: rotate(0deg); 
+	transform: rotate(0deg);}
 
   /* line 46, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_orbit.scss */
   to {
-    -webkit-transform: rotate(360deg); } }
+    -webkit-transform: rotate(360deg);
+	transform: rotate(360deg);} }
 
 @-moz-keyframes rotate {
   /* line 49, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_orbit.scss */
   from {
-    -moz-transform: rotate(0deg); }
+    -moz-transform: rotate(0deg); 
+	transform: rotate(0deg);
+	}
 
   /* line 50, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_orbit.scss */
   to {
-    -moz-transform: rotate(360deg); } }
+    -moz-transform: rotate(360deg);
+	transform: rotate(360deg);} }
 
 @-o-keyframes rotate {
   /* line 53, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_orbit.scss */
   from {
-    -o-transform: rotate(0deg); }
+    -o-transform: rotate(0deg); 
+	transform: rotate(0deg);}
 
   /* line 54, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_orbit.scss */
   to {
-    -o-transform: rotate(360deg); } }
+    -o-transform: rotate(360deg);
+	transform: rotate(360deg);} }
 
 @keyframes rotate {
   /* line 58, /home/bitrock/projects/apachefriends-web/bower_components/foundation/scss/foundation/components/_orbit.scss */
@@ -8866,11 +8874,6 @@ th.hide-for-touch {
   .asciidoctor .print-only {
     display: none !important; }
   @media print {
-    /* line 697, /home/bitrock/projects/apachefriends-web/source-xampp-windows/stylesheets/all.scss */
-    .asciidoctor {
-      @page {
-        margin: 1.25cm 0.75cm; }
- }
       /* line 694, /home/bitrock/projects/apachefriends-web/source-xampp-windows/stylesheets/asciidoctor.css */
       .asciidoctor * {
         -webkit-box-shadow: none !important;
@@ -9156,3 +9159,4 @@ iframe.video {
       margin-left: 5%;
       margin-right: 5%;
     }
+}
