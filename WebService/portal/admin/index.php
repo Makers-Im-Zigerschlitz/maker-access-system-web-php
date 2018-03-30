@@ -57,8 +57,7 @@
 <main role="main">
   <?php
   if (isset($_GET["message"])) {
-      echo "<div class='feedback'>";
-	  
+      echo "<div class='feedback success'>";
       if ($_GET["message"] == "usercreated") {
           echo $dict["User_Create_Success"] . ": " . $_GET["username"];
       } elseif ($_GET["message"] == "userdeleted") {
