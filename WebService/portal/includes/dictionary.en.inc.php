@@ -80,6 +80,7 @@ $dict["Dev_Create"] = "Create device";
 $dict["Dev_Create_Success"] = "Device created!";
 $dict["Dev_Delete_Success"] = "Device deleted!";
 $dict["Dev_Delete_Perm_Success"] = "Permissions revoked!";
+$dict["Dev_Modify_Perm_Success"] = "Permissions successfully modified!";
 
 //Tags
 $dict["Tag_ID"] = "Tag ID";

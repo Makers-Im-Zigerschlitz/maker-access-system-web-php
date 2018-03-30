@@ -216,56 +216,6 @@
                     </div>
                 <?php
                 endif;
-                if ($_GET["site"] == "access"):
-                    ?>
-                    <div class='row'>
-                        <div class="large-12 columns">
-
-                            <h2><?php echo $dict["Nav_Access_System"]; ?></h2>
-                            <?php
-                            if ($_SESSION["level"] > 2) {
-                                echo("<div><p><a href='admin/show_log.php'>Recent Log activity</a></p></div>");
-                            }
-                            ?>
-                            <form action="admin/actions/updateperm.php" method="post">
-                                <table>
-                                    <?php
-                                    $query = "SELECT * FROM tblDevices ORDER BY deviceName";
-                                    $deviceresult = mysqli_query($sqlconn, $query);
-                                    echo "<th>Name</th>";
-                                    while ($device = mysqli_fetch_assoc($deviceresult)) {
-                                        echo "<th>";
-                                        echo $device["deviceName"];
-                                        echo "</th>";
-                                    }
-                                    $query = "SELECT * FROM tblMembers ORDER BY Lastname";
-                                    $userresult = mysqli_query($sqlconn, $query);
-                                    while ($user = mysqli_fetch_assoc($userresult)) {
-                                        echo "<tr>";
-                                        echo "<td>" . $user["Firstname"] . " " . $user["Lastname"] . "</td>";
-
-                                        $query = "SELECT * FROM tblDevices ORDER BY deviceName";
-                                        $deviceresult = mysqli_query($sqlconn, $query);
-                                        while ($device = mysqli_fetch_assoc($deviceresult)) {
-                                            $query = "SELECT * FROM tblPermissions WHERE uid=" . $user["uid"] . " AND deviceID=" . $device["deviceID"] . ";";
-                                            $permresult = mysqli_query($sqlconn, $query);
-                                            if (mysqli_num_rows($permresult) > 0) {
-                                                echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' checked></td>";
-                                            } else {
-                                                echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $device["deviceID"] . "' ></td>";
-                                            }
-                                        }
-                                        echo "</tr>";
-                                    }
-                                    echo "</table>";
-                                    if ($_SESSION["level"] > 2) {
-                                        echo "<input class='button' type='submit' value='Update'>";
-                                    }
-                                    ?>
-                            </form>
-                        </div>
-                    </div>
-<?php endif;
 if ($_GET["site"] == "bookings"):
     ?>
     <div class="row">

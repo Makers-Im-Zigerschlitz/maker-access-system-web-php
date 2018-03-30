@@ -365,7 +365,7 @@ td {
 
   nav[role=navigation] {
     position: fixed;
-    width: 200px;
+    width: 250px;
     top: 75px;
     bottom: 0px;
   }

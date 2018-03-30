@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dashboard">
+<html lang="en" class="logs">
 
 <head>
   <meta charset="UTF-8">
@@ -13,6 +13,7 @@
   include "../includes/dictionary.$language.inc.php";
   include "../includes/functions.inc.php";
   $db = new PDO('mysql:host=' . $mysqlhost . ';dbname=' . $mysqldb, $mysqluser, $mysqlpass);
+  $sqlconn = mysqli_connect($mysqlhost, $mysqluser, $mysqlpass, $mysqldb);
   ?>
   <title><?php echo $orgname; ?> - <?php echo $dict["Gen_Administration"]; ?></title>
   <link rel="stylesheet" href="../css/normalize.css" type="text/css">
@@ -22,7 +23,7 @@
   <script src="js/prefixfree.min.js"></script>
     <?php
     if (!isset($_GET["site"])) {
-      header("Location: index.php?site=dashboard");
+      header("Location: index.php?site=logs");
     }
      ?>
      <script type="text/javascript">
@@ -44,11 +45,12 @@
 
 <nav role="navigation">
   <ul class="main">
-    <li class="dashboard"><a href="?site=dashboard">Dashboard</a></li>
+    <li class="logs"><a href="?site=logs">Logs</a></li>
     <li class="users"><a href="?site=users">Manage Users</a></li>
     <li class="documents"><a href="?site=documents">Edit Documents</a></li>
     <li class="posts"><a href="?site=posts">Manage Posts</a></li>
     <li class="devices"><a href="?site=devices">Manage Devices</a></li>
+	<li class="permissions"><a href="?site=permissions">Manage Permissions</a></li>
     <li class="tags"><a href="?site=tags">Manage Tags</a></li>
   </ul>
 </nav>
@@ -56,35 +58,40 @@
   <?php
   if (isset($_GET["message"])) {
       echo "<div class='feedback'>";
+	  
       if ($_GET["message"] == "usercreated") {
-          echo "<p>" . $dict["User_Create_Success"] . ": " . $_GET["username"] . "</p>";
+          echo $dict["User_Create_Success"] . ": " . $_GET["username"];
       } elseif ($_GET["message"] == "userdeleted") {
-          echo "<p>" . $dict["User_Delete_Success"] . "</p>";
+          echo $dict["User_Delete_Success"];
       } elseif ($_GET["message"] == "uploadok") {
-          echo "<p>" . $dict["Doc_Upload_Success"] . "</p>";
+          echo $dict["Doc_Upload_Success"];
       } elseif ($_GET["message"] == "wrongext") {
-          echo "<p>" . $dict["Doc_Upload_Filetype_Denied"] . ": " . $_GET["filext"] . "</p>";
+          echo $dict["Doc_Upload_Filetype_Denied"] . ": " . $_GET["filext"];
       } elseif ($_GET["message"] == "file_exists") {
-          echo "<p>" . $dict["Doc_File_Exists"] . "</p>";
+          echo $dict["Doc_File_Exists"];
       } elseif ($_GET["message"] == "filedeleted") {
-          echo "<p>" . $dict["Doc_File_Deleted"] . "</p>";
+          echo $dict["Doc_File_Deleted"];
       } elseif ($_GET["message"] == "devicecreated") {
-          echo "<p>" . $dict["Dev_Create_Success"] . "</p>";
+          echo $dict["Dev_Create_Success"];
       } elseif ($_GET["message"] == "devicedeleted") {
-          echo "<p>" . $dict["Dev_Delete_Success"] . " " . $_GET["permdeleted"] . " " . $dict["Dev_Delete_Perm_Success"] . "</p>";
+          echo $dict["Dev_Delete_Success"] . " " . $_GET["permdeleted"] . " " . $dict["Dev_Delete_Perm_Success"];
       } elseif ($_GET["message"] == "postcreated") {
-          echo "<p>" . $dict["Post_Create_Success"] . "</p>";
+          echo $dict["Post_Create_Success"];
       } elseif ($_GET["message"] == "postdeleted") {
-          echo "<p>" . $dict["Post_Delete_Success"] . "</p>";
+          echo $dict["Post_Delete_Success"];
       } elseif ($_GET["message"] == "tagcreated") {
-          echo "<p>" . $dict["Tag_Created"] . "</p>";
+          echo $dict["Tag_Created"];
       } elseif ($_GET["message"] == "tagdeleted") {
-            echo "<p>" . $dict["Tag_Deleted"] . "</p>";
-      }
+            echo $dict["Tag_Deleted"];
+      } elseif ($_GET["message"] == "permmodified") {
+            echo $dict["Dev_Modify_Perm_Success"];
+      } else {
+			echo "Message not defined";
+	  }
       echo "</div>";
   }
   ?>
-  <?php if ($_GET["site"] == "dashboard"): ?>
+  <?php if ($_GET["site"] == "logs"): ?>
     <section class="panel important">
       <iframe src="show_log.php" width="100%" height="500px"></iframe>
     </section>
@@ -254,6 +261,53 @@
       }
       ?>
   </table>
+</section>
+<?php endif; ?>
+<?php if ($_GET["site"] == "permissions"): ?>
+
+<section class="panel">
+  <div class="twothirds">
+  	<h2><?php echo $dict["Nav_Access_System"]; ?></h2>
+	<?php
+	if ($_SESSION["level"] > 2) {
+		echo('<div><p><a href="?site=logs">Recent Log activity</a></p></div>');
+		echo('<form action="actions/updateperm.php" method="post">');
+	}
+	?>
+		<table>
+			<th>Name</th>
+			<?php
+			$stmt = $db->query('SELECT * FROM tblDevices ORDER BY deviceName ASC');
+			while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {
+			echo "<th>" . $temp['deviceName'] . "</th>";
+			}
+			
+			$stmtuser = $db->query('SELECT * FROM tblMembers ORDER BY Lastname ASC');
+			while ($user = $stmtuser->fetch(PDO::FETCH_ASSOC)) {
+				echo "<tr>";
+				echo "<td>" . $user['Firstname'] . " " . $user['Lastname'] . "</td>";
+				
+				$substmt = $db->query('SELECT * FROM tblDevices ORDER BY deviceName ASC');
+				while ($dev = $substmt->fetch(PDO::FETCH_ASSOC)) {
+					$stmtperm = $db->prepare('SELECT * FROM tblPermissions WHERE uid=:uid AND deviceID=:devid');
+					$stmtperm->bindValue(':uid', $user['uid'], PDO::PARAM_STR);
+					$stmtperm->bindValue(':devid', $dev['deviceID'], PDO::PARAM_STR);
+					$stmtperm->execute();
+					$row_count = $stmtperm->rowCount();
+					if ($row_count > 0) {
+						echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $dev["deviceID"] . "' checked></td>";
+					} else {
+						echo "<td id='chkbxc'><input type=checkbox name='" . $user["uid"] . "_" . $dev["deviceID"] . "' ></td>";
+					}
+				}
+				echo "</tr>";
+			}		  
+		echo "</table>";
+		if ($_SESSION["level"] > 2) {
+		echo "<input class='button' type='submit' value='Update'>";
+		echo "</form>";
+		}
+		?>
 </section>
 <?php endif; ?>
 <?php if ($_GET["site"] == "tags"): ?>
