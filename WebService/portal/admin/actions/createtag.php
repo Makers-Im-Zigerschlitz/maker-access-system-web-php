@@ -9,13 +9,11 @@ include "../../config/config.inc.php";
 include "../../includes/dictionary.$language.inc.php";
 include "../../includes/functions.inc.php";
 $db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
-$stmt = $db->prepare("INSERT INTO tblNews (title,text,author) VALUES (?,?,?)");
-$stmt->bindValue(1, filter_input(INPUT_POST, 'posttitle'), PDO::PARAM_STR);
-$stmt->bindValue(2, filter_input(INPUT_POST, 'text'), PDO::PARAM_STR);
-$stmt->bindValue(3, $_SESSION["username"], PDO::PARAM_STR);
+$stmt = $db->prepare("INSERT INTO tblTags(tagID,uid) VALUES (:tagID,:uid)");
+$stmt->bindValue(':tagID', filter_input(INPUT_POST, 'tagID'), PDO::PARAM_STR);
+$stmt->bindValue(':uid', filter_input(INPUT_POST, 'user'), PDO::PARAM_STR);
 $stmt->execute();
-
 if ($stmt->rowCount()>0) {
-	header("Location: ../index.php?site=posts&message=postcreated");
+	header("Location: ../index.php?site=tags&message=tagcreated");
 }
 ?>

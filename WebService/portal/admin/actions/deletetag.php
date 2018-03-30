@@ -9,12 +9,15 @@ include "../../config/config.inc.php";
 include "../../includes/dictionary.$language.inc.php";
 
 $db = new PDO('mysql:host='.$mysqlhost.';dbname='.$mysqldb, $mysqluser, $mysqlpass);
-$stmt = $db->prepare("DELETE FROM tblNews WHERE nid=:nid");
-$stmt->bindValue(':nid', filter_input(INPUT_GET, 'nid'), PDO::PARAM_STR);
+$stmt = $db->prepare("DELETE FROM tblTags WHERE tagID=:id");
+$stmt->bindValue(':id', filter_input(INPUT_GET, 'tagID'), PDO::PARAM_STR);
 $stmt->execute();
 
 if ($stmt->rowCount()>0) {
-    header("Location: ../index.php?site=posts&message=postdeleted");
+    $stmt = $db->prepare("DELETE FROM tblPermissions WHERE tagID=:id");
+    $stmt->bindValue(':id', filter_input(INPUT_GET, 'tagID'), PDO::PARAM_STR);
+    $stmt->execute();
+    header("Location: ../index.php?site=tags&message=tagdeleted&permdeleted=".$stmt->rowCount());
 
 } else {
     echo "Es ist ein Fehler aufgetreten: ".mysqli_error($sqlconn);

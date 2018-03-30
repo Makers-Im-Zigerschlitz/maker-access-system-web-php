@@ -42,6 +42,6 @@ if ($_FILES["file"]["size"] > 0 && $upfile_ext == "pdf") {
         echo mysqli_error($sqlconn);
     }
 } else {
-    header("Location: ../index.php?message=wrongext&filext=$upfile_ext");
+    header("Location: ../index.php?site=documents&message=wrongext&filext=$upfile_ext");
 }
 ?>
