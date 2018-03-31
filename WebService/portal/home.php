@@ -28,7 +28,7 @@
   ?>
   <title><?php echo $orgname; ?> - Home</title>
 </head>
-<body>
+<body style="padding-top: 5%">
 <?php
 include 'includes/nav.inc.php';
 if (!isset($_GET["site"])) {
@@ -43,7 +43,7 @@ if ($_GET["site"] == "dashboard"):?>
     <h3><?php echo $dict["Gen_Welcome"] . " " . $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></h3>
     <h2><?php echo $motd; ?></h2>
 </div>
-<h1 class="bg-primary">News</h1>
+<h1 class="bg-primary" id="news">News</h1>
 <div class="row">
     <?php
     $query = "SELECT * FROM tblNews ORDER BY nid DESC";
@@ -51,7 +51,11 @@ if ($_GET["site"] == "dashboard"):?>
     while ($dataset = mysqli_fetch_assoc($result)) {
         echo "<div class='col-lg-4'>\n<h2>";
         echo $dataset["title"];
-        echo "</h2>\n<p>\n";
+        echo "<small>\n";
+        $timestamp = strtotime($dataset["timestamp"]);
+        echo date("d. M. Y", $timestamp);
+        echo "\n</small>\n</h2>\n";
+        echo "<p>\n";
         echo str_replace("\n", "<br>", $dataset["text"]);
         echo "\n</p>\n</div>\n";
     }
@@ -59,7 +63,7 @@ if ($_GET["site"] == "dashboard"):?>
 </div>
 <div class="row">
   <div class="col-lg-6">
-    <h1 class="bg-primary">Your bookings</h1>
+    <h1 class="bg-primary" id="bookings">Your bookings</h1>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -83,7 +87,7 @@ if ($_GET["site"] == "dashboard"):?>
     </table>
   </div>
   <div class="col-lg-6">
-    <h1 class="bg-primary">Your permissions</h1>
+    <h1 class="bg-primary" id="permissions">Your permissions</h1>
     <table class="table table-striped">
       <thead>
         <th>Device</th>
@@ -106,6 +110,37 @@ if ($_GET["site"] == "dashboard"):?>
          ?>
       </tbody>
     </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="bg-primary" id="feed">Feed</h1>
+    <div class="row">
+    <?php
+    $query = "SELECT * FROM `tblSettings` WHERE `settingName` LIKE 'RSSUrl';";
+    $result = mysqli_query($sqlconn, $query);
+    $feed = mysqli_fetch_assoc($result);
+    $html = "";
+    //$url = "https://zigerschlitzmakers.ch/?feed=rss2";
+    $url = $feed["settingValue"];
+    $xml = simplexml_load_file($url);
+    for($i = 0; $i < 4; $i++){
+        $title = $xml->channel->item[$i]->title;
+        $link = $xml->channel->item[$i]->link;
+        $description = $xml->channel->item[$i]->description;
+        $pubDate = $xml->channel->item[$i]->pubDate;
+
+        $pubDate = strtotime($pubDate);
+        $pubDate = date("d. M. Y", $pubDate);
+
+        $html .= "<div class='col-lg-6'>";
+        $html .= "<a href='$link'><h3>$title</h3><small>$pubDate</small></a>";
+        $html .= "$description";
+        $html .= "</div>";
+    }
+    echo $html;
+     ?>
+     </div>
   </div>
 </div>
 </div>
