@@ -120,11 +120,14 @@ if ($_GET["site"] == "dashboard"):?>
     $query = "SELECT * FROM `tblSettings` WHERE `settingName` LIKE 'RSSUrl';";
     $result = mysqli_query($sqlconn, $query);
     $feed = mysqli_fetch_assoc($result);
+    $feeds = 4;
     $html = "";
-    //$url = "https://zigerschlitzmakers.ch/?feed=rss2";
+    if ($feed["settingValue"] == "") {
+      $feeds = 0;
+    }
     $url = $feed["settingValue"];
     $xml = simplexml_load_file($url);
-    for($i = 0; $i < 4; $i++){
+    for($i = 0; $i < $feeds; $i++){
         $title = $xml->channel->item[$i]->title;
         $link = $xml->channel->item[$i]->link;
         $description = $xml->channel->item[$i]->description;
