@@ -39,6 +39,7 @@ footer p{
 	/*padding-left: 5%;*/
 	padding-right: 5%;
 	padding-top: 4%;
+	display: inline-grid;
 }
 
 .settingframe{
