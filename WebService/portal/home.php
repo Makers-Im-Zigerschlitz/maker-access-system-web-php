@@ -99,8 +99,8 @@ if ($_GET["site"] == "dashboard"):?>
           while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
             $query = "SELECT * FROM `tblDevices` WHERE `deviceID` = ".$row["deviceID"].";";
-            $result = mysqli_query($sqlconn,$query);
-            while ($devrow = mysqli_fetch_assoc($result)) {
+            $result1 = mysqli_query($sqlconn,$query);
+            while ($devrow = mysqli_fetch_assoc($result1)) {
               echo "<td class='success'>";
               echo $devrow["deviceName"];
               echo "</td>";
@@ -113,7 +113,7 @@ if ($_GET["site"] == "dashboard"):?>
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-6">
     <h1 class="bg-primary" id="feed">Feed</h1>
     <div class="row">
     <?php
@@ -144,6 +144,113 @@ if ($_GET["site"] == "dashboard"):?>
     echo $html;
      ?>
      </div>
+  </div>
+  <div class="col-lg-6">
+<h1 class="bg-primary" id="feed">Inbox</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Sender</th>
+      <th>Description</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+      $query = "SELECT * FROM `tblMessages` WHERE `recipientUID` = '".$_SESSION["uid"]."';";
+      $result = mysqli_query($sqlconn, $query);
+      while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>\n";
+        $query = "SELECT * FROM `tblMembers` WHERE `uid` = '".$row["senderUID"]."';";
+        $senderresult = mysqli_query($sqlconn, $query);
+        $senderresult = mysqli_fetch_assoc($senderresult);
+        echo "<td>\n";
+        if ($row["senderUID"] == 0) {
+          echo "System";
+        }
+        else {
+          echo $senderresult["Firstname"] . " " . $senderresult["Lastname"];
+        }
+        echo "\n</td>\n<td>";
+        echo $row["description"];
+        echo "\n</td>\n<td>";
+        echo "<button type='button' class='btn btn-info btn-sm' data-toggle='modal' data-target='#msg".$row["mid"]."'>Open Message</button>";
+        echo "\n</td>\n";
+        echo "</tr>\n";
+      }
+     ?>
+  </tbody>
+</table>
+<?php
+$query = "SELECT * FROM `tblMessages` WHERE `recipientUID` = '".$_SESSION["uid"]."' LIMIT 10;";
+$result = mysqli_query($sqlconn, $query);
+while ($row = mysqli_fetch_assoc($result)): ?>
+  <div id="<?php echo "msg".$row["mid"]; ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><?php echo $row["description"]; ?></h4>
+      </div>
+      <div class="modal-body">
+        <?php
+          $message = str_replace("'","",$row["message"]);
+          $message = str_replace("\\r\\n","<br>",$message);
+          ?>
+        <p><?php echo $message; ?></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<?php endwhile; ?>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#createMessage">Create message</button>
+<div id="createMessage" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create Message</h4>
+      </div>
+      <div class="modal-body">
+        <form class="" action="useractions/create_message.php" method="post">
+          <div class="form-group">
+            <label for="recipient">Recipient:</label>
+            <select class="form-control" name="recipient" id="recipient">
+                <?php
+                  $query = "SELECT * FROM `tblMembers`;";
+                  $result = mysqli_query($sqlconn, $query);
+                  while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<option value='".$row["uid"]."'>\n";
+                    echo $row["Firstname"]." ".$row["Lastname"];
+                    echo "\n</option>\n";
+                  }
+                ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <input id="description" class="form-control" type="text" name="description" placeholder="Description">
+          </div>
+          <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" class="form-control" type="text" name="message" placeholder="Message"></textarea>
+          </div>
+          <input class="form-control btn btn-primary" type="submit" name="submit">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
   </div>
 </div>
 </div>
