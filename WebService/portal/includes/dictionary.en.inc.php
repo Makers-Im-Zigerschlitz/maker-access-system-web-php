@@ -20,6 +20,7 @@ $dict["Login_Password_Change_Success"] = "Your password was successfully changed
 
 //Navigation
 $dict["Nav_Return_Home"] = "Go back to Home";
+$dict["Nav_Dashboard"] = "Dashboard";
 $dict["Nav_Members"] = "Members";
 $dict["Nav_News"] = "News";
 $dict["Nav_Documents"] = "Documents";

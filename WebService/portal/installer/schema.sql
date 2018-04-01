@@ -1,3 +1,12 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.12deb2+deb8u2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Erstellungszeit: 01. Apr 2018 um 11:46
+-- Server Version: 5.5.58-0+deb8u1
+-- PHP-Version: 5.6.30-0+deb8u1
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -81,6 +90,21 @@ CREATE TABLE IF NOT EXISTS `tblMembers` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `tblMessages`
+--
+
+CREATE TABLE IF NOT EXISTS `tblMessages` (
+`mid` int(11) NOT NULL,
+  `senderUID` int(11) NOT NULL,
+  `recipientUID` int(11) NOT NULL,
+  `description` varchar(70) COLLATE utf8_unicode_ci NOT NULL,
+  `message` varchar(8000) COLLATE utf8_unicode_ci NOT NULL,
+  `sendDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `tblNews`
 --
 
@@ -114,6 +138,18 @@ CREATE TABLE IF NOT EXISTS `tblRoles` (
 `RoleID` int(10) unsigned NOT NULL,
   `RoleName` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `tblSettings`
+--
+
+CREATE TABLE IF NOT EXISTS `tblSettings` (
+`setID` int(11) NOT NULL,
+  `settingName` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `settingValue` varchar(80) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -181,6 +217,12 @@ ALTER TABLE `tblMembers`
  ADD PRIMARY KEY (`memberID`,`uid`), ADD KEY `uid` (`uid`);
 
 --
+-- Indizes für die Tabelle `tblMessages`
+--
+ALTER TABLE `tblMessages`
+ ADD PRIMARY KEY (`mid`);
+
+--
 -- Indizes für die Tabelle `tblNews`
 --
 ALTER TABLE `tblNews`
@@ -197,6 +239,12 @@ ALTER TABLE `tblPermissions`
 --
 ALTER TABLE `tblRoles`
  ADD PRIMARY KEY (`RoleID`);
+
+--
+-- Indizes für die Tabelle `tblSettings`
+--
+ALTER TABLE `tblSettings`
+ ADD PRIMARY KEY (`setID`), ADD UNIQUE KEY `settingName` (`settingName`);
 
 --
 -- Indizes für die Tabelle `tblUploads`
@@ -235,6 +283,11 @@ MODIFY `logID` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `tblMembers`
 MODIFY `memberID` int(10) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT für Tabelle `tblMessages`
+--
+ALTER TABLE `tblMessages`
+MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT für Tabelle `tblNews`
 --
 ALTER TABLE `tblNews`
@@ -249,6 +302,11 @@ MODIFY `permID` int(10) NOT NULL AUTO_INCREMENT;
 --
 ALTER TABLE `tblRoles`
 MODIFY `RoleID` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT für Tabelle `tblSettings`
+--
+ALTER TABLE `tblSettings`
+MODIFY `setID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT für Tabelle `tblUploads`
 --
