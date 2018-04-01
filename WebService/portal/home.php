@@ -38,11 +38,29 @@ if (!isset($_GET["site"])) {
 }
 if ($_GET["site"] == "dashboard"):?>
 <div class="container">
-  <div class="jumbotron">
-    <h1><img style="width: 7%;" src="img/logo.png" /><?php echo $orgname; ?> <br><span> <?php echo $slogan; ?></span></h1>
-    <h3><?php echo $dict["Gen_Welcome"] . " " . $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></h3>
-    <h2><?php echo $motd; ?></h2>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+  </ol>
+
+  <div class="carousel-inner">
+    <div class="item active">
+      <div class="jumbotron">
+        <h1><img style="width: 7%;" src="img/logo.png" /><span> <?php echo $slogan; ?></span></h1>
+        <h2><?php echo $motd; ?></h2>
+    </div>
+    </div>
+<!--
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
+-->
 <h1 class="bg-primary" id="news">News</h1>
 <div class="row">
     <?php

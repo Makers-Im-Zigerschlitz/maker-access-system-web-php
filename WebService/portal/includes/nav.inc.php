@@ -22,7 +22,7 @@
          ?>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-  <li><a href="home.php?site=settings"><span class="glyphicon glyphicon-user"></span> <?php echo $dict["Nav_Settings"]; ?></a></li>
+  <li><a href="home.php?site=settings"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></a></li>
   <li><a href="login/logout.php"><span class="glyphicon glyphicon-log-in"></span> <?php echo $dict["Login_Logout"]; ?></a></li>
 </ul>
 </div>
