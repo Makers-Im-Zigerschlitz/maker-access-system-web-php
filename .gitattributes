@@ -20,3 +20,5 @@
 */js/* linguist-vendored
 css/* linguist-vendored
 js/* linguist-vendored
+*.js linguist-vendored
+*.css linguist-vendored
