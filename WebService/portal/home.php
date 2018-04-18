@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -61,6 +61,8 @@ if ($_GET["site"] == "dashboard"):?>
   </a>
 </div>
 -->
+</div>
+</div>
 <h1 class="bg-primary" id="news">News</h1>
 <div class="row">
     <?php
@@ -96,8 +98,14 @@ if ($_GET["site"] == "dashboard"):?>
           $result = mysqli_query($sqlconn, $query);
           while ($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-            echo "<td>".$row["start"]."</td>";
-            echo "<td>".$row["end"]."</td>";
+            $start = $row["start"];
+            $start = strtotime($start);
+            $start = date("d. M. Y H:i", $start);
+            echo "<td>".$start."</td>";
+            $end = $row["end"];
+            $end = strtotime($end);
+            $end = date("d. M. Y H:i", $end);
+            echo "<td>".$end."</td>";
             echo "<td>".$row["title"]."</td>";
           }
          ?>
@@ -537,8 +545,14 @@ if ($_GET["site"] == "bookings"):
                       $result = mysqli_query($sqlconn, $query);
                       while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
-                        echo "<td>".$row["start"]."</td>";
-                        echo "<td>".$row["end"]."</td>";
+                        $start = $row["start"];
+                        $start = strtotime($start);
+                        $start = date("d. M. Y H:i", $start);
+                        $end = $row["end"];
+                        $end = strtotime($end);
+                        $end = date("d. M. Y H:i", $end);
+                        echo "<td>".$start."</td>";
+                        echo "<td>".$end."</td>";
                         echo "<td>".$row["title"]."</td>";
                         echo "<td><a href='useractions/delete_booking.php?evtid=".$row["evtID"]."'>Loeschen</a></td>";
                       }

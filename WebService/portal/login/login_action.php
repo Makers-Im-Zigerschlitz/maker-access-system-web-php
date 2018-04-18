@@ -22,7 +22,7 @@ $query = "SELECT * FROM $mysqldb.tblUsers WHERE username LIKE '$username' AND pa
 $result = mysqli_query($sqlconn,$query);
 $sqlfetch = mysqli_fetch_array($result);
 
-if ($sqlfetch["username"] == "") {
+if ($sqlfetch["username"] == "" || $sqlfetch["active"] == 0) {
   $query = "SELECT * FROM `tblUsers` WHERE `username` like '$username';";
   $result = mysqli_query($sqlconn, $query);
   $uid = "";
