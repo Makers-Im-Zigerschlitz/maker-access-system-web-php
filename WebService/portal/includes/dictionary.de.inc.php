@@ -103,4 +103,7 @@ $dict["Trans_Transaction_Fail"] = "Transaktion fehlgeschlagen!";
 $dict["Trans_Charge_Account"] = "Benutzerkonto belasten";
 $dict["Trans_Charge_Account_Success"] = "Betrag erfolgreich abgebucht.";
 $dict["Trans_View_Details"] = "Details";
+$dict["Trans_Delete_Transaction"] = "Buchung löschen";
+$dict["Trans_Delete_Transaction_Success"] = "Buchung erfolgreich gelöscht";
+$dict["Trans_Delete_Transaction_Fail"] = "Buchung konnte nicht gelöscht werden";
 ?>

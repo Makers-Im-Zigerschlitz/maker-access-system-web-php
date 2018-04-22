@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php
   include "includes/logincheck.inc.php";
   if ($_SESSION["level"] < 3) {
@@ -20,7 +21,10 @@
   <link rel="stylesheet" href="../css/normalize.css" type="text/css">
   <link rel='stylesheet prefetch' href='css/font-awesome.min.css'>
   <link rel="stylesheet" href="css/style.css" type="text/css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="../js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
   <script src="../js/logViewer.js"></script>
   <script src="js/prefixfree.min.js"></script>
     <?php
@@ -60,7 +64,7 @@
 <main role="main">
   <?php
   if (isset($_GET["message"])) {
-      echo "<div class='feedback success'>";
+      echo "<div class='feedback'>";
       if ($_GET["message"] == "usercreated") {
           echo $dict["User_Create_Success"] . ": " . $_GET["username"];
       } elseif ($_GET["message"] == "userdeleted") {
@@ -87,6 +91,16 @@
             echo $dict["Tag_Deleted"];
       } elseif ($_GET["message"] == "permmodified") {
             echo $dict["Dev_Modify_Perm_Success"];
+      } elseif ($_GET["message"] == "transaction_success") {
+            echo $dict["Trans_Add_Money_Success"];
+      } elseif ($_GET["message"] == "transaction_fail") {
+            echo $dict["Trans_Transaction_Fail"];
+      } elseif ($_GET["message"] == "transactiondeleted_success") {
+            echo $dict["Trans_Delete_Transaction_Success"];
+      } elseif ($_GET["message"] == "transactiondeleted_fail") {
+            echo $dict["Trans_Delete_Transaction_Fail"];
+
+
       } else {
 			echo "Message not defined";
 	  }
@@ -252,7 +266,7 @@
           echo "<tr>";
           echo "<td>" . $temp["title"] . "</td>";
           echo "<td>" . $temp["filename"] . "</td>";
-          echo "<td><a href='actions/deletefile.php?filename=" . $temp["filename"] . "'>Delete</a>";
+          echo "<td><a href='actions/deletefile.php?filename=" . $temp["filename"] . "'>Delete</a></td>";
       }
       ?>
   </table>
@@ -420,7 +434,7 @@
 </section>
 <?php endif; ?>
 <?php if ($_GET["site"] == "transactions"): ?>
-<section class="panel">
+<section class="panel important">
   <div class="twothirds">
   <h2><?php echo $dict["Trans_Name"]; ?></h2>
   <table border>
@@ -430,6 +444,7 @@
           <th><?php echo $dict["Trans_Amount"]; ?></th>
           <th><?php echo $dict["Trans_Description"]; ?></th>
           <th><?php echo $dict["Gen_Timestamp"]; ?></th>
+          <th>Actions</th>
       </tr>
       <?php
       $stmt_trans = $db->query('SELECT * FROM tblTransactions ORDER BY timestamp');
@@ -439,7 +454,9 @@
             echo "<td>" . $temp_trans["transactionid"] . "</td>";
             echo "<td>" . $temp_trans["uid"] . "</td>";
             echo "<td>" . $temp_trans["amount"] . "</td>";
+            echo "<td>" . $temp_trans["description"] . "</td>";
             echo "<td>" . $temp_trans["timestamp"] . "</td>";
+            echo "<td><a href='actions/deletetransaction.php?transactionid=" . $temp_trans["transactionid"] . "'>".$dict["Trans_Delete_Transaction"]."</a></td>";
             echo "</tr>";
         }
       } else {
@@ -447,6 +464,51 @@
   }
       ?>
   </table>
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#addMoney"><?php echo $dict["Trans_Add_Money"]?></button>
+  <div id="addMoney" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><?php echo $dict["Trans_Add_Money"]?></h4>
+        </div>
+        <div class="modal-body">
+          <form class="" action="actions/add_money.php" method="post">
+            <div class="form-group">
+              <label for="recipient">Recipient:</label>
+              <select class="form-control" name="recipient" id="recipient">
+                  <?php
+                    $query = "SELECT * FROM `tblMembers`;";
+                    $result = mysqli_query($sqlconn, $query);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                      echo "<option value='".$row["uid"]."'>\n";
+                      echo $row["Firstname"]." ".$row["Lastname"];
+                      echo "\n</option>\n";
+                    }
+                  ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <select id="description" name="description" class="form-control">
+                <option selected value="Cash">Cash</option>
+                <option value="Bank payment">Bank payment</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount:</label>
+              <textarea id="amount" class="form-control" type="text" name="amount" placeholder="Amount"></textarea>
+            </div>
+            <input class="form-control btn btn-primary" type="submit" name="submit">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
   </div>
 </section>
 <?php endif; ?>

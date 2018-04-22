@@ -101,6 +101,7 @@ $dict["Trans_Transaction_Fail"] = "Transaction failed!";
 $dict["Trans_Charge_Account"] = "Charge user-account";
 $dict["Trans_Charge_Account_Success"] = "User account successfully charged";
 $dict["Trans_View_Details"] = "View Details";
-
-
+$dict["Trans_Delete_Transaction"] = "Delete transaction";
+$dict["Trans_Delete_Transaction_Success"] = "Transaction successfully deleted";
+$dict["Trans_Delete_Transaction_Fail"] = "Transaction could not be deleted";
 ?>
