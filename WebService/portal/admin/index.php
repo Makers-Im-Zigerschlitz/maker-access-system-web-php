@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="../css/normalize.css" type="text/css">
   <link rel='stylesheet prefetch' href='css/font-awesome.min.css'>
   <link rel="stylesheet" href="css/style.css" type="text/css">
-  
+
   <script src="../js/logViewer.js"></script>
   <script src="js/prefixfree.min.js"></script>
     <?php
@@ -52,8 +52,9 @@
     <li class="documents"><a href="?site=documents">Edit Documents</a></li>
     <li class="posts"><a href="?site=posts">Manage Posts</a></li>
     <li class="devices"><a href="?site=devices">Manage Devices</a></li>
-	<li class="permissions"><a href="?site=permissions">Manage Permissions</a></li>
+	  <li class="permissions"><a href="?site=permissions">Manage Permissions</a></li>
     <li class="tags"><a href="?site=tags">Manage Tags</a></li>
+    <li class="transactions"><a href="?site=transactions">Manage Transactions</a></li>
   </ul>
 </nav>
 <main role="main">
@@ -348,12 +349,12 @@
 			while ($temp = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			echo "<th>" . $temp['deviceName'] . "</th>";
 			}
-			
+
 			$stmtuser = $db->query('SELECT * FROM tblMembers ORDER BY Lastname ASC');
 			while ($user = $stmtuser->fetch(PDO::FETCH_ASSOC)) {
 				echo "<tr>";
 				echo "<td>" . $user['Firstname'] . " " . $user['Lastname'] . "</td>";
-				
+
 				$substmt = $db->query('SELECT * FROM tblDevices ORDER BY deviceName ASC');
 				while ($dev = $substmt->fetch(PDO::FETCH_ASSOC)) {
 					$stmtperm = $db->prepare('SELECT * FROM tblPermissions WHERE uid=:uid AND deviceID=:devid');
@@ -368,7 +369,7 @@
 					}
 				}
 				echo "</tr>";
-			}		  
+			}
 		echo "</table>";
 		if ($_SESSION["level"] > 2) {
 		echo "<input class='button' type='submit' value='Update'>";
@@ -415,6 +416,37 @@
   </select>
   <input type="submit" value="<?php echo $dict["Tag_Create"]; ?>">
 </form>
+  </div>
+</section>
+<?php endif; ?>
+<?php if ($_GET["site"] == "transactions"): ?>
+<section class="panel">
+  <div class="twothirds">
+  <h2><?php echo $dict["Trans_Name"]; ?></h2>
+  <table border>
+      <tr>
+          <th><?php echo $dict["Trans_ID"]; ?></th>
+          <th>User ID</th>
+          <th><?php echo $dict["Trans_Amount"]; ?></th>
+          <th><?php echo $dict["Trans_Description"]; ?></th>
+          <th><?php echo $dict["Gen_Timestamp"]; ?></th>
+      </tr>
+      <?php
+      $stmt_trans = $db->query('SELECT * FROM tblTransactions ORDER BY timestamp');
+      if ($stmt_trans->rowCount()>0) {
+        while ($temp_trans = $stmt_trans->fetch(PDO::FETCH_ASSOC)) {
+            echo "<tr>";
+            echo "<td>" . $temp_trans["transactionid"] . "</td>";
+            echo "<td>" . $temp_trans["uid"] . "</td>";
+            echo "<td>" . $temp_trans["amount"] . "</td>";
+            echo "<td>" . $temp_trans["timestamp"] . "</td>";
+            echo "</tr>";
+        }
+      } else {
+          echo "<tr><td colspan='5'>No Transactions found.</td></tr>";
+  }
+      ?>
+  </table>
   </div>
 </section>
 <?php endif; ?>
