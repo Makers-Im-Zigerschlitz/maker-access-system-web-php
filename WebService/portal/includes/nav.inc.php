@@ -1,3 +1,8 @@
+<?php
+$db = new PDO('mysql:host=' . $mysqlhost . ';dbname=' . $mysqldb, $mysqluser, $mysqlpass);
+$sqlconn = mysqli_connect($mysqlhost, $mysqluser, $mysqlpass, $mysqldb);
+?>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -22,6 +27,20 @@
          ?>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+  <li><a href="home.php?site=transactions"><span class="glyphicon glyphicon-usd">
+<?php
+$stmt = $db->prepare('SELECT FORMAT(SUM(amount),2) total FROM tblTransactions WHERE uid = :uid');
+$stmt->bindValue(':uid', $_SESSION["uid"], PDO::PARAM_INT);
+$stmt->execute();
+if ($stmt->rowCount()>0) {
+  $data = $stmt->fetch(PDO::FETCH_ASSOC);
+  echo $data['total'];
+} else {
+  echo "0";
+}
+?>
+
+  </span></a></li>
   <li><a href="home.php?site=settings"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"]; ?></a></li>
   <li><a href="login/logout.php"><span class="glyphicon glyphicon-log-in"></span> <?php echo $dict["Login_Logout"]; ?></a></li>
 </ul>
