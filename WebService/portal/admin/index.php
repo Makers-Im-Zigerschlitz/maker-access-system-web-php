@@ -462,7 +462,7 @@
             echo "<td>" . $temp_trans["amount"] . "</td>";
             echo "<td>" . $temp_trans["description"] . "</td>";
             echo "<td>" . $temp_trans["timestamp"] . "</td>";
-            echo "<td><a href='actions/deletetransaction.php?transactionid=" . $temp_trans["transactionid"] . "'>".$dict["Trans_Delete_Transaction"]."</a></td>";
+            echo "<td><a href='actions/deletetransaction.php?transactionid=" . $temp_trans["transactionid"] . "'><i class='fas fa-trash'></i> ".$dict["Trans_Delete_Transaction"]."</a></td>";
             echo "</tr>";
         }
       } else {

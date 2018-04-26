@@ -97,24 +97,37 @@ nav[role=navigation] li a:before {
   padding-right: .6em;
 }
 nav[role=navigation] .dashboard a:before {
-  content: "";
+  content: "\f3fd";
+  font-family: FontAwesome;
 }
 nav[role=navigation] .users a:before {
   content: "\f0c0";
+  font-family: FontAwesome;
 }
 nav[role=navigation] .documents a:before {
   content: "\f1d8";
+  font-family: FontAwesome;
 }
 nav[role=navigation] .posts a:before {
   content: "\f1ea";
+  font-family: FontAwesome;
 }
 nav[role=navigation] .devices a:before {
   content: "\f0ad";
+  font-family: FontAwesome;
 }
 nav[role=navigation] .tags a:before {
   content: "\f02c";
+  font-family: FontAwesome;
 }
-
+nav[role=navigation] .permissions a:before {
+  content: "\f0ae";
+  font-family: FontAwesome;
+}
+nav[role=navigation] .transactions a:before {
+  content: "\f3d1";
+  font-family: FontAwesome;
+}
 /* current nav item */
 .current, .dashboard .dashboard a, .write .write a, .edit .edit a, .comments .comments a, .users .users a {
   background-color: rgba(255, 255, 255, 0.1);
