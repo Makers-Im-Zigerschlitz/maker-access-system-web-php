@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="logs">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +21,7 @@
   <link rel='stylesheet prefetch' href='css/font-awesome.min.css'>
   <link rel="stylesheet" href="css/style.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
   <script src="../js/jquery.min.js" type="text/javascript"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
@@ -167,7 +167,13 @@
         echo "<td class='text-left'>".$logentry["logID"]."</td>";
         echo "<td class='text-left'>".$logentry["timestamp"]."</td>";
         echo "<td class='text-left'>".$logentry["action"]."</td>";
-        echo "<td class='text-left'>".$members[$logentry["uid"]]."</td>";
+        echo "<td class='text-left'>";
+        if (isset($members[$logentry["uid"]])){
+          echo $members[$logentry["uid"]];
+        } else {
+          echo "";
+        }
+        echo "</td>";
         echo "<td class='text-left'>".$logentry["deviceID"]."</td>";
         echo "<td class='text-left'>".$logentry["r_host"]."</td>";
         echo "<td class='text-left'>".$categories[$logentry["logCategory"]]."</td>";
@@ -211,7 +217,7 @@
               echo "<td>" . $temp["Country"] . "</td>";
               echo "<td>" . sqltodate($temp["Membership_Start"]) . "</td>";
               echo "<td>" . sqltodate($temp["Membership_End"]) . "</td>";
-              echo "<td><a href='actions/deleteuser.php?user=" . $temp["uid"] . "'>Delete</a>";
+              echo "<td><a href='actions/deleteuser.php?user=" . $temp["uid"] . "'><i class='fas fa-trash'></i> Delete</a>";
           }
       }
       ?>

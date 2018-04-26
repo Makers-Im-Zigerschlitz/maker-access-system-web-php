@@ -14,9 +14,13 @@ function sql_replace($instring)
 
 function sqltodate($sqldate)
 {
-  $temp = explode("-",$sqldate);
-  $date = $temp[2].".".$temp[1].".".$temp[0];
-  return $date;
+  if ($sqldate!=""){
+    $temp = explode("-",$sqldate);
+    $date = $temp[2].".".$temp[1].".".$temp[0];
+    return $date;
+  } else {
+    return "";
+  }
 }
 
 function datetosql($date)
