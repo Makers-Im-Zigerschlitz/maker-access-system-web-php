@@ -4,6 +4,7 @@ $dict = array();
 //General
 $dict["Gen_Welcome"] = "Welcome";
 $dict["Gen_Administration"] = "Administration";
+$dict["Gen_Timestamp"] = "Date / Time";
 
 //Login
 $dict["Login_Prompt"] = "Please log in";
@@ -69,7 +70,7 @@ $dict["Post_Delete_Post"] = "Delete Post";
 $dict["Post_Create_Success"] = "Post created!";
 $dict["Post_Delete_Success"] = "Post deleted!";
 
-//Devices 
+//Devices
 $dict["Dev_Name"] = "Devicename";
 $dict["Dev_Description"] = "Device description";
 $dict["Dev_Delete"] = "Delete device";
@@ -80,4 +81,27 @@ $dict["Dev_Create_Success"] = "Device created!";
 $dict["Dev_Delete_Success"] = "Device deleted!";
 $dict["Dev_Delete_Perm_Success"] = "Permissions revoked!";
 $dict["Dev_Modify_Perm_Success"] = "Permissions successfully modified!";
+
+//Tags
+$dict["Tag_ID"] = "Tag ID";
+$dict["Tag_Create"] = "Create Tag";
+$dict["Tag_Enter_ID"] = "Please enter tag id";
+$dict["Tag_Assoc_User"] = "Please choose the associated user";
+$dict["Tag_Created"] = "The has been created!";
+
+//Transactions
+$dict["Trans_Name"] = "Transactions";
+$dict["Trans_ID"] = "Transaction ID";
+$dict["Trans_Amount"] = "Amount";
+$dict["Trans_Description"] = "Description";
+$dict["Trans_Payments"] = "Payments";
+$dict["Trans_Add_Money"] = "add money";
+$dict["Trans_Add_Money_Success"] = "Money successfully added to user-account";
+$dict["Trans_Transaction_Fail"] = "Transaction failed!";
+$dict["Trans_Charge_Account"] = "Charge user-account";
+$dict["Trans_Charge_Account_Success"] = "User account successfully charged";
+$dict["Trans_View_Details"] = "View Details";
+$dict["Trans_Delete_Transaction"] = "Delete transaction";
+$dict["Trans_Delete_Transaction_Success"] = "Transaction successfully deleted";
+$dict["Trans_Delete_Transaction_Fail"] = "Transaction could not be deleted";
 ?>

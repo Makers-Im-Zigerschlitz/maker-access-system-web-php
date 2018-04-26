@@ -4,6 +4,7 @@ $dict = array();
 //General
 $dict["Gen_Welcome"] = "Willkommen";
 $dict["Gen_Administration"] = "Administration";
+$dict["Gen_Timestamp"] = "Date / Time";
 
 //Login
 $dict["Login_Prompt"] = "Bitte loggen Sie sich ein";
@@ -89,4 +90,20 @@ $dict["Tag_Create"] = "Tag erstellen";
 $dict["Tag_Enter_ID"] = "Bitte Tag ID eingeben";
 $dict["Tag_Assoc_User"] = "Bitte zugehörigen User auswählen";
 $dict["Tag_Created"] = "Der Tag wurde erstellt!";
+
+//Transactions
+$dict["Trans_Name"] = "Transaktionen";
+$dict["Trans_ID"] = "Transaktions ID";
+$dict["Trans_Amount"] = "Betrag";
+$dict["Trans_Description"] = "Bezeichnung";
+$dict["Trans_Payments"] = "Kontobewegungen";
+$dict["Trans_Add_Money"] = "Guthaben laden";
+$dict["Trans_Add_Money_Success"] = "Guthaben erfolgreich aufgeladen.";
+$dict["Trans_Transaction_Fail"] = "Transaktion fehlgeschlagen!";
+$dict["Trans_Charge_Account"] = "Benutzerkonto belasten";
+$dict["Trans_Charge_Account_Success"] = "Betrag erfolgreich abgebucht.";
+$dict["Trans_View_Details"] = "Details";
+$dict["Trans_Delete_Transaction"] = "Buchung löschen";
+$dict["Trans_Delete_Transaction_Success"] = "Buchung erfolgreich gelöscht";
+$dict["Trans_Delete_Transaction_Fail"] = "Buchung konnte nicht gelöscht werden";
 ?>

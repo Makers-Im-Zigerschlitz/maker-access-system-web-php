@@ -18,6 +18,7 @@
   include "config/config.inc.php";
   include "includes/dictionary.$language.inc.php";
   include "includes/functions.inc.php";
+  $db = new PDO('mysql:host=' . $mysqlhost . ';dbname=' . $mysqldb, $mysqluser, $mysqlpass);
   $sqlconn = mysqli_connect($mysqlhost, $mysqluser, $mysqlpass, $mysqldb);
 
   // Change language if request available
@@ -548,6 +549,38 @@ if ($_GET["site"] == "bookings"):
               </div>
             </div>
       </div>
+<?php
+endif;
+if ($_GET["site"] == "transactions"):
+    ?>
+    <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <h2><?php echo $dict["Trans_Name"]; ?></h2>
+              <?php
+              echo "<table class='table table-striped'>";
+              echo "<tr><th>" . $dict["Trans_ID"] . "</th><th>" . $dict["Trans_Amount"] . "</th><th>" . $dict["Trans_Description"] . "</th></tr>";
+              $stmt = $db->prepare('SELECT * FROM tblTransactions WHERE uid = :uid');
+              $stmt->bindValue(':uid', $_SESSION["uid"], PDO::PARAM_INT);
+              $stmt->execute();
+              if ($stmt->rowCount()>0) {
+                while($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                  echo "<tr><td>";
+                  echo $data['transactionid'];
+                  echo "</td><td>";
+                  echo $data['amount'];
+                  echo "</td><td>";
+                  echo $data['description'];
+                  echo "</td></tr>";
+                }
+              } else {
+                echo "<tr><td colspan=3>No entries</td></tr>";
+              }
+              ?>
+              </table>
+          </div>
+      </div>
+    </div>
 <?php
 endif; ?>
 <br>
