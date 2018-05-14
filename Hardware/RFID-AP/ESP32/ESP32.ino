@@ -1,29 +1,36 @@
 /*
-    Maker Access System (MAS)
+  Maker Access System (MAS)
   By Makers im Zigerschlitz
   http://zigerschlitzmakers.ch
   Github: https://github.com/Makers-Im-Zigerschlitz/maker-access-system
 */
 
-#include <ESP8266WiFi.h>
 #include <SPI.h>
-#include <SoftwareSerial.h>
+#include <HardwareSerial.h>
 #include <ArduinoJson.h>
-
+#include <WiFi.h>
+#include <Wire.h>  
+#include "SSD1306.h"
+#include "images.h"
+#include "font.h"
 // ****************************************************************************  SETTINGS BLOCK  ****************************************************************************
 //Define your WiFi credentials and host running MAS as well as your site-wide salt
-const char* ssid     = "--==SSID==--";
-const char* password = "--==PASSWORD==--";
-const char* host = "--==HOST==--";
-const String salt = "--==SALT==--"
+const char* ssid     = "__WiFi_SSID__";
+const char* password = "__WiFi_Password__";
+const char* host = "__MAS_Host_Adress__";
+const String salt = "__MAS_Salt__";
+const String subfolder = ""; //If MAS is located in subfolder use "/subfolder"
 
 //Define ID of this device - corresponds to ID in MAS admin panel
-const int deviceID = --==ID==--;
+const int deviceID = __DEVICE_ID__;
 
 //Define Pins of RGB LED or individuale LEDs
 const int pinRed = 13;
 const int pinGreen = 12;
 const int pinBlue = 14;
+
+//Define Pin to control Relay
+const int pinRelay = 25;
 
 //Define pins for connection to RDM6300 RFID reader
 const int pinRFID_toRx = 5;
@@ -33,7 +40,8 @@ const int pinRFID_toTx = 4;
 const int TagLockout = 15000;      // Time after which the device checks if same RFID tag is still present (in ms)
 // ****************************************************************************  SETTINGS BLOCK  ****************************************************************************
 
-SoftwareSerial RFID(pinRFID_toTx, pinRFID_toRx); // RX and TX
+HardwareSerial RFID(1);
+SSD1306 display(0x3c, 21, 22);
 
 //Varibles for active session
 int deviceActive = 0;
@@ -60,20 +68,33 @@ int buffer_index = 0;
 unsigned testTag = 0;
 
 void setup() {
+  display.init();
+  display.flipScreenVertically();
+  //display.setFont((const unsigned char*) Lato_Hairline_12);
+  //display.drawXbm(32, 0, logo_width, logo_height, (const unsigned char*) logo_bits);
+  display.drawString(0, 0, "Maker Access System");
+  display.display();
+  delay(900);
+  
   pinMode(pinGreen, OUTPUT); // for status LEDs
   pinMode(pinRed, OUTPUT);
   pinMode(pinBlue, OUTPUT);
-
-  RFID.begin(9600);    // start serial to RFID reader
-  RFID.listen();
+  
+  RFID.begin(9600, SERIAL_8N1, 16, 17); // start serial to RFID reader
   Serial.begin(115200); // start serial to PC
   delay(100);
   Serial.println("Serials started");
 
   // We start by connecting to a WiFi network
   Serial.println();
+  display.clear();
+  String drawString = "Connecting to: ";
+  drawString += ssid;
+  display.drawStringMaxWidth(0, 0, 128, drawString);
+  display.display();
   Serial.print("Connecting WiFi to ");
   Serial.println(ssid);
+  delay(1000);
 
   WiFi.begin(ssid, password);
 
@@ -84,13 +105,20 @@ void setup() {
 
   Serial.println("");
   Serial.println("WiFi connected");
+  display.clear();
+  display.drawStringMaxWidth(0, 0, 128, "WiFi connected!");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
+  display.drawStringMaxWidth(0, 12, 128, WiFi.localIP().toString());
   Serial.print("Netmask: ");
   Serial.println(WiFi.subnetMask());
+  display.drawStringMaxWidth(0, 24, 128, WiFi.subnetMask().toString());
   Serial.print("Gateway: ");
   Serial.println(WiFi.gatewayIP());
+  display.drawStringMaxWidth(0, 36, 128, WiFi.gatewayIP().toString());
   Serial.println();
+  display.display();  
+  delay(2500);
 
   //Device is ready to read first RFID tag
   Serial.println("Waiting for RFID tag");
@@ -107,8 +135,15 @@ void loop() {
           startMillis = millis();
           deviceActive = true;
         } else {
-          flashLED(pinRed,3,200);
           Serial.println("Logon failed!");
+          display.clear();
+          display.drawStringMaxWidth(0, 0, 128, "Error logging on");
+          display.drawStringMaxWidth(0, 20, 128, "Reason:");
+          display.drawStringMaxWidth(0, 32, 128, "__REASON__");
+          display.display();
+          flashLED(pinRed,3,200); 
+          delay(2000);
+          clearBuffer();
           testTag=0;
         }
       }
@@ -121,6 +156,14 @@ void loop() {
         } else {
           flashLED(pinRed,3,200);
           Serial.println("Logoff failed!");
+          display.clear();
+          display.drawStringMaxWidth(0, 0, 128, "Error logging off");
+          display.drawStringMaxWidth(0, 20, 128, "Reason:");
+          display.drawStringMaxWidth(0, 32, 128, "__REASON__");
+          display.display();
+          flashLED(pinRed,3,200); 
+          delay(2000);
+          clearBuffer();          
           testTag=0;
         }
       }
@@ -184,7 +227,8 @@ bool logOn(long tagID) {
     }
 
     // We now create a URI for the request
-    String url = "/API/start_usage.php?tag=000";
+    String url = subfolder;
+    url += "/API/start_usage.php?tag=000";
     url += String(tagID);
     url += "&device=";
     url += deviceID;
@@ -258,7 +302,8 @@ bool logOff(long tagID)
   }
 
   // We now create a URI for the request
-  String url = "/API/stop_usage.php?tag=000";
+  String url = subfolder;
+  url += "/API/stop_usage.php?tag=000";
   url += String(tagID);
   url += "&sessionID=";
   url += activeSession;
@@ -331,9 +376,31 @@ void changeStatusLED() {
   if (deviceActive) {
     digitalWrite(pinGreen, 1);
     digitalWrite(pinBlue, 0);
+    digitalWrite(pinRelay, 1);
+    display.clear();
+    display.drawStringMaxWidth(0, 0, 128, "Running:");
+    display.drawStringMaxWidth(0, 12, 128, "User: -=Username=-");
+    unsigned long Now = millis()-millisActive/1000;
+    int Seconds = Now%60;
+    int Minutes = (Now/60)%60;
+    int Hours = (Now/3600)%24;
+    String runtime = String(Hours)+"h "+String(Minutes)+"min "+String(Seconds)+"s";
+    display.drawStringMaxWidth(0, 24, 128, runtime);
+    display.display();  
   } else {
     digitalWrite(pinGreen, 0);
     digitalWrite(pinBlue, 1);
+    digitalWrite(pinRelay, 0);
+    display.clear();
+    display.drawStringMaxWidth(0, 0, 128, "Ready:");
+    display.drawStringMaxWidth(0, 12, 128, "Waiting for RFID tag...");
+    unsigned long Now = millis()/1000;
+    int Seconds=Now%60;
+    int Minutes = (Now/60)%60;
+    int Hours = (Now/3600)%24;
+    String waittime = String(Hours)+"h "+String(Minutes)+"min "+String(Seconds)+"s";
+    display.drawStringMaxWidth(0, 48, 128, waittime);
+    display.display();      
   }
 }
 void flashLED(int pinLED, int numFlashes, int interval) {
