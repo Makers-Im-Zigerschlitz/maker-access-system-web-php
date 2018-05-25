@@ -11,23 +11,21 @@
 #include <WiFi.h>
 #include <Wire.h>  
 #include "SSD1306.h"
-#include "images.h"
-#include "font.h"
 // ****************************************************************************  SETTINGS BLOCK  ****************************************************************************
 //Define your WiFi credentials and host running MAS as well as your site-wide salt
-const char* ssid     = "__WiFi_SSID__";
-const char* password = "__WiFi_Password__";
-const char* host = "__MAS_Host_Adress__";
-const String salt = "__MAS_Salt__";
-const String subfolder = ""; //If MAS is located in subfolder use "/subfolder"
+const char* ssid     = "SSID";
+const char* password = "PASS";
+const char* host = "HOST";
+const String salt = "SALT";
+const String subfolder = "SUBFOLDER"; //If MAS is located in subfolder use "/subfolder"
 
 //Define ID of this device - corresponds to ID in MAS admin panel
-const int deviceID = __DEVICE_ID__;
+const int deviceID = 9;
 
 //Define Pins of RGB LED or individuale LEDs
-const int pinRed = 13;
-const int pinGreen = 12;
-const int pinBlue = 14;
+const int pinRed = 32;
+const int pinGreen = 35;
+const int pinBlue = 34;
 
 //Define Pin to control Relay
 const int pinRelay = 25;
@@ -46,7 +44,6 @@ SSD1306 display(0x3c, 21, 22);
 //Varibles for active session
 int deviceActive = 0;
 String activeSession = "";
-unsigned long millisActive = 0;
 
 //Tag id associated variables
 String InputStringA = "";
@@ -70,8 +67,6 @@ unsigned testTag = 0;
 void setup() {
   display.init();
   display.flipScreenVertically();
-  //display.setFont((const unsigned char*) Lato_Hairline_12);
-  //display.drawXbm(32, 0, logo_width, logo_height, (const unsigned char*) logo_bits);
   display.drawString(0, 0, "Maker Access System");
   display.display();
   delay(900);
@@ -79,6 +74,7 @@ void setup() {
   pinMode(pinGreen, OUTPUT); // for status LEDs
   pinMode(pinRed, OUTPUT);
   pinMode(pinBlue, OUTPUT);
+  pinMode(pinRelay, OUTPUT);
   
   RFID.begin(9600, SERIAL_8N1, 16, 17); // start serial to RFID reader
   Serial.begin(115200); // start serial to PC
@@ -94,10 +90,14 @@ void setup() {
   display.display();
   Serial.print("Connecting WiFi to ");
   Serial.println(ssid);
+  display.clear();
+  display.drawStringMaxWidth(0, 0, 128, "Start Wifi...");
+  display.display();
   delay(1000);
-
   WiFi.begin(ssid, password);
-
+  display.clear();
+  display.drawStringMaxWidth(0, 0, 128, "WiFi started!");
+  display.display();
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
@@ -105,18 +105,18 @@ void setup() {
 
   Serial.println("");
   Serial.println("WiFi connected");
-  display.clear();
-  display.drawStringMaxWidth(0, 0, 128, "WiFi connected!");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
-  display.drawStringMaxWidth(0, 12, 128, WiFi.localIP().toString());
   Serial.print("Netmask: ");
   Serial.println(WiFi.subnetMask());
-  display.drawStringMaxWidth(0, 24, 128, WiFi.subnetMask().toString());
   Serial.print("Gateway: ");
   Serial.println(WiFi.gatewayIP());
-  display.drawStringMaxWidth(0, 36, 128, WiFi.gatewayIP().toString());
   Serial.println();
+  display.clear();
+  display.drawStringMaxWidth(0, 0, 128, "WiFi connected!");
+  display.drawStringMaxWidth(0, 12, 128, WiFi.localIP().toString());
+  display.drawStringMaxWidth(0, 24, 128, WiFi.subnetMask().toString());
+  display.drawStringMaxWidth(0, 36, 128, WiFi.gatewayIP().toString());
   display.display();  
   delay(2500);
 
@@ -310,7 +310,7 @@ bool logOff(long tagID)
   url += "&device=";
   url += deviceID;
   url += "&duration=";
-  url += (millis() - millisActive) / 1000;
+  url += (millis() - startMillis) / 1000;
   Serial.print("Requesting URL: ");
   Serial.println(url);
 
@@ -380,7 +380,7 @@ void changeStatusLED() {
     display.clear();
     display.drawStringMaxWidth(0, 0, 128, "Running:");
     display.drawStringMaxWidth(0, 12, 128, "User: -=Username=-");
-    unsigned long Now = millis()-millisActive/1000;
+    unsigned long Now = (millis()-startMillis)/1000;
     int Seconds = Now%60;
     int Minutes = (Now/60)%60;
     int Hours = (Now/3600)%24;
