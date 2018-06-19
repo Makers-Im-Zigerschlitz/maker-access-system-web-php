@@ -51,6 +51,8 @@ if ($_GET["site"] == "dashboard"):?>
         <h2><?php echo $motd; ?></h2>
     </div>
     </div>
+    </div>
+    </div>
 <!--
   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left"></span>
@@ -578,6 +580,9 @@ if ($_GET["site"] == "transactions"):
               }
               ?>
               </table>
+          </div>
+          <div class="col-lg-12">
+
           </div>
       </div>
     </div>

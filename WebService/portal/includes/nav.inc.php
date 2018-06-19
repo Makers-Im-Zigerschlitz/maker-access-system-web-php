@@ -34,7 +34,12 @@ $stmt->bindValue(':uid', $_SESSION["uid"], PDO::PARAM_INT);
 $stmt->execute();
 if ($stmt->rowCount()>0) {
   $data = $stmt->fetch(PDO::FETCH_ASSOC);
-  echo $data['total'];
+    if($data['total'] == ""){
+      echo "0";
+    }
+    else{
+    echo $data['total'];
+  }
 } else {
   echo "0";
 }
