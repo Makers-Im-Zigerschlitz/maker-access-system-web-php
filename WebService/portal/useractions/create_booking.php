@@ -29,5 +29,6 @@ if ($stmt->rowCount()>0) {
 }
 else {
   header("Location: ../home.php?site=bookings&error");
+  //print_r($stmt->errorInfo());
 }
  ?>

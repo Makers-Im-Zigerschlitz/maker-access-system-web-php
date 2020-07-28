@@ -583,23 +583,5 @@ if ($_GET["site"] == "transactions"):
     </div>
 <?php
 endif; ?>
-<br>
-<footer style="background-color: #4c4c4c; padding-top: 5%; padding-bottom: 5%;" class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-              <h2 class="text-info">This system was scripted with a lot of time by <a href="https://zigerschlitzmakers.ch">Makers im Zigerschlitz</a> and <a href="http://tekkie-mag.black">n15c</a></h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4">
-            <h4 class="text-primary"><a href="https://github.com/n15c">Visit me on GitHub</a></h4>
-          </div>
-          <div class="col-lg-offset-6 col-lg-2">
-            <h4 class="bg-primary">Copyright (C) 2018</h4>
-          </div>
-        </div>
-      </div>
-    </footer>
 </body>
 </html>
